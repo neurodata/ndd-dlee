@@ -46,12 +46,11 @@
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="shortcut icon" href="_static/nd_logo_small.png"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -216,18 +215,67 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#some-null-kernels">
-   Some “Null” Kernels
+  <a class="reference internal nav-link" href="#global-kernels">
+   Global Kernels
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#absolute-difference-in-density">
-     Absolute Difference in Density
+    <a class="reference internal nav-link" href="#density">
+     Density
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#absolute-difference-in-node-degrees">
-     Absolute Difference in Node Degrees
+    <a class="reference internal nav-link" href="#average-edge-weight">
+     Average Edge Weight
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#average-of-the-adjacency-matrix">
+     Average of the Adjacency Matrix
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#node-wise-kernels">
+   Node-wise Kernels
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-degrees-l1-norm">
+     Node Degrees - L1 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-degrees-l2-norm">
+     Node Degrees - L2 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-strength-l1-norm">
+     Node Strength - L1 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-strength-l2-norm">
+     Node Strength - L2 Norm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#edge-wise-kernels">
+   Edge-wise Kernels
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edge-weights-l1-norm">
+     Edge weights - L1 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edge-weights-l2-norm">
+     Edge Weights - L2 Norm
     </a>
    </li>
   </ul>
@@ -243,6 +291,11 @@
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discriminability-plot">
+   Discriminability Plot
+  </a>
  </li>
 </ul>
 
@@ -270,18 +323,67 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#some-null-kernels">
-   Some “Null” Kernels
+  <a class="reference internal nav-link" href="#global-kernels">
+   Global Kernels
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#absolute-difference-in-density">
-     Absolute Difference in Density
+    <a class="reference internal nav-link" href="#density">
+     Density
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#absolute-difference-in-node-degrees">
-     Absolute Difference in Node Degrees
+    <a class="reference internal nav-link" href="#average-edge-weight">
+     Average Edge Weight
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#average-of-the-adjacency-matrix">
+     Average of the Adjacency Matrix
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#node-wise-kernels">
+   Node-wise Kernels
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-degrees-l1-norm">
+     Node Degrees - L1 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-degrees-l2-norm">
+     Node Degrees - L2 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-strength-l1-norm">
+     Node Strength - L1 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-strength-l2-norm">
+     Node Strength - L2 Norm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#edge-wise-kernels">
+   Edge-wise Kernels
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edge-weights-l1-norm">
+     Edge weights - L1 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edge-weights-l2-norm">
+     Edge Weights - L2 Norm
     </a>
    </li>
   </ul>
@@ -298,6 +400,11 @@
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discriminability-plot">
+   Discriminability Plot
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -313,6 +420,9 @@
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">graspologic.plot</span> <span class="kn">import</span> <span class="n">heatmap</span>
+<span class="kn">import</span> <span class="nn">grakel</span>
+<span class="kn">import</span> <span class="nn">hyppo</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
@@ -343,9 +453,7 @@
 <span class="c1"># Convert adjacency matrices to grakel objects</span>
 <span class="n">Gs</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">graph</span> <span class="ow">in</span> <span class="n">graphs</span><span class="p">:</span>
-    <span class="n">test</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">initialization_object</span> <span class="o">=</span> <span class="n">graph</span><span class="p">,</span> <span class="n">node_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
-    <span class="n">Gs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
-
+    <span class="n">Gs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Graph</span><span class="p">(</span><span class="n">initialization_object</span> <span class="o">=</span> <span class="n">graph</span><span class="p">,</span> <span class="n">node_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Gs</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -357,12 +465,25 @@
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualize one of the graphs</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s1">&#39;talk&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="s1">&#39;simple-all&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="section" id="some-null-kernels">
-<h2>Some “Null” Kernels<a class="headerlink" href="#some-null-kernels" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="absolute-difference-in-density">
-<h3>Absolute Difference in Density<a class="headerlink" href="#absolute-difference-in-density" title="Permalink to this headline">¶</a></h3>
-<p>The density of each graph was calculated by dividing the number of edges by the number of possible nodes. The differences are plotted using a heatmap below.</p>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/pipeline_3_0.png" src="_images/pipeline_3_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="global-kernels">
+<h2>Global Kernels<a class="headerlink" href="#global-kernels" title="Permalink to this headline">¶</a></h2>
+<p>The following kernels are constructed using characteristics of the entire graph. For each metric, the absolute differences between every pair of graphs were calculated and visualized using a heatmap.</p>
+<div class="section" id="density">
+<h3>Density<a class="headerlink" href="#density" title="Permalink to this headline">¶</a></h3>
+<p>The density of each graph was calculated by dividing the number of edges by the number of possible nodes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_nodes</span> <span class="o">=</span> <span class="n">graphs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -375,49 +496,261 @@
     <span class="n">density</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">num_edges</span> <span class="o">/</span> <span class="n">num_nodes_possible</span>
 
 <span class="c1"># calculate absolute difference of density </span>
-<span class="n">dissimilarity_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
+<span class="n">density_dissim_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
 <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">density</span><span class="p">)):</span>
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">density</span><span class="p">)):</span>
         <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">density</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">density</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
-        <span class="n">dissimilarity_matrix</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+        <span class="n">density_dissim_matrix</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
 
 <span class="c1"># plot heatmap</span>
-<span class="n">scaled_dissimilarity</span> <span class="o">=</span> <span class="n">dissimilarity_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dissimilarity_matrix</span><span class="p">)</span>
+<span class="n">scaled_density_dissim</span> <span class="o">=</span> <span class="n">density_dissim_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">density_dissim_matrix</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_dissimilarity</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/pipeline_4_0.png" src="_images/pipeline_4_0.png" />
+<img alt="_images/pipeline_5_0.png" src="_images/pipeline_5_0.png" />
 </div>
 </div>
 </div>
-<div class="section" id="absolute-difference-in-node-degrees">
-<h3>Absolute Difference in Node Degrees<a class="headerlink" href="#absolute-difference-in-node-degrees" title="Permalink to this headline">¶</a></h3>
-<p>The degree of a node in a graph is the number of nodes each node is adjacent to, aka the number of edges each node has. The absolute differences of each node degree was calculated and plotted using a heatmap.</p>
+<div class="section" id="average-edge-weight">
+<h3>Average Edge Weight<a class="headerlink" href="#average-edge-weight" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">degrees</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">graphs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">graphs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate average edge weight</span>
+<span class="n">edgeweight_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)):</span>
+    <span class="n">num_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">graphs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">edgeweight_avg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">graphs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">num_edges</span>
+
+<span class="c1"># calculate absolute difference </span>
+<span class="n">avgedgeweight_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edgeweight_avg</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edgeweight_avg</span><span class="p">)):</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">edgeweight_avg</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">edgeweight_avg</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="n">avgedgeweight_matrix</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+
+<span class="c1"># plot heatmap</span>
+<span class="n">scaled_avgedgeweight_dissim</span> <span class="o">=</span> <span class="n">avgedgeweight_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">avgedgeweight_matrix</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/pipeline_7_0.png" src="_images/pipeline_7_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="average-of-the-adjacency-matrix">
+<h3>Average of the Adjacency Matrix<a class="headerlink" href="#average-of-the-adjacency-matrix" title="Permalink to this headline">¶</a></h3>
+<p>Note that when we calculate the average of each adjacency matrix, we include edges that do not exist, whereas we only consider those with nonzero values when we calculate the average edge weight of each graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate the average of each adjacency matrix</span>
+<span class="n">adjmat_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)):</span>
+    <span class="n">adjmat_avg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">graphs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="c1"># calculate absolute difference </span>
+<span class="n">avgadjmat_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">adjmat_avg</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">adjmat_avg</span><span class="p">)):</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">adjmat_avg</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">adjmat_avg</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="n">avgadjmat_matrix</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+
+<span class="c1"># plot heatmap</span>
+<span class="n">scaled_avgadjmat_dissim</span> <span class="o">=</span> <span class="n">avgadjmat_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">avgadjmat_matrix</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_avgadjmat_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/pipeline_9_0.png" src="_images/pipeline_9_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="node-wise-kernels">
+<h2>Node-wise Kernels<a class="headerlink" href="#node-wise-kernels" title="Permalink to this headline">¶</a></h2>
+<p>The following kernels use characteristics related to the nodes of each graph. For each metric, we calculate a difference vector between every pair of graphs, then compute and visulize the L1 and L2 norms of the difference vector using a heatmap.</p>
+<div class="section" id="node-degrees-l1-norm">
+<h3>Node Degrees - L1 Norm<a class="headerlink" href="#node-degrees-l1-norm" title="Permalink to this headline">¶</a></h3>
+<p>The degree of a node in a graph is the number of nodes each node is adjacent to, aka the number of edges each node has.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find the degree of each node for each graph</span>
+<span class="n">degrees</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">graphs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">graphs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">graph</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
         <span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
+<span class="c1"># construct difference vector and compute L1 norm</span>
+<span class="n">nodedeg_matrix_l1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">degree1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">degrees</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">degree2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">degrees</span><span class="p">):</span>
-        <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">degree1</span> <span class="o">-</span> <span class="n">degree2</span><span class="p">)</span>
-        <span class="n">dissimilarity_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">((</span><span class="n">degree1</span> <span class="o">-</span> <span class="n">degree2</span><span class="p">),</span> <span class="nb">ord</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">nodedeg_matrix_l1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
 
-<span class="n">scaled_dissimilarity</span> <span class="o">=</span> <span class="n">dissimilarity_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dissimilarity_matrix</span><span class="p">)</span>
+<span class="c1"># plot heatmap</span>
+<span class="n">scaled_nodedeg_dissim_l1</span> <span class="o">=</span> <span class="n">nodedeg_matrix_l1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">nodedeg_matrix_l1</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_dissimilarity</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l1</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/pipeline_6_0.png" src="_images/pipeline_6_0.png" />
+<img alt="_images/pipeline_11_0.png" src="_images/pipeline_11_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="node-degrees-l2-norm">
+<h3>Node Degrees - L2 Norm<a class="headerlink" href="#node-degrees-l2-norm" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find the degree of each node for each graph</span>
+<span class="n">degrees</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">graphs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">graphs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">graph</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+        <span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        
+<span class="c1"># find difference vector and compute L2 norm</span>
+<span class="n">nodedeg_matrix_l2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">degree1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">degrees</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">degree2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">degrees</span><span class="p">):</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">((</span><span class="n">degree1</span> <span class="o">-</span> <span class="n">degree2</span><span class="p">),</span> <span class="nb">ord</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">nodedeg_matrix_l2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+
+<span class="c1"># plot heatmap</span>
+<span class="n">scaled_nodedeg_dissim_l2</span><span class="o">=</span> <span class="n">nodedeg_matrix_l2</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">nodedeg_matrix_l2</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l2</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/pipeline_13_0.png" src="_images/pipeline_13_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="node-strength-l1-norm">
+<h3>Node Strength - L1 Norm<a class="headerlink" href="#node-strength-l1-norm" title="Permalink to this headline">¶</a></h3>
+<p>Node strength, unlike node degree, takes into account the weight of the edges each node has. We calculate node strength by finding the sum of the edge weights for each node.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute the strength of each node for each graph</span>
+<span class="n">strengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">graphs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">graphs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">graph</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+        <span class="n">strengths</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        
+<span class="c1"># find difference vector and compute L1 norm</span>
+<span class="n">nodestr_matrix_l1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">strength1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">strengths</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">strength2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">strengths</span><span class="p">):</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">((</span><span class="n">strength1</span> <span class="o">-</span> <span class="n">strength2</span><span class="p">),</span> <span class="nb">ord</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">nodestr_matrix_l1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+
+<span class="c1"># plot heatmap</span>
+<span class="n">scaled_nodestr_dissim_l1</span> <span class="o">=</span> <span class="n">nodestr_matrix_l1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">nodestr_matrix_l1</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l1</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/pipeline_15_0.png" src="_images/pipeline_15_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="node-strength-l2-norm">
+<h3>Node Strength - L2 Norm<a class="headerlink" href="#node-strength-l2-norm" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute the strength of each node for each graph</span>
+<span class="n">strengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">graphs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">graphs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">graph</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+        <span class="n">strengths</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        
+<span class="c1"># find difference vector and compute L2 norm</span>
+<span class="n">nodestr_matrix_l2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">strength1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">strengths</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">strength2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">strengths</span><span class="p">):</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">strength1</span> <span class="o">-</span> <span class="n">strength2</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">nodestr_matrix_l2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+
+<span class="c1"># plot heatmap</span>
+<span class="n">scaled_nodestr_dissim_l2</span> <span class="o">=</span> <span class="n">nodestr_matrix_l2</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">nodestr_matrix_l2</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l2</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/pipeline_17_0.png" src="_images/pipeline_17_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="edge-wise-kernels">
+<h2>Edge-wise Kernels<a class="headerlink" href="#edge-wise-kernels" title="Permalink to this headline">¶</a></h2>
+<p>The following kernels use characteristics related to the edges of each graph. For each metric, we calculate a difference vector between every pair of graphs, then compute and visulize the L1 and L2 norms of the difference vector using a heatmap.</p>
+<div class="section" id="edge-weights-l1-norm">
+<h3>Edge weights - L1 Norm<a class="headerlink" href="#edge-weights-l1-norm" title="Permalink to this headline">¶</a></h3>
+<p>Here we compare the weights of each edge between graphs by simply subtracting one adjacency matrix from another.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find difference between two adjacency matrices and compute L1 norm</span>
+<span class="n">edgeweight_matrix_l1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)):</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">graphs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">graphs</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="nb">ord</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">edgeweight_matrix_l1</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+
+<span class="c1"># plot heatmap</span>
+<span class="n">scaled_edgeweight_dissim_l1</span> <span class="o">=</span> <span class="n">edgeweight_matrix_l1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">edgeweight_matrix_l1</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l1</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/pipeline_19_0.png" src="_images/pipeline_19_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="edge-weights-l2-norm">
+<h3>Edge Weights - L2 Norm<a class="headerlink" href="#edge-weights-l2-norm" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find difference between two adjacency matrices and compute L1 norm</span>
+<span class="n">edgeweight_matrix_l2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)):</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">((</span><span class="n">graphs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">graphs</span><span class="p">[</span><span class="n">j</span><span class="p">]),</span> <span class="nb">ord</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">edgeweight_matrix_l2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+
+<span class="c1"># plot heatmap</span>
+<span class="n">scaled_edgeweight_dissim_l2</span> <span class="o">=</span> <span class="n">edgeweight_matrix_l2</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">edgeweight_matrix_l2</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l2</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/pipeline_21_0.png" src="_images/pipeline_21_0.png" />
 </div>
 </div>
 </div>
@@ -435,6 +768,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">Ks</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
 <span class="n">scaled_dissimilarity</span> <span class="o">=</span> <span class="n">Ks</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Ks</span><span class="p">)</span>
+<span class="n">scaled_dissimilarity</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">scaled_dissimilarity</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_dissimilarity</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
@@ -445,7 +779,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(32, 32)
 </pre></div>
 </div>
-<img alt="_images/pipeline_8_1.png" src="_images/pipeline_8_1.png" />
+<img alt="_images/pipeline_23_1.png" src="_images/pipeline_23_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -457,6 +791,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">Ks</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
 <span class="n">scaled_dissimilarity</span> <span class="o">=</span> <span class="n">Ks</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Ks</span><span class="p">)</span>
+<span class="n">scaled_dissimilarity</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">scaled_dissimilarity</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_dissimilarity</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
@@ -467,7 +802,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(32, 32)
 </pre></div>
 </div>
-<img alt="_images/pipeline_9_1.png" src="_images/pipeline_9_1.png" />
+<img alt="_images/pipeline_24_1.png" src="_images/pipeline_24_1.png" />
 </div>
 </div>
 <div class="section" id="from-ben-s-nds-class-network-data-science">
@@ -491,28 +826,179 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create dissimilarity matrix</span>
-<span class="n">dissimilarity_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create dissimilarity matrix</span>
+<span class="n">omni_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">embedding1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">omni_embedding</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">embedding2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">omni_embedding</span><span class="p">):</span>
         <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">embedding1</span> <span class="o">-</span> <span class="n">embedding2</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="s2">&quot;fro&quot;</span><span class="p">)</span>
-        <span class="n">dissimilarity_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span>
+        <span class="n">omni_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span>
+
+<span class="c1"># plot heatmap</span>
+<span class="n">scaled_omni_dissim</span> <span class="o">=</span> <span class="n">omni_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">omni_matrix</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_omni_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/pipeline_27_0.png" src="_images/pipeline_27_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="discriminability-plot">
+<h2>Discriminability Plot<a class="headerlink" href="#discriminability-plot" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">control_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">graph1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">graph2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">graph1</span> <span class="o">-</span> <span class="n">graph2</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="s2">&quot;fro&quot;</span><span class="p">)</span>
+        <span class="n">control_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span>
+
+<span class="n">scaled_control_dissim</span> <span class="o">=</span> <span class="n">control_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">control_matrix</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">scaled_control_dissim</span><span class="p">)))</span>
+
+<span class="kn">from</span> <span class="nn">hyppo.discrim</span> <span class="kn">import</span> <span class="n">DiscrimOneSample</span>
+<span class="n">discrim</span> <span class="o">=</span> <span class="n">DiscrimOneSample</span><span class="p">()</span>
+<span class="n">test_stat</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">scaled_control_dissim</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_stat</span><span class="p">)</span>
+<span class="n">test_stat2</span> <span class="o">=</span> <span class="n">DiscrimOneSample</span><span class="p">(</span><span class="n">is_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">scaled_control_dissim</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_stat2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1024, 2)
+(1024,)
+0.999974354523073
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">79</span><span class="p">],</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">test_stat</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">scaled_control_dissim</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="nb">print</span><span class="p">(</span><span class="n">test_stat</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">17</span> <span class="n">test_stat2</span> <span class="o">=</span> <span class="n">DiscrimOneSample</span><span class="p">(</span><span class="n">is_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">scaled_control_dissim</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="nb">print</span><span class="p">(</span><span class="n">test_stat2</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/bilateral/lib/python3.9/site-packages/hyppo/discrim/discrim_one_samp.py:71,</span> in <span class="ni">DiscrimOneSample.statistic</span><span class="nt">(self, x, y)</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="k">def</span> <span class="nf">statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span>     <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span><span class="sd">     Helper function that calculates the discriminability test statistics.</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span><span class="sd">         The computed two sample discriminability statistic.</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">71</span>     <span class="n">stat</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">DiscrimOneSample</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span>     <span class="k">return</span> <span class="n">stat</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/bilateral/lib/python3.9/site-packages/hyppo/discrim/base.py:26,</span> in <span class="ni">DiscriminabilityTest.statistic</span><span class="nt">(self, x, y)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="nd">@abstractmethod</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="k">def</span> <span class="nf">statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span><span class="sd">     Calulates the independence test statistic.</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span><span class="sd">         Input data matrices.</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">26</span>     <span class="n">rdfs</span> <span class="o">=</span> <span class="n">_discr_rdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="n">stat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">rdfs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span>     <span class="k">return</span> <span class="n">stat</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/bilateral/lib/python3.9/site-packages/hyppo/discrim/base.py:78,</span> in <span class="ni">_discr_rdf</span><span class="nt">(dissimilarities, labels)</span>
+<span class="g g-Whitespace">     </span><span class="mi">76</span> <span class="c1"># All other samples except its own label</span>
+<span class="g g-Whitespace">     </span><span class="mi">77</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">labels</span> <span class="o">==</span> <span class="n">label</span>
+<span class="ne">---&gt; </span><span class="mi">78</span> <span class="n">Dij</span> <span class="o">=</span> <span class="n">di</span><span class="p">[</span><span class="o">~</span><span class="n">idx</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">80</span> <span class="c1"># All samples except itself</span>
+<span class="g g-Whitespace">     </span><span class="mi">81</span> <span class="n">idx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="ne">IndexError</span>: too many indices for array: array is 1-dimensional, but 2 were indexed
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graspologic.plot</span> <span class="kn">import</span> <span class="n">heatmap</span>
-<span class="n">scaled_dissimilarity</span> <span class="o">=</span> <span class="n">dissimilarity_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dissimilarity_matrix</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">control_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
 
-<span class="n">_</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_dissimilarity</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">graph1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">graph2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">graph1</span> <span class="o">-</span> <span class="n">graph2</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="s2">&quot;fro&quot;</span><span class="p">)</span>
+        <span class="n">control_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span>
+
+<span class="n">scaled_control_dissim</span> <span class="o">=</span> <span class="n">control_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">control_matrix</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">hyppo.discrim</span> <span class="kn">import</span> <span class="n">DiscrimOneSample</span>
+<span class="n">discrim</span> <span class="o">=</span> <span class="n">DiscrimOneSample</span><span class="p">(</span><span class="n">is_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">discrim_omni</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_omni_dissim</span><span class="p">,</span> <span class="n">scaled_control_dissim</span><span class="p">)</span>
+<span class="n">discrim_density</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_control_dissim</span><span class="p">,</span> <span class="n">scaled_density_dissim</span><span class="p">)</span>
+<span class="n">discrim_avgedgeweight</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_control_dissim</span><span class="p">,</span> <span class="n">scaled_avgedgeweight_dissim</span><span class="p">)</span>
+<span class="n">discrim_avgadjmat</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_control_dissim</span><span class="p">,</span> <span class="n">scaled_avgadjmat_dissim</span><span class="p">)</span>
+<span class="n">discrim_nodedeg_l1</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_control_dissim</span><span class="p">,</span> <span class="n">scaled_nodedeg_dissim_l1</span><span class="p">)</span>
+<span class="n">discrim_nodedeg_l2</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_control_dissim</span><span class="p">,</span> <span class="n">scaled_nodedeg_dissim_l2</span><span class="p">)</span>
+<span class="n">discrim_nodestr_l1</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_control_dissim</span><span class="p">,</span> <span class="n">scaled_nodestr_dissim_l1</span><span class="p">)</span>
+<span class="n">discrim_nodestr_l2</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_control_dissim</span><span class="p">,</span> <span class="n">scaled_nodestr_dissim_l2</span><span class="p">)</span>
+<span class="n">discrim_edgeweight_l1</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_control_dissim</span><span class="p">,</span> <span class="n">scaled_edgeweight_dissim_l1</span><span class="p">)</span>
+<span class="n">discrim_edgeweight_l2</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_control_dissim</span><span class="p">,</span> <span class="n">scaled_edgeweight_dissim_l2</span><span class="p">)</span>
+
+<span class="n">kernels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Omni&#39;</span><span class="p">,</span> <span class="s1">&#39;Density&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg. Edge Weight&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg. Adjacency&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Degree (L1)&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Degree (L2)&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Strength (L1)&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Node Strength (L2)&#39;</span><span class="p">,</span> <span class="s1">&#39;Edge Weight (L1)&#39;</span><span class="p">,</span> <span class="s1">&#39;Edge Weight (L2)&#39;</span><span class="p">]</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="p">[</span><span class="n">discrim_omni</span><span class="p">,</span> <span class="n">discrim_density</span><span class="p">,</span> <span class="n">discrim_avgedgeweight</span><span class="p">,</span> <span class="n">discrim_avgadjmat</span><span class="p">,</span> <span class="n">discrim_nodedeg_l1</span><span class="p">,</span> <span class="n">discrim_nodedeg_l2</span><span class="p">,</span> \
+    <span class="n">discrim_nodestr_l1</span><span class="p">,</span> <span class="n">discrim_nodestr_l2</span><span class="p">,</span> <span class="n">discrim_edgeweight_l1</span><span class="p">,</span> <span class="n">discrim_edgeweight_l2</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">kernels</span><span class="p">,</span> <span class="n">stats</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/pipeline_13_0.png" src="_images/pipeline_13_0.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">59</span><span class="p">],</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">discrim</span> <span class="o">=</span> <span class="n">DiscrimOneSample</span><span class="p">(</span><span class="n">is_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">))</span>
+<span class="ne">---&gt; </span><span class="mi">14</span> <span class="n">discrim_omni</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_omni_dissim</span><span class="p">,</span> <span class="n">scaled_control_dissim</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">discrim_density</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_control_dissim</span><span class="p">,</span> <span class="n">scaled_density_dissim</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="n">discrim_avgedgeweight</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_control_dissim</span><span class="p">,</span> <span class="n">scaled_avgedgeweight_dissim</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/bilateral/lib/python3.9/site-packages/hyppo/discrim/discrim_one_samp.py:71,</span> in <span class="ni">DiscrimOneSample.statistic</span><span class="nt">(self, x, y)</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="k">def</span> <span class="nf">statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span>     <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span><span class="sd">     Helper function that calculates the discriminability test statistics.</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span><span class="sd">         The computed two sample discriminability statistic.</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">71</span>     <span class="n">stat</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">DiscrimOneSample</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span>     <span class="k">return</span> <span class="n">stat</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/bilateral/lib/python3.9/site-packages/hyppo/discrim/base.py:26,</span> in <span class="ni">DiscriminabilityTest.statistic</span><span class="nt">(self, x, y)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="nd">@abstractmethod</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="k">def</span> <span class="nf">statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span><span class="sd">     Calulates the independence test statistic.</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span><span class="sd">         Input data matrices.</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">26</span>     <span class="n">rdfs</span> <span class="o">=</span> <span class="n">_discr_rdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="n">stat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">rdfs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span>     <span class="k">return</span> <span class="n">stat</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/bilateral/lib/python3.9/site-packages/hyppo/discrim/base.py:78,</span> in <span class="ni">_discr_rdf</span><span class="nt">(dissimilarities, labels)</span>
+<span class="g g-Whitespace">     </span><span class="mi">76</span> <span class="c1"># All other samples except its own label</span>
+<span class="g g-Whitespace">     </span><span class="mi">77</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">labels</span> <span class="o">==</span> <span class="n">label</span>
+<span class="ne">---&gt; </span><span class="mi">78</span> <span class="n">Dij</span> <span class="o">=</span> <span class="n">di</span><span class="p">[</span><span class="o">~</span><span class="n">idx</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">80</span> <span class="c1"># All samples except itself</span>
+<span class="g g-Whitespace">     </span><span class="mi">81</span> <span class="n">idx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="ne">IndexError</span>: too many indices for array: array is 1-dimensional, but 2 were indexed
+</pre></div>
 </div>
 </div>
 </div>
