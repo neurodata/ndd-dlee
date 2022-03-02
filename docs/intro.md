@@ -1,16 +1,5 @@
-# Welcome to your Jupyter Book
+# Welcome
 
-This is a small sample book to give you a feel for how book content is
-structured.
+This is a book that summarizes how simple kernels can be used to measure dissimilarities between networks.
 
-:::{note}
-Here is a note!
-:::
-
-And here is a code block:
-
-```
-e = mc^2
-```
-
-Check out the content pages bundled with this sample book to see more.
+TODO: Add introduction to graph theory and kernels.
