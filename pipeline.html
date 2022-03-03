@@ -830,9 +830,17 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hyppo.discrim</span> <span class="kn">import</span> <span class="n">DiscrimOneSample</span>
 <span class="n">discrim</span> <span class="o">=</span> <span class="n">DiscrimOneSample</span><span class="p">()</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">3</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)])</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 
+<span class="c1"># construct labels</span>
+<span class="n">mapper</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;B6&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;BTBR&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;CAST&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;DBA2&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mapper</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)])</span>
+
+<span class="c1"># construct random matrix with zero diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">scaled_random</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">scaled_random</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># calculate discriminability for each kernel matrix</span>
 <span class="n">discrim_omni</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_omni_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">discrim_density</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">discrim_avgedgeweight</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -843,13 +851,9 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">discrim_nodestr_l2</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l2</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">discrim_edgeweight_l1</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l1</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">discrim_edgeweight_l2</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l2</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-
-<span class="c1"># random matrix</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">scaled_random</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">))</span>
-<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">scaled_random</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">discrim_random</span> <span class="o">=</span> <span class="n">discrim</span><span class="o">.</span><span class="n">statistic</span><span class="p">(</span><span class="n">scaled_random</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
+<span class="c1"># plot bar graph in descending order</span>
 <span class="n">kernels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Omnibus&#39;</span><span class="p">,</span> <span class="s1">&#39;Density&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg. Edge Weight&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg. Adjacency&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Degree (L1)&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Degree (L2)&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Strength (L1)&#39;</span><span class="p">,</span> \
     <span class="s1">&#39;Node Strength (L2)&#39;</span><span class="p">,</span> <span class="s1">&#39;Edge Weight (L1)&#39;</span><span class="p">,</span> <span class="s1">&#39;Edge Weight (L2)&#39;</span><span class="p">,</span> <span class="s1">&#39;Random&#39;</span><span class="p">]</span>
 <span class="n">stats</span> <span class="o">=</span> <span class="p">[</span><span class="n">discrim_omni</span><span class="p">,</span> <span class="n">discrim_density</span><span class="p">,</span> <span class="n">discrim_avgedgeweight</span><span class="p">,</span> <span class="n">discrim_avgadjmat</span><span class="p">,</span> <span class="n">discrim_nodedeg_l1</span><span class="p">,</span> <span class="n">discrim_nodedeg_l2</span><span class="p">,</span> \
@@ -865,17 +869,12 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">sorted_discrim_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="nb">list</span><span class="p">(</span><span class="n">sorted_discrim_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;discriminability&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;BarContainer object of 11 artists&gt;
-</pre></div>
-</div>
-<img alt="_images/pipeline_31_2.png" src="_images/pipeline_31_2.png" />
+<img alt="_images/pipeline_31_0.png" src="_images/pipeline_31_0.png" />
 </div>
 </div>
 </div>
