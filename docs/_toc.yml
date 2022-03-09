@@ -4,4 +4,6 @@
 format: jb-book
 root: intro
 chapters:
-- file: pipeline
+- file: discriminability
+- file: clustering
+
