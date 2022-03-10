@@ -2,9 +2,7 @@ import numpy as np
 
 
 def calculate_dissim(graphs, method="density", norm=None, normalize=True):
-    """
-    Calculate the dissimilarity matrix using the input kernel. 
-    """
+    """ Calculate the dissimilarity matrix using the input kernel. """
     glob = False
     node = False
     edge = False
