@@ -343,6 +343,51 @@ const thebe_selector_output = ".output, .cell_output"
      Density
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     Average Edge Weight
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     Average of the Adjacency Matrix
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-degree-l1-norm">
+     Node Degree - L1 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-degree-l2-norm">
+     Node Degree - L2 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     Node Strength - L1 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
+     Node Strength - L2 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edge-weight-l1-norm">
+     Edge Weight - L1 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edge-weight-l2-norm">
+     Edge Weight - L2 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id15">
+     Omnibus Embedding
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -499,6 +544,51 @@ const thebe_selector_output = ".output, .cell_output"
      Density
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     Average Edge Weight
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     Average of the Adjacency Matrix
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-degree-l1-norm">
+     Node Degree - L1 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-degree-l2-norm">
+     Node Degree - L2 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     Node Strength - L1 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
+     Node Strength - L2 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edge-weight-l1-norm">
+     Edge Weight - L1 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edge-weight-l2-norm">
+     Edge Weight - L2 Norm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id15">
+     Omnibus Embedding
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -527,7 +617,11 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">adjusted_rand_score</span><span class="p">,</span> <span class="n">accuracy_score</span>
 <span class="kn">from</span> <span class="nn">graspologic.embed</span> <span class="kn">import</span> <span class="n">ClassicalMDS</span>
 <span class="kn">from</span> <span class="nn">graspologic.utils</span> <span class="kn">import</span> <span class="n">remap_labels</span>
-<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">calculate_dissim</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;/Users/dianelee/Documents/Github/ndd-dlee&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">utils.utils</span> <span class="kn">import</span> <span class="n">calculate_dissim</span>
 </pre></div>
 </div>
 </div>
@@ -603,9 +697,9 @@ const thebe_selector_output = ".output, .cell_output"
 
         <span class="c1"># cluster using GMM or K-means</span>
         <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;gmm&quot;</span><span class="p">:</span>
-            <span class="n">clustering</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">cmds_embedding</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+            <span class="n">clustering</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">cmds_embedding</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;kmeans&quot;</span><span class="p">:</span>
-            <span class="n">clustering</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">cmds_embedding</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+            <span class="n">clustering</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">cmds_embedding</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not a valid kernel name.&quot;</span><span class="p">)</span>
 
@@ -655,6 +749,58 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_clustering</span><span class="p">(</span>
+    <span class="n">algorithm</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;agg&quot;</span><span class="p">,</span>
+    <span class="n">dissim_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">linkage_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
+    <span class="n">palette</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;DBA2&quot;</span><span class="p">:</span> <span class="s2">&quot;#e7298a&quot;</span><span class="p">,</span> <span class="s2">&quot;B6&quot;</span><span class="p">:</span> <span class="s2">&quot;#1b9e77&quot;</span><span class="p">,</span> <span class="s2">&quot;BTBR&quot;</span><span class="p">:</span> <span class="s2">&quot;#d95f02&quot;</span><span class="p">,</span> <span class="s2">&quot;CAST&quot;</span><span class="p">:</span> <span class="s2">&quot;#7570b3&quot;</span><span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">algorithm</span> <span class="o">==</span> <span class="s2">&quot;agg&quot;</span> <span class="ow">and</span> <span class="n">dissim_matrix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">linkage_matrix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Labels&#39;</span><span class="p">])</span>
+        <span class="n">mice_labels</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;Labels&quot;</span><span class="p">)</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="n">mice_labels</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">palette</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+        <span class="n">clustergrid</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="p">,</span> <span class="n">row_linkage</span><span class="o">=</span><span class="n">linkage_matrix</span><span class="p">,</span> <span class="n">col_linkage</span><span class="o">=</span><span class="n">linkage_matrix</span><span class="p">,</span> <span class="n">row_colors</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> \
+            <span class="n">col_colors</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_cbar</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Dissimilarity&quot;</span><span class="p">)</span> <span class="c1"># add color bar</span>
+        <span class="n">col_ax</span> <span class="o">=</span> <span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_col_colors</span> <span class="c1"># add row and column colors</span>
+        <span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s2">&quot;Genotype&quot;</span><span class="p">],</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+        <span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">palette</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="c1"># add legend</span>
+        <span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span> <span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.13</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Genotype&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">clustergrid</span>
+        
+    <span class="k">elif</span> <span class="n">algorithm</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;gmm&quot;</span><span class="p">,</span> <span class="s2">&quot;kmeans&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="n">markers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Incorrect&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Correct&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> \
+            <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">markers</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;CMDS Dimension 1&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;CMDS Dimension 2&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ax</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;If algorithm is &#39;agg&#39;, dissim_matrix and linkage_matrix must be given. If algorithm is &#39;gmm&#39; or &#39;kmeans&#39;, </span><span class="se">\</span>
+<span class="s2">            data must be given.&quot;</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="agglomerative-clustering">
 <h2>Agglomerative Clustering<a class="headerlink" href="#agglomerative-clustering" title="Permalink to this headline">¶</a></h2>
@@ -665,12 +811,6 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct labels</span>
 <span class="n">mapper</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;B6&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;BTBR&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;CAST&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;DBA2&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mapper</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)])</span>
-
-<span class="c1"># set palette for plotting</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Labels&#39;</span><span class="p">])</span>
-<span class="n">mice_labels</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;Labels&quot;</span><span class="p">)</span>
-<span class="n">palette</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;DBA2&quot;</span><span class="p">:</span> <span class="s2">&quot;#e7298a&quot;</span><span class="p">,</span> <span class="s2">&quot;B6&quot;</span><span class="p">:</span> <span class="s2">&quot;#1b9e77&quot;</span><span class="p">,</span> <span class="s2">&quot;BTBR&quot;</span><span class="p">:</span> <span class="s2">&quot;#d95f02&quot;</span><span class="p">,</span> <span class="s2">&quot;CAST&quot;</span><span class="p">:</span> <span class="s2">&quot;#7570b3&quot;</span><span class="p">}</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="n">mice_labels</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">palette</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -694,26 +834,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">density_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
-<span class="n">clustergrid</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span>
-    <span class="n">scaled_density_dissim</span><span class="p">,</span>
-    <span class="n">row_linkage</span><span class="o">=</span><span class="n">density_linkage_matrix</span><span class="p">,</span>
-    <span class="n">col_linkage</span><span class="o">=</span><span class="n">density_linkage_matrix</span><span class="p">,</span>
-    <span class="n">row_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">col_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span>
-    <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">xticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_cbar</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Dissimilarity&quot;</span><span class="p">)</span> <span class="c1"># add color bar</span>
-<span class="n">col_ax</span> <span class="o">=</span> <span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_col_colors</span> <span class="c1"># add row and column colors</span>
-<span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s2">&quot;Genotype&quot;</span><span class="p">],</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
-<span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">palette</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="c1"># add legend</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Genotype&#39;</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">density_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -722,10 +843,10 @@ const thebe_selector_output = ".output, .cell_output"
 ARI: 0.20111167256189996
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb04a94eb80&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9df982cc40&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_9_2.png" src="_images/clustering_9_2.png" />
+<img alt="_images/clustering_10_2.png" src="_images/clustering_10_2.png" />
 </div>
 </div>
 </div>
@@ -748,26 +869,7 @@ ARI: 0.20111167256189996
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">avgedgeweight_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
-<span class="n">clustergrid</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span>
-    <span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> 
-    <span class="n">row_linkage</span><span class="o">=</span><span class="n">avgedgeweight_linkage_matrix</span><span class="p">,</span> 
-    <span class="n">col_linkage</span><span class="o">=</span><span class="n">avgedgeweight_linkage_matrix</span><span class="p">,</span>
-    <span class="n">row_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">col_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span>
-    <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">xticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_cbar</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Dissimilarity&quot;</span><span class="p">)</span> <span class="c1"># add color bar</span>
-<span class="n">col_ax</span> <span class="o">=</span> <span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_col_colors</span> <span class="c1"># add row and column colors</span>
-<span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s2">&quot;Genotype&quot;</span><span class="p">],</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
-<span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">palette</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="c1"># add legend</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Genotype&#39;</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">avgedgeweight_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -776,10 +878,10 @@ ARI: 0.20111167256189996
 ARI: 0.4124638612271121
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb0bcac3820&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9df982cc70&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_11_2.png" src="_images/clustering_11_2.png" />
+<img alt="_images/clustering_12_2.png" src="_images/clustering_12_2.png" />
 </div>
 </div>
 </div>
@@ -802,26 +904,7 @@ ARI: 0.4124638612271121
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">avgadjmat_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
-<span class="n">clustergrid</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span>
-    <span class="n">scaled_avgadjmat_dissim</span><span class="p">,</span> 
-    <span class="n">row_linkage</span><span class="o">=</span><span class="n">avgadjmat_linkage_matrix</span><span class="p">,</span> 
-    <span class="n">col_linkage</span><span class="o">=</span><span class="n">avgadjmat_linkage_matrix</span><span class="p">,</span>
-    <span class="n">row_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">col_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span>
-    <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">xticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_cbar</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Dissimilarity&quot;</span><span class="p">)</span> <span class="c1"># add color bar</span>
-<span class="n">col_ax</span> <span class="o">=</span> <span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_col_colors</span> <span class="c1"># add row and column colors</span>
-<span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s2">&quot;Genotype&quot;</span><span class="p">],</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
-<span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">palette</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="c1"># add legend</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Genotype&#39;</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_avgadjmat_dissim</span><span class="p">,</span> <span class="n">avgadjmat_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -830,10 +913,10 @@ ARI: 0.4124638612271121
 ARI: 0.3134054954204829
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb0ca627c10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dd14e07f0&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_13_2.png" src="_images/clustering_13_2.png" />
+<img alt="_images/clustering_14_2.png" src="_images/clustering_14_2.png" />
 </div>
 </div>
 </div>
@@ -856,26 +939,7 @@ ARI: 0.3134054954204829
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l1_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
-<span class="n">clustergrid</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span>
-    <span class="n">scaled_nodedeg_dissim_l1</span><span class="p">,</span> 
-    <span class="n">row_linkage</span><span class="o">=</span><span class="n">nodedeg_l1_linkage_matrix</span><span class="p">,</span> 
-    <span class="n">col_linkage</span><span class="o">=</span><span class="n">nodedeg_l1_linkage_matrix</span><span class="p">,</span>
-    <span class="n">row_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">col_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span>
-    <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">xticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_cbar</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Dissimilarity&quot;</span><span class="p">)</span> <span class="c1"># add color bar</span>
-<span class="n">col_ax</span> <span class="o">=</span> <span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_col_colors</span> <span class="c1"># add row and column colors</span>
-<span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s2">&quot;Genotype&quot;</span><span class="p">],</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
-<span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">palette</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="c1"># add legend</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Genotype&#39;</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_nodedeg_dissim_l1</span><span class="p">,</span> <span class="n">nodedeg_l1_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -884,10 +948,10 @@ ARI: 0.3134054954204829
 ARI: 0.17706740792216819
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb039de6eb0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dc9e27e20&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_15_2.png" src="_images/clustering_15_2.png" />
+<img alt="_images/clustering_16_2.png" src="_images/clustering_16_2.png" />
 </div>
 </div>
 </div>
@@ -910,26 +974,7 @@ ARI: 0.17706740792216819
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l2_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
-<span class="n">clustergrid</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span>
-    <span class="n">scaled_nodedeg_dissim_l2</span><span class="p">,</span> 
-    <span class="n">row_linkage</span><span class="o">=</span><span class="n">nodedeg_l2_linkage_matrix</span><span class="p">,</span> 
-    <span class="n">col_linkage</span><span class="o">=</span><span class="n">nodedeg_l2_linkage_matrix</span><span class="p">,</span>
-    <span class="n">row_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">col_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span>
-    <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">xticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_cbar</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Dissimilarity&quot;</span><span class="p">)</span> <span class="c1"># add color bar</span>
-<span class="n">col_ax</span> <span class="o">=</span> <span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_col_colors</span> <span class="c1"># add row and column colors</span>
-<span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s2">&quot;Genotype&quot;</span><span class="p">],</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
-<span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">palette</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="c1"># add legend</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Genotype&#39;</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_nodedeg_dissim_l2</span><span class="p">,</span> <span class="n">nodedeg_l2_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -938,10 +983,10 @@ ARI: 0.17706740792216819
 ARI: 0.27552275522755226
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb0ad595820&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dd14e0760&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_17_2.png" src="_images/clustering_17_2.png" />
+<img alt="_images/clustering_18_2.png" src="_images/clustering_18_2.png" />
 </div>
 </div>
 </div>
@@ -964,26 +1009,7 @@ ARI: 0.27552275522755226
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l1_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
-<span class="n">clustergrid</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span>
-    <span class="n">scaled_nodestr_dissim_l1</span><span class="p">,</span> 
-    <span class="n">row_linkage</span><span class="o">=</span><span class="n">nodestr_l1_linkage_matrix</span><span class="p">,</span> 
-    <span class="n">col_linkage</span><span class="o">=</span><span class="n">nodestr_l1_linkage_matrix</span><span class="p">,</span>
-    <span class="n">row_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">col_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span>
-    <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">xticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_cbar</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Dissimilarity&quot;</span><span class="p">)</span> <span class="c1"># add color bar</span>
-<span class="n">col_ax</span> <span class="o">=</span> <span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_col_colors</span> <span class="c1"># add row and column colors</span>
-<span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s2">&quot;Genotype&quot;</span><span class="p">],</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
-<span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">palette</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="c1"># add legend</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Genotype&#39;</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_nodestr_dissim_l1</span><span class="p">,</span> <span class="n">nodestr_l1_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -992,10 +1018,10 @@ ARI: 0.27552275522755226
 ARI: 0.7122838944494996
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb038f7c850&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dda1dfa90&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_19_2.png" src="_images/clustering_19_2.png" />
+<img alt="_images/clustering_20_2.png" src="_images/clustering_20_2.png" />
 </div>
 </div>
 </div>
@@ -1018,26 +1044,7 @@ ARI: 0.7122838944494996
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l2_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
-<span class="n">clustergrid</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span>
-    <span class="n">scaled_nodestr_dissim_l2</span><span class="p">,</span> 
-    <span class="n">row_linkage</span><span class="o">=</span><span class="n">nodestr_l2_linkage_matrix</span><span class="p">,</span> 
-    <span class="n">col_linkage</span><span class="o">=</span><span class="n">nodestr_l2_linkage_matrix</span><span class="p">,</span>
-    <span class="n">row_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">col_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span>
-    <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">xticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_cbar</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Dissimilarity&quot;</span><span class="p">)</span> <span class="c1"># add color bar</span>
-<span class="n">col_ax</span> <span class="o">=</span> <span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_col_colors</span> <span class="c1"># add row and column colors</span>
-<span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s2">&quot;Genotype&quot;</span><span class="p">],</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
-<span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">palette</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="c1"># add legend</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Genotype&#39;</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_nodestr_dissim_l2</span><span class="p">,</span> <span class="n">nodestr_l2_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1046,10 +1053,10 @@ ARI: 0.7122838944494996
 ARI: 0.5847123719464145
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb06949df10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dc9a64a60&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_21_2.png" src="_images/clustering_21_2.png" />
+<img alt="_images/clustering_22_2.png" src="_images/clustering_22_2.png" />
 </div>
 </div>
 </div>
@@ -1072,26 +1079,7 @@ ARI: 0.5847123719464145
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">edgeweight_l1_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
-<span class="n">clustergrid</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span>
-    <span class="n">scaled_edgeweight_dissim_l1</span><span class="p">,</span> 
-    <span class="n">row_linkage</span><span class="o">=</span><span class="n">edgeweight_l1_linkage_matrix</span><span class="p">,</span> 
-    <span class="n">col_linkage</span><span class="o">=</span><span class="n">edgeweight_l1_linkage_matrix</span><span class="p">,</span>
-    <span class="n">row_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">col_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span>
-    <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">xticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_cbar</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Dissimilarity&quot;</span><span class="p">)</span> <span class="c1"># add color bar</span>
-<span class="n">col_ax</span> <span class="o">=</span> <span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_col_colors</span> <span class="c1"># add row and column colors</span>
-<span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s2">&quot;Genotype&quot;</span><span class="p">],</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
-<span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">palette</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="c1"># add legend</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Genotype&#39;</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_edgeweight_dissim_l1</span><span class="p">,</span> <span class="n">edgeweight_l1_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1100,10 +1088,10 @@ ARI: 0.5847123719464145
 ARI: 0.9137771184869276
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb05c483ee0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dc9a6e790&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_23_2.png" src="_images/clustering_23_2.png" />
+<img alt="_images/clustering_24_2.png" src="_images/clustering_24_2.png" />
 </div>
 </div>
 </div>
@@ -1126,26 +1114,7 @@ ARI: 0.9137771184869276
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">edgeweight_l2_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
-<span class="n">clustergrid</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span>
-    <span class="n">scaled_edgeweight_dissim_l2</span><span class="p">,</span> 
-    <span class="n">row_linkage</span><span class="o">=</span><span class="n">edgeweight_l2_linkage_matrix</span><span class="p">,</span> 
-    <span class="n">col_linkage</span><span class="o">=</span><span class="n">edgeweight_l2_linkage_matrix</span><span class="p">,</span>
-    <span class="n">row_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">col_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span>
-    <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">xticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_cbar</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Dissimilarity&quot;</span><span class="p">)</span> <span class="c1"># add color bar</span>
-<span class="n">col_ax</span> <span class="o">=</span> <span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_col_colors</span> <span class="c1"># add row and column colors</span>
-<span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s2">&quot;Genotype&quot;</span><span class="p">],</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
-<span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">palette</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="c1"># add legend</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Genotype&#39;</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_edgeweight_dissim_l2</span><span class="p">,</span> <span class="n">edgeweight_l2_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1154,10 +1123,10 @@ ARI: 0.9137771184869276
 ARI: 0.9137771184869276
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb05c762bb0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dda1df460&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_25_2.png" src="_images/clustering_25_2.png" />
+<img alt="_images/clustering_26_2.png" src="_images/clustering_26_2.png" />
 </div>
 </div>
 </div>
@@ -1192,26 +1161,7 @@ ARI: 0.9137771184869276
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">omni_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
-<span class="n">clustergrid</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span>
-    <span class="n">scaled_omni_dissim</span><span class="p">,</span> 
-    <span class="n">row_linkage</span><span class="o">=</span><span class="n">omni_linkage_matrix</span><span class="p">,</span> 
-    <span class="n">col_linkage</span><span class="o">=</span><span class="n">omni_linkage_matrix</span><span class="p">,</span>
-    <span class="n">row_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">col_colors</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span>
-    <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">xticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_cbar</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Dissimilarity&quot;</span><span class="p">)</span> <span class="c1"># add color bar</span>
-<span class="n">col_ax</span> <span class="o">=</span> <span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_col_colors</span> <span class="c1"># add row and column colors</span>
-<span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s2">&quot;Genotype&quot;</span><span class="p">],</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
-<span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">palette</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="c1"># add legend</span>
-<span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Genotype&#39;</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_omni_dissim</span><span class="p">,</span> <span class="n">omni_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1220,10 +1170,10 @@ ARI: 0.9137771184869276
 ARI: 1.0
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb05c425b50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dd2d1cd00&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_27_2.png" src="_images/clustering_27_2.png" />
+<img alt="_images/clustering_28_2.png" src="_images/clustering_28_2.png" />
 </div>
 </div>
 </div>
@@ -1263,12 +1213,7 @@ ARI: 1.0
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">density_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="n">markers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Incorrect&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Correct&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Genotype&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">density_gm</span><span class="p">,</span> \
-    <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">markers</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">density_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1277,10 +1222,10 @@ ARI: 1.0
 ARI: 0.20111167256189996
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb04c1d7d30&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_31_2.png" src="_images/clustering_31_2.png" />
+<img alt="_images/clustering_32_2.png" src="_images/clustering_32_2.png" />
 </div>
 </div>
 </div>
@@ -1300,24 +1245,19 @@ ARI: 0.20111167256189996
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">avgedgeweight_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="n">markers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Incorrect&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Correct&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Genotype&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">avgedgeweight_gm</span><span class="p">,</span> \
-    <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">markers</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">avgedgeweight_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.65625
-ARI: 0.4124638612271121
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.5
+ARI: 0.18691588785046728
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb0ca8ffe80&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_33_2.png" src="_images/clustering_33_2.png" />
+<img alt="_images/clustering_34_2.png" src="_images/clustering_34_2.png" />
 </div>
 </div>
 </div>
@@ -1338,24 +1278,19 @@ ARI: 0.4124638612271121
 
 
 <span class="c1"># plot clustering</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="n">markers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Incorrect&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Correct&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Genotype&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">avgadjmat_gm</span><span class="p">,</span> \
-    <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">markers</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">avgadjmat_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.625
-ARI: 0.2802568746912564
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.59375
+ARI: 0.27401624980086026
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb068e64a90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_35_2.png" src="_images/clustering_35_2.png" />
+<img alt="_images/clustering_36_2.png" src="_images/clustering_36_2.png" />
 </div>
 </div>
 </div>
@@ -1375,24 +1310,19 @@ ARI: 0.2802568746912564
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l1_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="n">markers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Incorrect&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Correct&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Genotype&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodedeg_l1_gm</span><span class="p">,</span> \
-    <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">markers</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodedeg_l1_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.625
-ARI: 0.36778063410454154
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.65625
+ARI: 0.44858546501778757
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb05da827c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_37_2.png" src="_images/clustering_37_2.png" />
+<img alt="_images/clustering_38_2.png" src="_images/clustering_38_2.png" />
 </div>
 </div>
 </div>
@@ -1412,12 +1342,7 @@ ARI: 0.36778063410454154
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l2_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="n">markers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Incorrect&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Correct&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Genotype&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodedeg_l2_gm</span><span class="p">,</span> \
-    <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">markers</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodedeg_l2_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1426,10 +1351,10 @@ ARI: 0.36778063410454154
 ARI: 0.5248441974060973
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb05db3bdf0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_39_2.png" src="_images/clustering_39_2.png" />
+<img alt="_images/clustering_40_2.png" src="_images/clustering_40_2.png" />
 </div>
 </div>
 </div>
@@ -1449,24 +1374,19 @@ ARI: 0.5248441974060973
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l1_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="n">markers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Incorrect&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Correct&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Genotype&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodestr_l1_gm</span><span class="p">,</span> \
-    <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">markers</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.39</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodestr_l1_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.9375
-ARI: 0.8405584129316679
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.84375
+ARI: 0.6579851691083378
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb0be289790&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_41_2.png" src="_images/clustering_41_2.png" />
+<img alt="_images/clustering_42_2.png" src="_images/clustering_42_2.png" />
 </div>
 </div>
 </div>
@@ -1486,24 +1406,19 @@ ARI: 0.8405584129316679
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l2_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="n">markers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Incorrect&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Correct&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Genotype&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodestr_l2_gm</span><span class="p">,</span> \
-    <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">markers</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.39</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodestr_l2_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.875
-ARI: 0.7122838944494996
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.71875
+ARI: 0.6531126871552404
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb06d8e0820&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_43_2.png" src="_images/clustering_43_2.png" />
+<img alt="_images/clustering_44_2.png" src="_images/clustering_44_2.png" />
 </div>
 </div>
 </div>
@@ -1523,24 +1438,19 @@ ARI: 0.7122838944494996
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">edgeweight_l1_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="n">markers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Incorrect&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Correct&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Genotype&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">edgeweight_l1_gm</span><span class="p">,</span> \
-    <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">markers</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.39</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">edgeweight_l1_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.96875
-ARI: 0.9137771184869276
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.75
+ARI: 0.5847123719464145
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb04cde5970&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_45_2.png" src="_images/clustering_45_2.png" />
+<img alt="_images/clustering_46_2.png" src="_images/clustering_46_2.png" />
 </div>
 </div>
 </div>
@@ -1548,11 +1458,12 @@ ARI: 0.9137771184869276
 <h3>Edge Weights - L2 Norm<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l2</span><span class="p">)</span> <span class="o">==</span> <span class="n">scaled_edgeweight_dissim_l2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graspologic.utils</span> <span class="kn">import</span> <span class="n">symmetrize</span>
 
-<span class="c1">### doesn&#39;t work because it is not a symmetric matrix - how to fix?</span>
+<span class="c1"># make dissimilarity matrix symmetric</span>
+<span class="n">scaled_edgeweight_dissim_l2</span> <span class="o">=</span> <span class="n">symmetrize</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l2</span><span class="p">)</span>
+
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">edgeweight_l2_gm_embedding</span><span class="p">,</span> <span class="n">edgeweight_l2_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="o">=</span><span class="n">scaled_edgeweight_dissim_l2</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">)</span>
 <span class="n">edgeweight_l2_gm</span><span class="p">,</span> <span class="n">edgeweight_l2_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">edgeweight_l2_gm_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l2_gm_pred</span><span class="p">)</span>
 
@@ -1564,72 +1475,19 @@ ARI: 0.9137771184869276
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">edgeweight_l2_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="n">markers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Incorrect&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Correct&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Genotype&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">edgeweight_l2_gm</span><span class="p">,</span> \
-    <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">markers</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.39</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">edgeweight_l2_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(32, 32)
-[[ True False  True ...  True  True  True]
- [False  True  True ... False False False]
- [ True  True  True ... False  True False]
- ...
- [ True False False ...  True  True False]
- [ True False  True ...  True  True  True]
- [ True False False ... False  True  True]]
-[[ True  True  True ...  True  True  True]
- [ True  True  True ...  True  True  True]
- [ True  True  True ...  True  True  True]
- ...
- [ True  True  True ...  True  True  True]
- [ True  True  True ...  True  True  True]
- [ True  True  True ...  True  True  True]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.75
+ARI: 0.5847123719464145
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">218</span><span class="p">],</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l2</span><span class="p">)</span> <span class="o">==</span> <span class="n">scaled_edgeweight_dissim_l2</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l1</span><span class="p">)</span> <span class="o">==</span> <span class="n">scaled_edgeweight_dissim_l1</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">edgeweight_l2_gm_embedding</span><span class="p">,</span> <span class="n">edgeweight_l2_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="o">=</span><span class="n">scaled_edgeweight_dissim_l2</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">edgeweight_l2_gm</span><span class="p">,</span> <span class="n">edgeweight_l2_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">edgeweight_l2_gm_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l2_gm_pred</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># calculate accuracy and ARI</span>
-
-<span class="nn">Input In [177],</span> in <span class="ni">cluster_dissim</span><span class="nt">(dissim_matrix, labels, method)</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="k">elif</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;gmm&quot;</span><span class="p">,</span> <span class="s2">&quot;kmeans&quot;</span><span class="p">]:</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="c1"># Classical MDS</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="n">cmds</span> <span class="o">=</span> <span class="n">ClassicalMDS</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dissimilarity</span><span class="o">=</span><span class="s2">&quot;precomputed&quot;</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">29</span>     <span class="n">cmds_embedding</span> <span class="o">=</span> <span class="n">cmds</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span>     <span class="c1"># cluster using GMM or K-means</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;gmm&quot;</span><span class="p">:</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/bilateral/lib/python3.9/site-packages/graspologic/embed/mds.py:244,</span> in <span class="ni">ClassicalMDS.fit_transform</span><span class="nt">(self, X, y)</span>
-<span class="g g-Whitespace">    </span><span class="mi">225</span> <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">226</span>     <span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">227</span><span class="sd">     Fit the data from X, and returns the embedded coordinates.</span>
-<span class="g g-Whitespace">    </span><span class="mi">228</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">242</span><span class="sd">         Embedded input.</span>
-<span class="g g-Whitespace">    </span><span class="mi">243</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">244</span>     <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">246</span>     <span class="n">X_new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components_</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">singular_values_</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">248</span>     <span class="k">return</span> <span class="n">X_new</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/bilateral/lib/python3.9/site-packages/graspologic/embed/mds.py:194,</span> in <span class="ni">ClassicalMDS.fit</span><span class="nt">(self, X, y)</span>
-<span class="g g-Whitespace">    </span><span class="mi">192</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">is_symmetric</span><span class="p">(</span><span class="n">dissimilarity_matrix</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">193</span>         <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;X must be a symmetric array if precomputed dissimilarity matrix.&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">194</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">195</span> <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dissimilarity</span> <span class="o">==</span> <span class="s2">&quot;euclidean&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">196</span>     <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">allow_nd</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="ne">ValueError</span>: X must be a symmetric array if precomputed dissimilarity matrix.
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
+<img alt="_images/clustering_48_2.png" src="_images/clustering_48_2.png" />
 </div>
 </div>
 </div>
@@ -1649,12 +1507,7 @@ ARI: 0.9137771184869276
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">omni_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="n">markers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Incorrect&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Correct&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Genotype&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">omni_gm</span><span class="p">,</span> \
-    <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">markers</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.39</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">omni_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1663,10 +1516,10 @@ ARI: 0.9137771184869276
 ARI: 0.9137771184869276
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb0bdff9160&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_49_2.png" src="_images/clustering_49_2.png" />
+<img alt="_images/clustering_50_2.png" src="_images/clustering_50_2.png" />
 </div>
 </div>
 </div>
@@ -1691,12 +1544,7 @@ ARI: 0.9137771184869276
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">density_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="n">markers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Incorrect&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Correct&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Genotype&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">density_km</span><span class="p">,</span> \
-    <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">markers</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">density_km</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1705,10 +1553,298 @@ ARI: 0.9137771184869276
 ARI: 0.24777853725222146
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb08a265550&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/clustering_51_2.png" src="_images/clustering_51_2.png" />
+<img alt="_images/clustering_52_2.png" src="_images/clustering_52_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id11">
+<h3>Average Edge Weight<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<span class="n">avgedgeweight_km_embedding</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">avgedgeweight_km</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">avgedgeweight_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span><span class="p">)</span>
+
+<span class="c1"># calculate accuracy and ARI</span>
+<span class="n">avgedgeweight_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span><span class="p">)</span>
+<span class="n">avgedgeweight_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">avgedgeweight_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">avgedgeweight_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot clustering</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">avgedgeweight_km</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.53125
+ARI: 0.2412006432017152
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/clustering_54_2.png" src="_images/clustering_54_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id12">
+<h3>Average of the Adjacency Matrix<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<span class="n">avgadjmat_km_embedding</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_avgadjmat_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">avgadjmat_km</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">avgadjmat_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span><span class="p">)</span>
+
+<span class="c1"># calculate accuracy and ARI</span>
+<span class="n">avgadjmat_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span><span class="p">)</span>
+<span class="n">avgadjmat_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">avgadjmat_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">avgadjmat_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot clustering</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">avgadjmat_km</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.65625
+ARI: 0.3094958968347011
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/clustering_56_2.png" src="_images/clustering_56_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="node-degree-l1-norm">
+<h3>Node Degree - L1 Norm<a class="headerlink" href="#node-degree-l1-norm" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<span class="n">nodedeg_l1_km_embedding</span><span class="p">,</span> <span class="n">nodedeg_l1_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">nodedeg_l1_km</span><span class="p">,</span> <span class="n">nodedeg_l1_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodedeg_l1_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l1_km_pred</span><span class="p">)</span>
+
+<span class="c1"># calculate accuracy and ARI</span>
+<span class="n">nodedeg_l1_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l1_km_pred</span><span class="p">)</span>
+<span class="n">nodedeg_l1_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l1_km_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodedeg_l1_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l1_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot clustering</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodedeg_l1_km</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.625
+ARI: 0.36778063410454154
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/clustering_58_2.png" src="_images/clustering_58_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="node-degree-l2-norm">
+<h3>Node Degree - L2 Norm<a class="headerlink" href="#node-degree-l2-norm" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<span class="n">nodedeg_l2_km_embedding</span><span class="p">,</span> <span class="n">nodedeg_l2_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">nodedeg_l2_km</span><span class="p">,</span> <span class="n">nodedeg_l2_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodedeg_l2_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l2_km_pred</span><span class="p">)</span>
+
+<span class="c1"># calculate accuracy and ARI</span>
+<span class="n">nodedeg_l2_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l2_km_pred</span><span class="p">)</span>
+<span class="n">nodedeg_l2_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l2_km_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodedeg_l2_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l2_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot clustering</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodedeg_l2_km</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.65625
+ARI: 0.47026657552973344
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/clustering_60_2.png" src="_images/clustering_60_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id13">
+<h3>Node Strength - L1 Norm<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<span class="n">nodestr_l1_km_embedding</span><span class="p">,</span> <span class="n">nodestr_l1_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">nodestr_l1_km</span><span class="p">,</span> <span class="n">nodestr_l1_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodestr_l1_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l1_km_pred</span><span class="p">)</span>
+
+<span class="c1"># calculate accuracy and ARI</span>
+<span class="n">nodestr_l1_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l1_km_pred</span><span class="p">)</span>
+<span class="n">nodestr_l1_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l1_km_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodestr_l1_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l1_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot clustering</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodestr_l1_km</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.84375
+ARI: 0.6558689717925387
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/clustering_62_2.png" src="_images/clustering_62_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id14">
+<h3>Node Strength - L2 Norm<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<span class="n">nodestr_l2_km_embedding</span><span class="p">,</span> <span class="n">nodestr_l2_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">nodestr_l2_km</span><span class="p">,</span> <span class="n">nodestr_l2_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodestr_l2_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l2_km_pred</span><span class="p">)</span>
+
+<span class="c1"># calculate accuracy and ARI</span>
+<span class="n">nodestr_l2_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l2_km_pred</span><span class="p">)</span>
+<span class="n">nodestr_l2_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l2_km_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodestr_l2_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l2_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot clustering</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodestr_l2_km</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.875
+ARI: 0.7122838944494996
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/clustering_64_2.png" src="_images/clustering_64_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="edge-weight-l1-norm">
+<h3>Edge Weight - L1 Norm<a class="headerlink" href="#edge-weight-l1-norm" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<span class="n">edgeweight_l1_km_embedding</span><span class="p">,</span> <span class="n">edgeweight_l1_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">edgeweight_l1_km</span><span class="p">,</span> <span class="n">edgeweight_l1_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">edgeweight_l1_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l1_km_pred</span><span class="p">)</span>
+
+<span class="c1"># calculate accuracy and ARI</span>
+<span class="n">edgeweight_l1_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l1_km_pred</span><span class="p">)</span>
+<span class="n">edgeweight_l1_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l1_km_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">edgeweight_l1_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">edgeweight_l1_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot clustering</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">edgeweight_l1_km</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.9375
+ARI: 0.8333024290747265
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/clustering_66_2.png" src="_images/clustering_66_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="edge-weight-l2-norm">
+<h3>Edge Weight - L2 Norm<a class="headerlink" href="#edge-weight-l2-norm" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<span class="n">edgeweight_l2_km_embedding</span><span class="p">,</span> <span class="n">edgeweight_l2_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">edgeweight_l2_km</span><span class="p">,</span> <span class="n">edgeweight_l2_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">edgeweight_l2_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l2_km_pred</span><span class="p">)</span>
+
+<span class="c1"># calculate accuracy and ARI</span>
+<span class="n">edgeweight_l2_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l2_km_pred</span><span class="p">)</span>
+<span class="n">edgeweight_l2_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l2_km_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">edgeweight_l2_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">edgeweight_l2_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot clustering</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">edgeweight_l2_km</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.90625
+ARI: 0.7658006264971439
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/clustering_68_2.png" src="_images/clustering_68_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id15">
+<h3>Omnibus Embedding<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<span class="n">omni_km_embedding</span><span class="p">,</span> <span class="n">omni_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_omni_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">omni_km</span><span class="p">,</span> <span class="n">omni_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">omni_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">omni_km_pred</span><span class="p">)</span>
+
+<span class="c1"># calculate accuracy and ARI</span>
+<span class="n">omni_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">omni_km_pred</span><span class="p">)</span>
+<span class="n">omni_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">omni_km_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">omni_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">omni_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot clustering</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">omni_km</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.96875
+ARI: 0.9137771184869276
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/clustering_70_2.png" src="_images/clustering_70_2.png" />
 </div>
 </div>
 </div>
@@ -1721,8 +1857,7 @@ ARI: 0.24777853725222146
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct symmetric random matrix with zero diagonal</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">scaled_random</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">))</span>
-<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">scaled_random</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">scaled_random</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tril</span><span class="p">(</span><span class="n">scaled_random</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">scaled_random</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">scaled_random</span> <span class="o">=</span> <span class="n">symmetrize</span><span class="p">(</span><span class="n">scaled_random</span><span class="p">)</span>
 
 <span class="c1"># agglomerative clustering</span>
 <span class="n">random_linkage_matrix</span><span class="p">,</span> <span class="n">random_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_random</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;agg&quot;</span><span class="p">)</span>
@@ -1735,34 +1870,50 @@ ARI: 0.24777853725222146
 <span class="n">random_gm</span><span class="p">,</span> <span class="n">random_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">random_gm_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_gm_pred</span><span class="p">)</span>
 <span class="n">random_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">random_gm_pred</span><span class="p">)</span>
 <span class="n">random_gm_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">random_gm_pred</span><span class="p">)</span>
+
+<span class="c1"># K-Means</span>
+<span class="n">random_km_embedding</span><span class="p">,</span> <span class="n">random_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_random</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;kmeans&quot;</span><span class="p">)</span>
+<span class="n">random_km</span><span class="p">,</span> <span class="n">random_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">random_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_km_pred</span><span class="p">)</span>
+<span class="n">random_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">random_km_pred</span><span class="p">)</span>
+<span class="n">random_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">random_km_pred</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kernels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Omnibus&#39;</span><span class="p">,</span> <span class="s1">&#39;Density&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg. Edge </span><span class="se">\n</span><span class="s1">Weight&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg. Adj.&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Degree </span><span class="se">\n</span><span class="s1">(L1)&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Degree </span><span class="se">\n</span><span class="s1">(L2)&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Strength </span><span class="se">\n</span><span class="s1">(L1)&#39;</span><span class="p">,</span> \
-    <span class="s1">&#39;Node Strength </span><span class="se">\n</span><span class="s1">(L2)&#39;</span><span class="p">,</span> <span class="s1">&#39;Edge Weight </span><span class="se">\n</span><span class="s1">(L1)&#39;</span><span class="p">,</span> <span class="s1">&#39;Edge Weight </span><span class="se">\n</span><span class="s1">(L2)&#39;</span><span class="p">,</span> <span class="s1">&#39;Random&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kernels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Omnibus&#39;</span><span class="p">,</span> <span class="s1">&#39;Density&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg. Edge Weight&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg. Adj.&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Degree (L1)&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Degree (L2)&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Strength (L1)&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Node Strength (L2)&#39;</span><span class="p">,</span> <span class="s1">&#39;Edge Weight (L1)&#39;</span><span class="p">,</span> <span class="s1">&#39;Edge Weight (L2)&#39;</span><span class="p">,</span> <span class="s1">&#39;Random&#39;</span><span class="p">]</span>
+<span class="n">kernels_df</span> <span class="o">=</span> <span class="p">[</span><span class="n">kernel</span> <span class="k">for</span> <span class="n">kernel</span> <span class="ow">in</span> <span class="n">kernels</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
 <span class="n">agg_ari</span> <span class="o">=</span> <span class="p">[</span><span class="n">omni_agg_ari</span><span class="p">,</span> <span class="n">density_agg_ari</span><span class="p">,</span> <span class="n">avgedgeweight_agg_ari</span><span class="p">,</span> <span class="n">avgadjmat_agg_ari</span><span class="p">,</span> <span class="n">nodedeg_l1_agg_ari</span><span class="p">,</span> <span class="n">nodedeg_l2_agg_ari</span><span class="p">,</span> \
     <span class="n">nodestr_l1_agg_ari</span><span class="p">,</span> <span class="n">nodestr_l2_agg_ari</span><span class="p">,</span> <span class="n">edgeweight_l1_agg_ari</span><span class="p">,</span> <span class="n">edgeweight_l2_agg_ari</span><span class="p">,</span> <span class="n">random_agg_ari</span><span class="p">]</span>
 <span class="n">gm_ari</span> <span class="o">=</span> <span class="p">[</span><span class="n">omni_gm_ari</span><span class="p">,</span> <span class="n">density_gm_ari</span><span class="p">,</span> <span class="n">avgedgeweight_gm_ari</span><span class="p">,</span> <span class="n">avgadjmat_gm_ari</span><span class="p">,</span> <span class="n">nodedeg_l1_gm_ari</span><span class="p">,</span> <span class="n">nodedeg_l2_gm_ari</span><span class="p">,</span> \
-    <span class="n">nodestr_l1_gm_ari</span><span class="p">,</span> <span class="n">nodestr_l2_gm_ari</span><span class="p">,</span> <span class="n">edgeweight_l1_gm_ari</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">random_gm_ari</span><span class="p">]</span>
+    <span class="n">nodestr_l1_gm_ari</span><span class="p">,</span> <span class="n">nodestr_l2_gm_ari</span><span class="p">,</span> <span class="n">edgeweight_l1_gm_ari</span><span class="p">,</span> <span class="n">edgeweight_l2_gm_ari</span><span class="p">,</span> <span class="n">random_gm_ari</span><span class="p">]</span>
+<span class="n">km_ari</span> <span class="o">=</span> <span class="p">[</span><span class="n">omni_km_ari</span><span class="p">,</span> <span class="n">density_km_ari</span><span class="p">,</span> <span class="n">avgedgeweight_km_ari</span><span class="p">,</span> <span class="n">avgadjmat_km_ari</span><span class="p">,</span> <span class="n">nodedeg_l1_km_ari</span><span class="p">,</span> <span class="n">nodedeg_l2_km_ari</span><span class="p">,</span> \
+    <span class="n">nodestr_l1_km_ari</span><span class="p">,</span> <span class="n">nodestr_l2_km_ari</span><span class="p">,</span> <span class="n">edgeweight_l1_km_ari</span><span class="p">,</span> <span class="n">edgeweight_l2_km_ari</span><span class="p">,</span> <span class="n">random_km_ari</span><span class="p">]</span>
 
-<span class="n">algos</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Agglomerative&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">agg_ari</span><span class="p">))]</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;GMM&#39;</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gm_ari</span><span class="p">))]</span>
-<span class="n">ari_vals</span> <span class="o">=</span> <span class="n">agg_ari</span> <span class="o">+</span> <span class="n">gm_ari</span>
+<span class="n">ari_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">agg_ari</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gm_ari</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">km_ari</span><span class="p">)))</span>
+<span class="n">ari_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">ari_vals</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">algos</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Agglomerative&#39;</span><span class="p">,</span> <span class="s1">&#39;GMM&#39;</span><span class="p">,</span> <span class="s1">&#39;KMeans&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">agg_ari</span><span class="p">)</span>
 
-<span class="n">ari_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">kernels</span><span class="p">,</span> <span class="n">ari_vals</span><span class="p">,</span> <span class="n">algos</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Kernels&quot;</span><span class="p">,</span> <span class="s2">&quot;ARI&quot;</span><span class="p">,</span> <span class="s2">&quot;Algorithm&quot;</span><span class="p">])</span>
+<span class="n">ari_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">kernels_df</span><span class="p">,</span> <span class="n">ari_vals</span><span class="p">,</span> <span class="n">algos</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Kernel&quot;</span><span class="p">,</span> <span class="s2">&quot;ARI&quot;</span><span class="p">,</span> <span class="s2">&quot;Algorithm&quot;</span><span class="p">])</span>
+
+<span class="n">avg_ari_vals</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">agg_ari</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gm_ari</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">km_ari</span><span class="p">))</span> <span class="o">/</span> <span class="mi">3</span>
+<span class="n">avg_ari_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">val</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">avg_ari_vals</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+<span class="n">ari_df</span><span class="p">[</span><span class="s2">&quot;Average&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">avg_ari_vals</span>
+<span class="n">ari_df</span> <span class="o">=</span> <span class="n">ari_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Average&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.73</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Kernels&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;ARI&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Algorithm&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">ari_df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.15</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Kernel&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;ARI&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Algorithm&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">ari_df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/clustering_54_0.png" src="_images/clustering_54_0.png" />
+<img alt="_images/clustering_73_0.png" src="_images/clustering_73_0.png" />
 </div>
 </div>
 </div>
