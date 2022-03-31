@@ -214,6 +214,61 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pass-to-ranks-transformation-smoothing-cosine">
+   Pass-to-Ranks Transformation, Smoothing, Cosine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#no-pass-to-ranks-tranformation-smoothing-cosine">
+   No Pass-to-Ranks Tranformation, Smoothing, Cosine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pass-to-ranks-transformation-no-smoothing-cosine">
+   Pass-to-Ranks Transformation, No Smoothing, Cosine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pass-to-ranks-transformation-smoothing-l1-norm">
+   Pass-To-Ranks Transformation, Smoothing, L1 Norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#no-pass-to-ranks-transformation-no-smoothing-cosine">
+   No Pass-To-Ranks Transformation, No Smoothing, Cosine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#no-pass-to-ranks-transformation-smoothing-l1-norm">
+   No Pass-To-Ranks Transformation, Smoothing, L1 Norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pass-to-ranks-transformation-no-smoothing-l1-norm">
+   Pass-To-Ranks Transformation, No Smoothing, L1 Norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-eigenvalue-spectrum">
+   Visualizing Eigenvalue Spectrum
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#smoothing-eigenvalue-spectrum-with-gaussian-kernel">
+     Smoothing Eigenvalue Spectrum with Gaussian Kernel
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -226,6 +281,61 @@ const thebe_selector_output = ".output, .cell_output"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pass-to-ranks-transformation-smoothing-cosine">
+   Pass-to-Ranks Transformation, Smoothing, Cosine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#no-pass-to-ranks-tranformation-smoothing-cosine">
+   No Pass-to-Ranks Tranformation, Smoothing, Cosine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pass-to-ranks-transformation-no-smoothing-cosine">
+   Pass-to-Ranks Transformation, No Smoothing, Cosine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pass-to-ranks-transformation-smoothing-l1-norm">
+   Pass-To-Ranks Transformation, Smoothing, L1 Norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#no-pass-to-ranks-transformation-no-smoothing-cosine">
+   No Pass-To-Ranks Transformation, No Smoothing, Cosine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#no-pass-to-ranks-transformation-smoothing-l1-norm">
+   No Pass-To-Ranks Transformation, Smoothing, L1 Norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pass-to-ranks-transformation-no-smoothing-l1-norm">
+   Pass-To-Ranks Transformation, No Smoothing, L1 Norm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-eigenvalue-spectrum">
+   Visualizing Eigenvalue Spectrum
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#smoothing-eigenvalue-spectrum-with-gaussian-kernel">
+     Smoothing Eigenvalue Spectrum with Gaussian Kernel
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -237,11 +347,12 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">graspologic.plot</span> <span class="kn">import</span> <span class="n">heatmap</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">cosine</span>
 <span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KernelDensity</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">csgraph</span>
+<span class="kn">from</span> <span class="nn">graspologic.utils</span> <span class="kn">import</span> <span class="n">pass_to_ranks</span><span class="p">,</span> <span class="n">to_laplacian</span>
 </pre></div>
 </div>
 </div>
@@ -249,7 +360,6 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graspologic.datasets</span> <span class="kn">import</span> <span class="n">load_mice</span>
-<span class="kn">from</span> <span class="nn">grakel</span> <span class="kn">import</span> <span class="n">Graph</span>
 
 <span class="c1"># Load the full mouse dataset</span>
 <span class="n">mice</span> <span class="o">=</span> <span class="n">load_mice</span><span class="p">()</span>
@@ -257,47 +367,43 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="c1"># Stack all adjacency matrices in a 3D numpy array</span>
 <span class="n">graphs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mice</span><span class="o">.</span><span class="n">graphs</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">graphs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="c1"># initialize labels</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">332</span><span class="p">):</span>
-    <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
-
-<span class="c1"># Convert adjacency matrices to grakel objects</span>
-<span class="n">Gs</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">graph</span> <span class="ow">in</span> <span class="n">graphs</span><span class="p">:</span>
-    <span class="n">Gs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Graph</span><span class="p">(</span><span class="n">initialization_object</span> <span class="o">=</span> <span class="n">graph</span><span class="p">,</span> <span class="n">node_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Gs</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(32, 332, 332)
-32
 </pre></div>
 </div>
 </div>
 </div>
+<div class="section" id="pass-to-ranks-transformation-smoothing-cosine">
+<h2>Pass-to-Ranks Transformation, Smoothing, Cosine<a class="headerlink" href="#pass-to-ranks-transformation-smoothing-cosine" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">laps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">graphs</span><span class="p">))</span>
-<span class="n">scaled_kdes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">graphs</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2000</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_kdes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">graphs</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2000</span><span class="p">))</span>
 
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">graph</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>
-    <span class="c1">#lap = csgraph.laplacian(graph, normed=True)</span>
+    <span class="c1"># make graphs unweighted (binary)</span>
+    <span class="c1">#graph[np.nonzero(graph)] = 1</span>
+
+    <span class="c1"># pass-to-ranks transformation</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="n">pass_to_ranks</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
 
     <span class="c1"># find normalized laplacian of each adjacency matrix</span>
-    <span class="n">diags</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">graphs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">deg_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">diags</span><span class="p">)</span>
-    <span class="n">lap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">graphs</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">deg_mat</span><span class="p">),</span> <span class="n">graphs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">laps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lap</span>
+    <span class="c1">#lap = to_laplacian(graph, &#39;I-DAD&#39;)</span>
+    <span class="n">lap</span> <span class="o">=</span> <span class="n">csgraph</span><span class="o">.</span><span class="n">laplacian</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1">#diags = np.sum(graph, axis=1)</span>
+    <span class="c1">#deg_mat = np.diag(diags)</span>
+    <span class="c1">#lap = np.eye(np.shape(graphs)[1]) - np.matmul(np.linalg.inv(deg_mat), graph)</span>
 
     <span class="c1"># find eigenvalues</span>
     <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">lap</span><span class="p">)</span>
 
     <span class="c1"># check eigenvalues are between 0 and 2</span>
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eigenvalues must be between 0 and 2.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&lt;</span> <span class="o">-</span> <span class="mf">0.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eigenvalues must be &gt;= 0.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&gt;</span> <span class="mf">2.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eigenvalues must be &lt;= 2.&#39;</span><span class="p">)</span>
     
     <span class="c1"># smooth eigenvalue spectrum using Gaussian kernel</span>
     <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
@@ -312,7 +418,7 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">scaled_kdes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaled_kde</span>
 
     <span class="c1"># check area under scaled_kde is 1</span>
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">scaled_kde</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">scaled_kde</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">0.995</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">scaled_kde</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">1.005</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KDE is not normalized.&quot;</span><span class="p">)</span>
     
 <span class="n">dissim_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
@@ -322,17 +428,377 @@ const thebe_selector_output = ".output, .cell_output"
             <span class="c1">#diff = np.linalg.norm(metric1 - metric2, ord=1)</span>
             <span class="n">dissim_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
 
-<span class="c1">#scaled_dissim = dissim_matrix / np.max(dissim_matrix)</span>
+<span class="n">scaled_dissim</span> <span class="o">=</span> <span class="n">dissim_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/laplacian_3_0.png" src="_images/laplacian_3_0.png" />
+<img alt="_images/laplacian_4_0.png" src="_images/laplacian_4_0.png" />
 </div>
 </div>
+</div>
+<div class="section" id="no-pass-to-ranks-tranformation-smoothing-cosine">
+<h2>No Pass-to-Ranks Tranformation, Smoothing, Cosine<a class="headerlink" href="#no-pass-to-ranks-tranformation-smoothing-cosine" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_kdes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">graphs</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2000</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">graph</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>
+    <span class="c1"># make graphs unweighted (binary)</span>
+    <span class="c1">#graph[np.nonzero(graph)] = 1</span>
+
+    <span class="c1"># pass-to-ranks transformation</span>
+    <span class="c1">#graph = pass_to_ranks(graph)</span>
+
+    <span class="c1"># find normalized laplacian of each adjacency matrix</span>
+    <span class="c1">#lap = to_laplacian(graph, &#39;I-DAD&#39;)</span>
+    <span class="n">lap</span> <span class="o">=</span> <span class="n">csgraph</span><span class="o">.</span><span class="n">laplacian</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1">#diags = np.sum(graph, axis=1)</span>
+    <span class="c1">#deg_mat = np.diag(diags)</span>
+    <span class="c1">#lap = np.eye(np.shape(graphs)[1]) - np.matmul(np.linalg.inv(deg_mat), graph)</span>
+
+    <span class="c1"># find eigenvalues</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">lap</span><span class="p">)</span>
+
+    <span class="c1"># check eigenvalues are between 0 and 2</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&lt;</span> <span class="o">-</span> <span class="mf">0.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eigenvalues must be &gt;= 0.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&gt;</span> <span class="mf">2.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eigenvalues must be &lt;= 2.&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># smooth eigenvalue spectrum using Gaussian kernel</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+    <span class="n">kde</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mf">0.015</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mf">0.0015</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">temp_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+        <span class="n">kde</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_sum</span>
+    
+    <span class="c1"># normalize kde so that area under curve is 1</span>
+    <span class="n">scaled_kde</span> <span class="o">=</span> <span class="n">kde</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">kde</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+    <span class="n">scaled_kdes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaled_kde</span>
+
+    <span class="c1"># check area under scaled_kde is 1</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">scaled_kde</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">0.995</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">scaled_kde</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">1.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KDE is not normalized.&quot;</span><span class="p">)</span>
+    
+<span class="n">dissim_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">metric1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scaled_kdes</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">metric2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scaled_kdes</span><span class="p">):</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">cosine</span><span class="p">(</span><span class="n">metric1</span><span class="p">,</span> <span class="n">metric2</span><span class="p">)</span>
+            <span class="c1">#diff = np.linalg.norm(metric1 - metric2, ord=1)</span>
+            <span class="n">dissim_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+
+<span class="n">scaled_dissim</span> <span class="o">=</span> <span class="n">dissim_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/laplacian_6_0.png" src="_images/laplacian_6_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="pass-to-ranks-transformation-no-smoothing-cosine">
+<h2>Pass-to-Ranks Transformation, No Smoothing, Cosine<a class="headerlink" href="#pass-to-ranks-transformation-no-smoothing-cosine" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">graphs</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">332</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">graph</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>
+    <span class="c1"># make graphs unweighted (binary)</span>
+    <span class="c1">#graph[np.nonzero(graph)] = 1</span>
+
+    <span class="c1"># pass-to-ranks transformation</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="n">pass_to_ranks</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+    <span class="c1"># find normalized laplacian of each adjacency matrix</span>
+    <span class="c1">#lap = to_laplacian(graph, &#39;I-DAD&#39;)</span>
+    <span class="n">lap</span> <span class="o">=</span> <span class="n">csgraph</span><span class="o">.</span><span class="n">laplacian</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1">#diags = np.sum(graph, axis=1)</span>
+    <span class="c1">#deg_mat = np.diag(diags)</span>
+    <span class="c1">#lap = np.eye(np.shape(graphs)[1]) - np.matmul(np.linalg.inv(deg_mat), graph)</span>
+
+    <span class="c1"># find eigenvalues</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">lap</span><span class="p">)</span>
+    <span class="n">ws</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span>
+
+    <span class="c1"># check eigenvalues are between 0 and 2</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&lt;</span> <span class="o">-</span> <span class="mf">0.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eigenvalues must be &gt;= 0.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&gt;</span> <span class="mf">2.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eigenvalues must be &lt;= 2.&#39;</span><span class="p">)</span>
+    
+<span class="n">dissim_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">metric1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ws</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">metric2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ws</span><span class="p">):</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">cosine</span><span class="p">(</span><span class="n">metric1</span><span class="p">,</span> <span class="n">metric2</span><span class="p">)</span>
+            <span class="c1">#diff = np.linalg.norm(metric1 - metric2, ord=1)</span>
+            <span class="n">dissim_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+
+<span class="n">scaled_dissim</span> <span class="o">=</span> <span class="n">dissim_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/laplacian_8_0.png" src="_images/laplacian_8_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="pass-to-ranks-transformation-smoothing-l1-norm">
+<h2>Pass-To-Ranks Transformation, Smoothing, L1 Norm<a class="headerlink" href="#pass-to-ranks-transformation-smoothing-l1-norm" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_kdes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">graphs</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2000</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">graph</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>
+    <span class="c1"># make graphs unweighted (binary)</span>
+    <span class="c1">#graph[np.nonzero(graph)] = 1</span>
+
+    <span class="c1"># pass-to-ranks transformation</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="n">pass_to_ranks</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+    <span class="c1"># find normalized laplacian of each adjacency matrix</span>
+    <span class="c1">#lap = to_laplacian(graph, &#39;I-DAD&#39;)</span>
+    <span class="n">lap</span> <span class="o">=</span> <span class="n">csgraph</span><span class="o">.</span><span class="n">laplacian</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1">#diags = np.sum(graph, axis=1)</span>
+    <span class="c1">#deg_mat = np.diag(diags)</span>
+    <span class="c1">#lap = np.eye(np.shape(graphs)[1]) - np.matmul(np.linalg.inv(deg_mat), graph)</span>
+
+    <span class="c1"># find eigenvalues</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">lap</span><span class="p">)</span>
+
+    <span class="c1"># check eigenvalues are between 0 and 2</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&lt;</span> <span class="o">-</span> <span class="mf">0.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eigenvalues must be &gt;= 0.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&gt;</span> <span class="mf">2.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eigenvalues must be &lt;= 2.&#39;</span><span class="p">)</span>
+
+    <span class="c1"># smooth eigenvalue spectrum using Gaussian kernel</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+    <span class="n">kde</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mf">0.015</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mf">0.0015</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">temp_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+        <span class="n">kde</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_sum</span>
+    
+    <span class="c1"># normalize kde so that area under curve is 1</span>
+    <span class="n">scaled_kde</span> <span class="o">=</span> <span class="n">kde</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">kde</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+    <span class="n">scaled_kdes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaled_kde</span>
+
+    <span class="c1"># check area under scaled_kde is 1</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">scaled_kde</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">0.995</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">scaled_kde</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">1.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KDE is not normalized.&quot;</span><span class="p">)</span>
+    
+<span class="n">dissim_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">metric1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scaled_kdes</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">metric2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scaled_kdes</span><span class="p">):</span>
+            <span class="c1">#diff = cosine(metric1, metric2)</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">metric1</span> <span class="o">-</span> <span class="n">metric2</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">dissim_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+
+<span class="n">scaled_dissim</span> <span class="o">=</span> <span class="n">dissim_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/laplacian_10_0.png" src="_images/laplacian_10_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="no-pass-to-ranks-transformation-no-smoothing-cosine">
+<h2>No Pass-To-Ranks Transformation, No Smoothing, Cosine<a class="headerlink" href="#no-pass-to-ranks-transformation-no-smoothing-cosine" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">graphs</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">332</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">graph</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>
+    <span class="c1"># make graphs unweighted (binary)</span>
+    <span class="c1">#graph[np.nonzero(graph)] = 1</span>
+
+    <span class="c1"># pass-to-ranks transformation</span>
+    <span class="c1">#graph = pass_to_ranks(graph)</span>
+
+    <span class="c1"># find normalized laplacian of each adjacency matrix</span>
+    <span class="c1">#lap = to_laplacian(graph, &#39;I-DAD&#39;)</span>
+    <span class="n">lap</span> <span class="o">=</span> <span class="n">csgraph</span><span class="o">.</span><span class="n">laplacian</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1">#diags = np.sum(graph, axis=1)</span>
+    <span class="c1">#deg_mat = np.diag(diags)</span>
+    <span class="c1">#lap = np.eye(np.shape(graphs)[1]) - np.matmul(np.linalg.inv(deg_mat), graph)</span>
+
+    <span class="c1"># find eigenvalues</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">lap</span><span class="p">)</span>
+    <span class="n">ws</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span>
+
+    <span class="c1"># check eigenvalues are between 0 and 2</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&lt;</span> <span class="o">-</span> <span class="mf">0.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eigenvalues must be &gt;= 0.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&gt;</span> <span class="mf">2.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eigenvalues must be &lt;= 2.&#39;</span><span class="p">)</span>
+    
+<span class="n">dissim_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">metric1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ws</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">metric2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ws</span><span class="p">):</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">cosine</span><span class="p">(</span><span class="n">metric1</span><span class="p">,</span> <span class="n">metric2</span><span class="p">)</span>
+            <span class="c1">#diff = np.linalg.norm(metric1 - metric2, ord=1)</span>
+            <span class="n">dissim_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+
+<span class="n">scaled_dissim</span> <span class="o">=</span> <span class="n">dissim_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/laplacian_12_0.png" src="_images/laplacian_12_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="no-pass-to-ranks-transformation-smoothing-l1-norm">
+<h2>No Pass-To-Ranks Transformation, Smoothing, L1 Norm<a class="headerlink" href="#no-pass-to-ranks-transformation-smoothing-l1-norm" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_kdes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">graphs</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2000</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">graph</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>
+    <span class="c1"># make graphs unweighted (binary)</span>
+    <span class="c1">#graph[np.nonzero(graph)] = 1</span>
+
+    <span class="c1"># pass-to-ranks transformation</span>
+    <span class="c1">#graph = pass_to_ranks(graph)</span>
+
+    <span class="c1"># find normalized laplacian of each adjacency matrix</span>
+    <span class="c1">#lap = to_laplacian(graph, &#39;I-DAD&#39;)</span>
+    <span class="n">lap</span> <span class="o">=</span> <span class="n">csgraph</span><span class="o">.</span><span class="n">laplacian</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1">#diags = np.sum(graph, axis=1)</span>
+    <span class="c1">#deg_mat = np.diag(diags)</span>
+    <span class="c1">#lap = np.eye(np.shape(graphs)[1]) - np.matmul(np.linalg.inv(deg_mat), graph)</span>
+
+    <span class="c1"># find eigenvalues</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">lap</span><span class="p">)</span>
+
+    <span class="c1"># check eigenvalues are between 0 and 2</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&lt;</span> <span class="o">-</span> <span class="mf">0.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eigenvalues must be &gt;= 0.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&gt;</span> <span class="mf">2.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eigenvalues must be &lt;= 2.&#39;</span><span class="p">)</span>
+
+    <span class="c1"># smooth eigenvalue spectrum using Gaussian kernel</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+    <span class="n">kde</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mf">0.015</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mf">0.0015</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">temp_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+        <span class="n">kde</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_sum</span>
+    
+    <span class="c1"># normalize kde so that area under curve is 1</span>
+    <span class="n">scaled_kde</span> <span class="o">=</span> <span class="n">kde</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">kde</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+    <span class="n">scaled_kdes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaled_kde</span>
+
+    <span class="c1"># check area under scaled_kde is 1</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">scaled_kde</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">0.995</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">scaled_kde</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">1.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KDE is not normalized.&quot;</span><span class="p">)</span>
+    
+<span class="n">dissim_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">metric1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scaled_kdes</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">metric2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scaled_kdes</span><span class="p">):</span>
+            <span class="c1">#diff = cosine(metric1, metric2)</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">metric1</span> <span class="o">-</span> <span class="n">metric2</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">dissim_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+
+<span class="n">scaled_dissim</span> <span class="o">=</span> <span class="n">dissim_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/laplacian_14_0.png" src="_images/laplacian_14_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="pass-to-ranks-transformation-no-smoothing-l1-norm">
+<h2>Pass-To-Ranks Transformation, No Smoothing, L1 Norm<a class="headerlink" href="#pass-to-ranks-transformation-no-smoothing-l1-norm" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">graphs</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">332</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">graph</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>
+    <span class="c1"># make graphs unweighted (binary)</span>
+    <span class="c1">#graph[np.nonzero(graph)] = 1</span>
+
+    <span class="c1"># pass-to-ranks transformation</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="n">pass_to_ranks</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+    <span class="c1"># find normalized laplacian of each adjacency matrix</span>
+    <span class="c1">#lap = to_laplacian(graph, &#39;I-DAD&#39;)</span>
+    <span class="n">lap</span> <span class="o">=</span> <span class="n">csgraph</span><span class="o">.</span><span class="n">laplacian</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1">#diags = np.sum(graph, axis=1)</span>
+    <span class="c1">#deg_mat = np.diag(diags)</span>
+    <span class="c1">#lap = np.eye(np.shape(graphs)[1]) - np.matmul(np.linalg.inv(deg_mat), graph)</span>
+
+    <span class="c1"># find eigenvalues</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">lap</span><span class="p">)</span>
+    <span class="n">ws</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span>
+
+    <span class="c1"># check eigenvalues are between 0 and 2</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&lt;</span> <span class="o">-</span> <span class="mf">0.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eigenvalues must be &gt;= 0.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">w</span> <span class="o">&gt;</span> <span class="mf">2.005</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eigenvalues must be &lt;= 2.&#39;</span><span class="p">)</span>
+    
+<span class="n">dissim_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">metric1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ws</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">metric2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ws</span><span class="p">):</span>
+            <span class="c1">#diff = cosine(metric1, metric2)</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">metric1</span> <span class="o">-</span> <span class="n">metric2</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">dissim_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span>
+
+<span class="n">scaled_dissim</span> <span class="o">=</span> <span class="n">dissim_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/laplacian_16_0.png" src="_images/laplacian_16_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="visualizing-eigenvalue-spectrum">
+<h2>Visualizing Eigenvalue Spectrum<a class="headerlink" href="#visualizing-eigenvalue-spectrum" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### see what eigenvalue spectrum looks like</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Eigenvalues&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ws</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fad59879f10&gt;]
+</pre></div>
+</div>
+<img alt="_images/laplacian_18_1.png" src="_images/laplacian_18_1.png" />
+</div>
+</div>
+<div class="section" id="smoothing-eigenvalue-spectrum-with-gaussian-kernel">
+<h3>Smoothing Eigenvalue Spectrum with Gaussian Kernel<a class="headerlink" href="#smoothing-eigenvalue-spectrum-with-gaussian-kernel" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### running one example</span>
@@ -356,6 +822,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">scaled_kde</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scaled_kde</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -366,10 +833,10 @@ const thebe_selector_output = ".output, .cell_output"
 0.08026985446497661
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f9dfa169820&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fad59783dc0&gt;]
 </pre></div>
 </div>
-<img alt="_images/laplacian_4_2.png" src="_images/laplacian_4_2.png" />
+<img alt="_images/laplacian_20_2.png" src="_images/laplacian_20_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -379,30 +846,16 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">plot_xs</span> <span class="o">=</span> <span class="n">xs</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
 <span class="n">log_dens</span> <span class="o">=</span> <span class="n">kde1</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">plot_xs</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_xs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_dens</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f9dea1dc7f0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fad6bc064f0&gt;]
 </pre></div>
 </div>
-<img alt="_images/laplacian_5_1.png" src="_images/laplacian_5_1.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### see what eigenvalue spectrum looks like</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ws</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f9b09e73730&gt;]
-</pre></div>
-</div>
-<img alt="_images/laplacian_6_1.png" src="_images/laplacian_6_1.png" />
+<img alt="_images/laplacian_21_1.png" src="_images/laplacian_21_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -411,15 +864,18 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">testx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.015</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
 <span class="n">kde2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">testx</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kde2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f9dea028cd0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7face8cc58e0&gt;]
 </pre></div>
 </div>
-<img alt="_images/laplacian_7_1.png" src="_images/laplacian_7_1.png" />
+<img alt="_images/laplacian_22_1.png" src="_images/laplacian_22_1.png" />
+</div>
+</div>
 </div>
 </div>
 </div>
