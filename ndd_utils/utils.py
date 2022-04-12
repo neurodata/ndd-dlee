@@ -1,4 +1,7 @@
 import numpy as np
+from sklearn.cluster import AgglomerativeClustering, KMeans
+from sklearn.mixture import GaussianMixture
+from graspologic.embed import ClassicalMDS
 
 
 def calculate_dissim(graphs, method="density", norm=None, normalize=True):
@@ -69,3 +72,47 @@ def calculate_dissim(graphs, method="density", norm=None, normalize=True):
         dissim_matrix = dissim_matrix / np.max(dissim_matrix)
     
     return dissim_matrix
+
+
+def cluster_dissim(dissim_matrix: np.ndarray, labels: list, method="agg"):
+    if method == "agg":
+        # Agglomerative clustering
+        agg = AgglomerativeClustering(n_clusters=4, affinity='precomputed', linkage='average', \
+            compute_distances=True).fit(dissim_matrix, y=labels)
+        pred = AgglomerativeClustering(n_clusters=4, affinity='precomputed', linkage='average', \
+            compute_distances=True).fit_predict(dissim_matrix, y=labels)
+
+        # construct linkage matrix
+        counts = np.zeros(agg.children_.shape[0])
+        n_samples = len(agg.labels_)
+
+        for i, merge in enumerate(agg.children_):
+            temp_count = 0
+            for child_idx in merge:
+                if child_idx < n_samples:
+                    temp_count += 1 
+                else:
+                    temp_count += counts[child_idx - n_samples]
+            counts[i] = temp_count
+
+        linkage_matrix = np.column_stack([agg.children_, agg.distances_, counts]).astype(float)
+
+        return linkage_matrix, pred
+    
+    elif method in ["gmm", "kmeans"]:
+        # Classical MDS
+        cmds = ClassicalMDS(n_components=2, dissimilarity="precomputed")
+        cmds_embedding = cmds.fit_transform(dissim_matrix)
+
+        # cluster using GMM or K-means
+        if method == "gmm":
+            clustering = GaussianMixture(n_components=4, n_init=25).fit_predict(cmds_embedding, y=labels)
+        elif method == "kmeans":
+            clustering = KMeans(n_clusters=4, n_init=25).fit_predict(cmds_embedding, y=labels)
+        else:
+            print("Not a valid kernel name.")
+
+        return cmds_embedding, clustering
+    
+    else:
+        print("Not a valid kernel name.")
