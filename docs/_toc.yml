@@ -11,6 +11,7 @@ parts:
 - caption: Unmatched Dataset
   chapters:
   - file: mami_discriminability
+  - file: mami_clustering
 - caption: Working on Laplacian
   chapters:
   - file: laplacian
