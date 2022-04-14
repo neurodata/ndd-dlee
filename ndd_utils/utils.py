@@ -75,6 +75,9 @@ def calculate_dissim(graphs, method="density", norm=None, normalize=True):
 
 
 def cluster_dissim(dissim_matrix: np.ndarray, labels: list, method="agg"):
+    """
+    Cluster dissimilarity matrix using Agglomerative, K-means, or GMM. 
+    """
     if method == "agg":
         # Agglomerative clustering
         agg = AgglomerativeClustering(n_clusters=4, affinity='precomputed', linkage='average', \
