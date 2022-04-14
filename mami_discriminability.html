@@ -466,7 +466,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 <span class="n">graphs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">225</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">labels_species</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="n">npy_files</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../mami_data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">npy_files</span><span class="p">):</span>
@@ -476,10 +476,60 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">filestr</span> <span class="o">=</span> <span class="n">filestr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">filestr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
         <span class="n">filestr</span> <span class="o">=</span> <span class="n">filestr</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filestr</span><span class="p">)</span>
+    <span class="n">labels_species</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filestr</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels_species</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">labels_species</span><span class="p">)</span>
     
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>225
+[&#39;Rat&#39;, &#39;Mouse&#39;, &#39;Meerkat&#39;, &#39;CapraNubiana&#39;, &#39;Oryx&#39;, &#39;CapraNubiana&#39;, &#39;Meerkat&#39;, &#39;Rat&#39;, &#39;Colobus&#39;, &#39;ThomsonGazelle&#39;, &#39;CommonFox&#39;, &#39;PteropusLylei&#39;, &#39;Oryx&#39;, &#39;Oryx&#39;, &#39;CapraNubiana&#39;, &#39;HoneyBadger&#39;, &#39;Rat&#39;, &#39;Marmoset&#39;, &#39;ChaerephonPlicata&#39;, &#39;Hyrax&#39;, &#39;DikDik&#39;, &#39;Lama&#39;, &#39;GreenMonkey&#39;, &#39;Rat&#39;, &#39;Meerkat&#39;, &#39;Pecari&#39;, &#39;TamarinCottonTop&#39;, &#39;CapraNubiana&#39;, &#39;Meerkat&#39;, &#39;Rat&#39;, &#39;Hyrax&#39;, &#39;GreenMonkey&#39;, &#39;Lama&#39;, &#39;Rat&#39;, &#39;Meerkat&#39;, &#39;Pecari&#39;, &#39;Rhinolophus&#39;, &#39;Merion&#39;, &#39;SquirrelMonkey&#39;, &#39;TamarinCottonTop&#39;, &#39;Giraffe&#39;, &#39;RedNeckWallaby&#39;, &#39;CommonHedgeHog&#39;, &#39;Macaque&#39;, &#39;Onager&#39;, &#39;Hyaena&#39;, &#39;Addax&#39;, &#39;CaucasianSquirrel&#39;, &#39;StrippedDolphin&#39;, &#39;SturniraLilium&#39;, &#39;Battongia&#39;, &#39;Hare&#39;, &#39;CommonHedgeHog&#39;, &#39;Siamang&#39;, &#39;Lycaon&#39;, &#39;Lycaon&#39;, &#39;Giraffe&#39;, &#39;Macaque&#39;, &#39;Hyaena&#39;, &#39;StrippedDolphin&#39;, &#39;Battongia&#39;, &#39;BlanfordFox&#39;, &#39;Vervet&#39;, &#39;Macaque1&#39;, &#39;Macaque&#39;, &#39;CommonHedgeHog&#39;, &#39;Cynopterus&#39;, &#39;Giraffe&#39;, &#39;Lycaon&#39;, &#39;BlindMole&#39;, &#39;SkinnyPig&#39;, &#39;Chinchila&#39;, &#39;Macaque&#39;, &#39;Horse&#39;, &#39;Mandrill&#39;, &#39;GrayKangaroo&#39;, &#39;HowlerMonkey&#39;, &#39;TamarinEmperor&#39;, &#39;PalmSquirrel&#39;, &#39;Koala&#39;, &#39;Eptesicus&#39;, &#39;Rhinopoma&#39;, &#39;Macaque&#39;, &#39;BlindMole&#39;, &#39;Horse&#39;, &#39;Mandrill&#39;, &#39;GrayKangaroo&#39;, &#39;HowlerMonkey&#39;, &#39;MiniopterusSchreibersii&#39;, &#39;TamarinEmperor&#39;, &#39;Wilderbeest&#39;, &#39;PrairieDog&#39;, &#39;Macaque&#39;, &#39;Asellia&#39;, &#39;Eptesicus&#39;, &#39;MyotisEmargenitus&#39;, &#39;Caracal&#39;, &#39;MacaquePT&#39;, &#39;BactrianDeer&#39;, &#39;Rabbit&#39;, &#39;Vole&#39;, &#39;Dog&#39;, &#39;Goat&#39;, &#39;Orangutan&#39;, &#39;FennekFox&#39;, &#39;Orangutan&#39;, &#39;Ferret&#39;, &#39;CarolliaPerspicilatta&#39;, &#39;Dog&#39;, &#39;TadaridaTeniotis&#39;, &#39;Macaque&#39;, &#39;WildBoar&#39;, &#39;WildRat&#39;, &#39;Mara&#39;, &#39;BactrianDeer&#39;, &#39;Dog&#39;, &#39;Goat&#39;, &#39;Orangutan&#39;, &#39;Ferret&#39;, &#39;JungleCat&#39;, &#39;Ferret&#39;, &#39;Goat&#39;, &#39;CarolliaPerspicilatta&#39;, &#39;Dog&#39;, &#39;WildBoar&#39;, &#39;TadaridaTeniotis&#39;, &#39;MyotisVivesi&#39;, &#39;WildRat&#39;, &#39;RedPanda&#39;, &#39;MacaqueBlack&#39;, &#39;Capuchin&#39;, &#39;Dog&#39;, &#39;Mongoose&#39;, &#39;Nasua&#39;, &#39;SandCat&#39;, &#39;HimalianBear&#39;, &#39;Wolf&#39;, &#39;Dego&#39;, &#39;VampireBat&#39;, &#39;BrownLemur&#39;, &#39;Wolf&#39;, &#39;Nasua&#39;, &#39;TamarinGoldenHands&#39;, &#39;Otter&#39;, &#39;Dog&#39;, &#39;Coypu&#39;, &#39;Capuchin&#39;, &#39;GoldenSpinyMouse&#39;, &#39;ArtibeusJamacien&#39;, &#39;Capybara&#39;, &#39;Dog&#39;, &#39;Otter&#39;, &#39;SandCat&#39;, &#39;Wolf&#39;, &#39;BrownLemur&#39;, &#39;VampireBat&#39;, &#39;BrownLemur&#39;, &#39;Nasua&#39;, &#39;Ferret&#39;, &#39;AsianOtter&#39;, &#39;Otter&#39;, &#39;SandHedgeHog&#39;, &#39;MacaqueLionTail&#39;, &#39;Capuchin&#39;, &#39;CommonTreeShrew&#39;, &#39;SpinyMouse&#39;, &#39;Porcupine&#39;, &#39;Tapir&#39;, &#39;FallowDeer&#39;, &#39;RedKangaroo&#39;, &#39;Zebra&#39;, &#39;Chital&#39;, &#39;WildRabbit&#39;, &#39;Leopard&#39;, &#39;WildRabbit&#39;, &#39;Baboon&#39;, &#39;RedKangaroo&#39;, &#39;MyotisMyotis&#39;, &#39;FallowDeer&#39;, &#39;BottleNoseDolphin&#39;, &#39;Cat&#39;, &#39;Pkuhlii&#39;, &#39;Porcupine&#39;, &#39;Cat&#39;, &#39;Tapir&#39;, &#39;IndHogDeer&#39;, &#39;HippArmiger&#39;, &#39;FallowDeer&#39;, &#39;FruitBat&#39;, &#39;Baboon&#39;, &#39;Chital&#39;, &#39;Leopard&#39;, &#39;WildRabbit&#39;, &#39;Tiger&#39;, &#39;RedKangaroo&#39;, &#39;Baboon&#39;, &#39;FruitBat&#39;, &#39;Armadillo&#39;, &#39;Sheep&#39;, &#39;Cat&#39;, &#39;Pkuhlii&#39;, &#39;Cow&#39;, &#39;Cat&#39;, &#39;Deer&#39;, &#39;Gerbil&#39;, &#39;Eonycteris&#39;, &#39;Chimpanzee&#39;, &#39;LemurCatta&#39;, &#39;Porcine&#39;, &#39;Gorilla&#39;, &#39;FruitBat&#39;, &#39;Agouti&#39;, &#39;Donkey&#39;, &#39;Mangebi&#39;, &#39;Cat&#39;, &#39;Deer&#39;, &#39;Eonycteris&#39;, &#39;Baboon&#39;, &#39;FruitBat&#39;, &#39;Porcine&#39;, &#39;LemurCatta&#39;, &#39;FruitBat&#39;, &#39;Baboon&#39;, &#39;Agouti&#39;, &#39;Cat&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct labels based on morphologic and phylogenetic taxonomy ordersa</span>
+<span class="n">order_mapper</span> <span class="o">=</span> <span class="p">{</span>
+<span class="s1">&#39;Rodentia&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Rat&#39;</span><span class="p">,</span> <span class="s1">&#39;Mouse&#39;</span><span class="p">,</span> <span class="s1">&#39;Merion&#39;</span><span class="p">,</span> <span class="s1">&#39;CaucasianSquirrel&#39;</span><span class="p">,</span> <span class="s1">&#39;BlindMole&#39;</span><span class="p">,</span> <span class="s1">&#39;SkinnyPig&#39;</span><span class="p">,</span> <span class="s1">&#39;Chinchila&#39;</span><span class="p">,</span> <span class="s1">&#39;PalmSquirrel&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;PrairieDog&#39;</span><span class="p">,</span> <span class="s1">&#39;Vole&#39;</span><span class="p">,</span> <span class="s1">&#39;WildRat&#39;</span><span class="p">,</span> <span class="s1">&#39;Mara&#39;</span><span class="p">,</span> <span class="s1">&#39;Dego&#39;</span><span class="p">,</span> <span class="s1">&#39;Coypu&#39;</span><span class="p">,</span> <span class="s1">&#39;GoldenSpinyMouse&#39;</span><span class="p">,</span> <span class="s1">&#39;Capybara&#39;</span><span class="p">,</span> <span class="s1">&#39;SpinyMouse&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Porcupine&#39;</span><span class="p">,</span> <span class="s1">&#39;Gerbil&#39;</span><span class="p">,</span> <span class="s1">&#39;Agouti&#39;</span><span class="p">],</span> 
+<span class="s1">&#39;Carnivora&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Meerkat&#39;</span><span class="p">,</span> <span class="s1">&#39;CommonFox&#39;</span><span class="p">,</span> <span class="s1">&#39;PteropusLylei&#39;</span><span class="p">,</span> <span class="s1">&#39;HoneyBadger&#39;</span><span class="p">,</span> <span class="s1">&#39;Hyaena&#39;</span><span class="p">,</span> <span class="s1">&#39;Lycaon&#39;</span><span class="p">,</span> <span class="s1">&#39;BlanfordFox&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Caracal&#39;</span><span class="p">,</span> <span class="s1">&#39;Dog&#39;</span><span class="p">,</span> <span class="s1">&#39;Ferret&#39;</span><span class="p">,</span> <span class="s1">&#39;JungleCat&#39;</span><span class="p">,</span> <span class="s1">&#39;RedPanda&#39;</span><span class="p">,</span> <span class="s1">&#39;Mongoose&#39;</span><span class="p">,</span> <span class="s1">&#39;Nasua&#39;</span><span class="p">,</span> <span class="s1">&#39;SandCat&#39;</span><span class="p">,</span> <span class="s1">&#39;HimalianBear&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Wolf&#39;</span><span class="p">,</span> <span class="s1">&#39;Otter&#39;</span><span class="p">,</span> <span class="s1">&#39;AsianOtter&#39;</span><span class="p">,</span> <span class="s1">&#39;Leopard&#39;</span><span class="p">,</span> <span class="s1">&#39;Cat&#39;</span><span class="p">,</span> <span class="s1">&#39;Tiger&#39;</span><span class="p">],</span> 
+<span class="s1">&#39;Cetartiodactyla&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;CapraNubiana&#39;</span><span class="p">,</span> <span class="s1">&#39;Oryx&#39;</span><span class="p">,</span> <span class="s1">&#39;ThomsonGazelle&#39;</span><span class="p">,</span> <span class="s1">&#39;Lama&#39;</span><span class="p">,</span> <span class="s1">&#39;Pecari&#39;</span><span class="p">,</span> <span class="s1">&#39;Giraffe&#39;</span><span class="p">,</span> <span class="s1">&#39;Addax&#39;</span><span class="p">,</span> <span class="s1">&#39;StrippdDolphin&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Wilderbeest&#39;</span><span class="p">,</span> <span class="s1">&#39;BactrianDeer&#39;</span><span class="p">,</span> <span class="s1">&#39;Goat&#39;</span><span class="p">,</span> <span class="s1">&#39;WildBoar&#39;</span><span class="p">,</span> <span class="s1">&#39;FallowDeer&#39;</span><span class="p">,</span> <span class="s1">&#39;Chital&#39;</span><span class="p">,</span> <span class="s1">&#39;BottleNoseDolphin&#39;</span><span class="p">,</span> <span class="s1">&#39;IndHogDeer&#39;</span> \
+    <span class="s1">&#39;Sheep&#39;</span><span class="p">,</span> <span class="s1">&#39;Cow&#39;</span><span class="p">,</span> <span class="s1">&#39;Deer&#39;</span><span class="p">,</span> <span class="s1">&#39;Porcine&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Primates&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Colobus&#39;</span><span class="p">,</span> <span class="s1">&#39;Marmoset&#39;</span><span class="p">,</span> <span class="s1">&#39;GreenMonkey&#39;</span><span class="p">,</span> <span class="s1">&#39;SquirrelMonkey&#39;</span><span class="p">,</span> <span class="s1">&#39;TamarinCottonTop&#39;</span><span class="p">,</span> <span class="s1">&#39;Macaque&#39;</span><span class="p">,</span> <span class="s1">&#39;Siamang&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Vervet&#39;</span><span class="p">,</span> <span class="s1">&#39;Mandrill&#39;</span><span class="p">,</span> <span class="s1">&#39;HowlerMonkey&#39;</span><span class="p">,</span> <span class="s1">&#39;TamarinEmperor&#39;</span><span class="p">,</span> <span class="s1">&#39;MacaquePT&#39;</span><span class="p">,</span> <span class="s1">&#39;Orangutan&#39;</span><span class="p">,</span> <span class="s1">&#39;MacaqueBlack&#39;</span><span class="p">,</span> <span class="s1">&#39;Capuchin&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;BrownLemur&#39;</span><span class="p">,</span> <span class="s1">&#39;TamarinGoldenHands&#39;</span><span class="p">,</span> <span class="s1">&#39;MacaqueLionTail&#39;</span><span class="p">,</span> <span class="s1">&#39;Baboon&#39;</span><span class="p">,</span> <span class="s1">&#39;Chimpanzee&#39;</span><span class="p">,</span> <span class="s1">&#39;LemurCatta&#39;</span><span class="p">,</span> <span class="s1">&#39;Gorilla&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Mangebi&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Chiroptera&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ChaerephonPlicata&#39;</span><span class="p">,</span> <span class="s1">&#39;Rhinolophus&#39;</span><span class="p">,</span> <span class="s1">&#39;SturniraLilium&#39;</span><span class="p">,</span> <span class="s1">&#39;Cynopterus&#39;</span><span class="p">,</span> <span class="s1">&#39;Eptesicus&#39;</span><span class="p">,</span> <span class="s1">&#39;Rhinopoma&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;MiniopterusSchreibersii&#39;</span><span class="p">,</span> <span class="s1">&#39;Asellia&#39;</span><span class="p">,</span> <span class="s1">&#39;MyotisEmargenitus&#39;</span><span class="p">,</span> <span class="s1">&#39;CarolliaPerspicilatta&#39;</span><span class="p">,</span> <span class="s1">&#39;TadaridaTeniotis&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;MyotisVivesi&#39;</span><span class="p">,</span> <span class="s1">&#39;VampireBat&#39;</span><span class="p">,</span> <span class="s1">&#39;ArtibeusJamacien&#39;</span><span class="p">,</span> <span class="s1">&#39;MyotisMyotis&#39;</span><span class="p">,</span> <span class="s1">&#39;Pkuhlii&#39;</span><span class="p">,</span> <span class="s1">&#39;HippArmiger&#39;</span><span class="p">,</span> <span class="s1">&#39;FruitBat&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Eonycteris&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Hyracoidea&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Hyrax&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Marsupialia&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;RedNeckWallaby&#39;</span><span class="p">,</span> <span class="s1">&#39;Battongia&#39;</span><span class="p">,</span> <span class="s1">&#39;GrayKangaroo&#39;</span><span class="p">,</span> <span class="s1">&#39;Koala&#39;</span><span class="p">,</span> <span class="s1">&#39;RedKangaroo&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Eulipotyphla&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;CommonHedgeHog&#39;</span><span class="p">,</span> <span class="s1">&#39;SandHedgeHog&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Perissodactyla&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Macaque&#39;</span><span class="p">,</span> <span class="s1">&#39;Onager&#39;</span><span class="p">,</span> <span class="s1">&#39;Horse&#39;</span><span class="p">,</span> <span class="s1">&#39;Tapir&#39;</span><span class="p">,</span> <span class="s1">&#39;Zebra&#39;</span><span class="p">,</span> <span class="s1">&#39;Donkey&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Lagomorpha&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Hare&#39;</span><span class="p">,</span> <span class="s1">&#39;Rabbit&#39;</span><span class="p">,</span> <span class="s1">&#39;WildRabbit&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Scandentia&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;CommonTreeShrew&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Xenarthra&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Armadillo&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">idx</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">species_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">order_mapper</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">labels_species</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">species_list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+            <span class="n">idx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">order_mapper</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">idx</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -498,7 +548,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_3_0.png" src="_images/mami_discriminability_3_0.png" />
+<img alt="_images/mami_discriminability_4_0.png" src="_images/mami_discriminability_4_0.png" />
 </div>
 </div>
 </div>
@@ -521,13 +571,13 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_density_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_6_0.png" src="_images/mami_discriminability_6_0.png" />
+<img alt="_images/mami_discriminability_7_0.png" src="_images/mami_discriminability_7_0.png" />
 </div>
 </div>
 </div>
@@ -537,13 +587,13 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_avgedgeweight_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;avgedgeweight&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_8_0.png" src="_images/mami_discriminability_8_0.png" />
+<img alt="_images/mami_discriminability_9_0.png" src="_images/mami_discriminability_9_0.png" />
 </div>
 </div>
 </div>
@@ -554,13 +604,13 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_avgadjmat_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;avgadjmatrix&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_avgadjmat_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_avgadjmat_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_10_0.png" src="_images/mami_discriminability_10_0.png" />
+<img alt="_images/mami_discriminability_11_0.png" src="_images/mami_discriminability_11_0.png" />
 </div>
 </div>
 </div>
@@ -575,13 +625,13 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_nodedeg_dissim_l1</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;degree&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s2">&quot;l1&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l1</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l1</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_12_0.png" src="_images/mami_discriminability_12_0.png" />
+<img alt="_images/mami_discriminability_13_0.png" src="_images/mami_discriminability_13_0.png" />
 </div>
 </div>
 </div>
@@ -591,13 +641,13 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_nodedeg_dissim_l2</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;degree&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s2">&quot;l2&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l2</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l2</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_14_0.png" src="_images/mami_discriminability_14_0.png" />
+<img alt="_images/mami_discriminability_15_0.png" src="_images/mami_discriminability_15_0.png" />
 </div>
 </div>
 </div>
@@ -608,13 +658,13 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_nodestr_dissim_l1</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;strength&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s2">&quot;l1&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l1</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l1</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_16_0.png" src="_images/mami_discriminability_16_0.png" />
+<img alt="_images/mami_discriminability_17_0.png" src="_images/mami_discriminability_17_0.png" />
 </div>
 </div>
 </div>
@@ -624,13 +674,13 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_nodestr_dissim_l2</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;strength&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s2">&quot;l2&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l2</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l2</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_18_0.png" src="_images/mami_discriminability_18_0.png" />
+<img alt="_images/mami_discriminability_19_0.png" src="_images/mami_discriminability_19_0.png" />
 </div>
 </div>
 </div>
@@ -645,13 +695,13 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_edgeweight_dissim_l1</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;edgeweight&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s2">&quot;l1&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l1</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l1</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_20_0.png" src="_images/mami_discriminability_20_0.png" />
+<img alt="_images/mami_discriminability_21_0.png" src="_images/mami_discriminability_21_0.png" />
 </div>
 </div>
 </div>
@@ -661,13 +711,13 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_edgeweight_dissim_l2</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;edgeweight&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s2">&quot;l2&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l2</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l2</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_22_0.png" src="_images/mami_discriminability_22_0.png" />
+<img alt="_images/mami_discriminability_23_0.png" src="_images/mami_discriminability_23_0.png" />
 </div>
 </div>
 </div>
@@ -704,13 +754,13 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="c1"># plot heatmap</span>
 <span class="n">scaled_omni_dissim</span> <span class="o">=</span> <span class="n">omni_matrix</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">omni_matrix</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_omni_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_omni_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_25_0.png" src="_images/mami_discriminability_25_0.png" />
+<img alt="_images/mami_discriminability_26_0.png" src="_images/mami_discriminability_26_0.png" />
 </div>
 </div>
 </div>
@@ -776,7 +826,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Discriminability&#39;)
 </pre></div>
 </div>
-<img alt="_images/mami_discriminability_27_1.png" src="_images/mami_discriminability_27_1.png" />
+<img alt="_images/mami_discriminability_28_1.png" src="_images/mami_discriminability_28_1.png" />
 </div>
 </div>
 </div>

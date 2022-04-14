@@ -640,23 +640,31 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="c1">#from sklearn.cluster import AgglomerativeClustering, KMeans</span>
-<span class="c1">#from sklearn.mixture import GaussianMixture</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">AgglomerativeClustering</span><span class="p">,</span> <span class="n">KMeans</span>
+<span class="kn">from</span> <span class="nn">sklearn.mixture</span> <span class="kn">import</span> <span class="n">GaussianMixture</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">adjusted_rand_score</span><span class="p">,</span> <span class="n">accuracy_score</span>
-<span class="c1">#from graspologic.embed import ClassicalMDS</span>
+<span class="kn">from</span> <span class="nn">graspologic.embed</span> <span class="kn">import</span> <span class="n">ClassicalMDS</span>
 <span class="kn">from</span> <span class="nn">graspologic.utils</span> <span class="kn">import</span> <span class="n">remap_labels</span>
+<span class="kn">from</span> <span class="nn">ndd_utils</span> <span class="kn">import</span> <span class="n">calculate_dissim</span>
 
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;/Users/dianelee/Documents/Github/ndd-dlee&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">ndd_utils.utils</span> <span class="k">as</span> <span class="nn">utils</span>
-<span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">reload</span>
-<span class="n">reload</span><span class="p">(</span><span class="n">utils</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>  
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>  
+<span class="n">file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;mami_clustering.ipynb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span> 
+<span class="n">package_root_directory</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  
+
+<span class="c1">#from ..ndd_utils import cluster_dissim</span>
+
+<span class="c1">#import sys</span>
+<span class="c1">#sys.path.append(&#39;/Users/dianelee/Documents/Github/ndd-dlee&#39;)</span>
 <span class="c1">#from ndd_utils.utils import calculate_dissim, cluster_dissim</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;module &#39;ndd_utils.utils&#39; from &#39;/Users/dianelee/opt/anaconda3/envs/bilateral/lib/python3.9/site-packages/pkg-0.1.0-py3.9.egg/ndd_utils/utils.py&#39;&gt;
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ndd_utils</span> <span class="kn">import</span> <span class="n">utils</span>
 </pre></div>
 </div>
 </div>
@@ -671,24 +679,77 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 <span class="n">graphs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">225</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">labels_species</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="n">npy_files</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../mami_data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">npy_files</span><span class="p">):</span>
     <span class="n">graphs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     <span class="n">filestr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
     <span class="n">filestr</span> <span class="o">=</span> <span class="n">filestr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">filestr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
-        <span class="n">filestr</span> <span class="o">=</span> <span class="n">filestr</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filestr</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">filestr</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">filestr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="n">filestr</span> <span class="o">=</span> <span class="n">filestr</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">break</span>
+    <span class="n">labels_species</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filestr</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels_species</span><span class="p">))</span>
     
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>225
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cluster_dissim</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">labels</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;agg&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cluster dissimilarity matrix using Agglomerative, K-means, or GMM. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;agg&quot;</span><span class="p">:</span>
+        <span class="c1"># Agglomerative clustering</span>
+        <span class="n">agg</span> <span class="o">=</span> <span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">affinity</span><span class="o">=</span><span class="s1">&#39;precomputed&#39;</span><span class="p">,</span> <span class="n">linkage</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> \
+            <span class="n">compute_distances</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">affinity</span><span class="o">=</span><span class="s1">&#39;precomputed&#39;</span><span class="p">,</span> <span class="n">linkage</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> \
+            <span class="n">compute_distances</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+
+        <span class="c1"># construct linkage matrix</span>
+        <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">agg</span><span class="o">.</span><span class="n">children_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">agg</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">merge</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">agg</span><span class="o">.</span><span class="n">children_</span><span class="p">):</span>
+            <span class="n">temp_count</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">child_idx</span> <span class="ow">in</span> <span class="n">merge</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">child_idx</span> <span class="o">&lt;</span> <span class="n">n_samples</span><span class="p">:</span>
+                    <span class="n">temp_count</span> <span class="o">+=</span> <span class="mi">1</span> 
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">temp_count</span> <span class="o">+=</span> <span class="n">counts</span><span class="p">[</span><span class="n">child_idx</span> <span class="o">-</span> <span class="n">n_samples</span><span class="p">]</span>
+            <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_count</span>
+
+        <span class="n">linkage_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">agg</span><span class="o">.</span><span class="n">children_</span><span class="p">,</span> <span class="n">agg</span><span class="o">.</span><span class="n">distances_</span><span class="p">,</span> <span class="n">counts</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">linkage_matrix</span><span class="p">,</span> <span class="n">pred</span>
+    
+    <span class="k">elif</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;gmm&quot;</span><span class="p">,</span> <span class="s2">&quot;kmeans&quot;</span><span class="p">]:</span>
+        <span class="c1"># Classical MDS</span>
+        <span class="n">cmds</span> <span class="o">=</span> <span class="n">ClassicalMDS</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dissimilarity</span><span class="o">=</span><span class="s2">&quot;precomputed&quot;</span><span class="p">)</span>
+        <span class="n">cmds_embedding</span> <span class="o">=</span> <span class="n">cmds</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="p">)</span>
+
+        <span class="c1"># cluster using GMM or K-means</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;gmm&quot;</span><span class="p">:</span>
+            <span class="n">clustering</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">cmds_embedding</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;kmeans&quot;</span><span class="p">:</span>
+            <span class="n">clustering</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">cmds_embedding</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not a valid kernel name.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">cmds_embedding</span><span class="p">,</span> <span class="n">clustering</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not a valid kernel name.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -711,16 +772,19 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">construct_df</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">construct_df</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Construct dataframe for plotting and remapped labels. Only for &#39;gmm&#39; or &#39;kmeans&#39;. &quot;&quot;&quot;</span>
     <span class="c1"># x,y coordinates</span>
     <span class="n">plot_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">,</span> <span class="s2">&quot;Dimension 2&quot;</span><span class="p">])</span>
 
     <span class="c1"># predicted labels</span>
-    <span class="n">mapper_inv</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;B6&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;BTBR&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;CAST&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;DBA2&#39;</span><span class="p">}</span>
+    <span class="n">mapper_inv</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">labels</span><span class="p">)):</span>
+        <span class="n">mapper_inv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">label</span>
+    <span class="c1">#mapper_inv = {0: &#39;B6&#39;, 1: &#39;BTBR&#39;, 2: &#39;CAST&#39;, 3: &#39;DBA2&#39;}</span>
     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">remap_labels</span><span class="p">(</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">)</span>
     <span class="n">pred_str</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mapper_inv</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)])</span>
-    <span class="n">plot_df</span><span class="p">[</span><span class="s2">&quot;Genotype&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pred_str</span>
+    <span class="n">plot_df</span><span class="p">[</span><span class="s2">&quot;Order&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pred_str</span>
 
     <span class="c1"># determine if predictions are accurate for each sample</span>
     <span class="n">preds</span> <span class="o">=</span> <span class="n">compare_preds</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
@@ -734,6 +798,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_clustering</span><span class="p">(</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
     <span class="n">algorithm</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;agg&quot;</span><span class="p">,</span>
     <span class="n">dissim_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">linkage_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -741,12 +806,15 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
-    <span class="n">palette</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;DBA2&quot;</span><span class="p">:</span> <span class="s2">&quot;#e7298a&quot;</span><span class="p">,</span> <span class="s2">&quot;B6&quot;</span><span class="p">:</span> <span class="s2">&quot;#1b9e77&quot;</span><span class="p">,</span> <span class="s2">&quot;BTBR&quot;</span><span class="p">:</span> <span class="s2">&quot;#d95f02&quot;</span><span class="p">,</span> <span class="s2">&quot;CAST&quot;</span><span class="p">:</span> <span class="s2">&quot;#7570b3&quot;</span><span class="p">}</span>
+    <span class="c1">#palette = {&quot;DBA2&quot;: &quot;#e7298a&quot;, &quot;B6&quot;: &quot;#1b9e77&quot;, &quot;BTBR&quot;: &quot;#d95f02&quot;, &quot;CAST&quot;: &quot;#7570b3&quot;}</span>
+    <span class="n">palette</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;Paired&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">labels</span><span class="p">)))))</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">palette</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">])</span>
 
     <span class="k">if</span> <span class="n">algorithm</span> <span class="o">==</span> <span class="s2">&quot;agg&quot;</span> <span class="ow">and</span> <span class="n">dissim_matrix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">linkage_matrix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Labels&#39;</span><span class="p">])</span>
-        <span class="n">mice_labels</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;Labels&quot;</span><span class="p">)</span>
-        <span class="n">colors</span> <span class="o">=</span> <span class="n">mice_labels</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">palette</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="c1">#df = pd.DataFrame(labels, columns = [&#39;Labels&#39;])</span>
+        
+        <span class="c1">#mice_labels = df.pop(&quot;Labels&quot;)</span>
+        <span class="c1">#colors = mice_labels.map(palette).to_numpy()</span>
 
         <span class="n">clustergrid</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="p">,</span> <span class="n">row_linkage</span><span class="o">=</span><span class="n">linkage_matrix</span><span class="p">,</span> <span class="n">col_linkage</span><span class="o">=</span><span class="n">linkage_matrix</span><span class="p">,</span> <span class="n">row_colors</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> \
             <span class="n">col_colors</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -754,17 +822,17 @@ const thebe_selector_output = ".output, .cell_output"
         <span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_cbar</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Dissimilarity&quot;</span><span class="p">)</span> <span class="c1"># add color bar</span>
         <span class="n">col_ax</span> <span class="o">=</span> <span class="n">clustergrid</span><span class="o">.</span><span class="n">ax_col_colors</span> <span class="c1"># add row and column colors</span>
-        <span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])</span>
-        <span class="n">_</span> <span class="o">=</span> <span class="n">col_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s2">&quot;Genotype&quot;</span><span class="p">],</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+        <span class="c1">#col_ax.set_yticks([0.5])</span>
+        <span class="c1">#_ = col_ax.set_yticklabels([&quot;Genotype&quot;], va=&quot;center&quot;)</span>
         <span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">palette</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="c1"># add legend</span>
-        <span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span> <span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.13</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Genotype&#39;</span><span class="p">)</span>
+        <span class="n">clustergrid</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span> <span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.23</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Order&#39;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">clustergrid</span>
         
     <span class="k">elif</span> <span class="n">algorithm</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;gmm&quot;</span><span class="p">,</span> <span class="s2">&quot;kmeans&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">markers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Incorrect&quot;</span><span class="p">:</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Correct&quot;</span><span class="p">:</span> <span class="s2">&quot;o&quot;</span><span class="p">}</span>
-        <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> \
+        <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> \
             <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">markers</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
@@ -790,11 +858,70 @@ const thebe_selector_output = ".output, .cell_output"
 <p>For each kernel, the accuracy score, the number of correct predictions divided by the total number of samples, and the adjusted rand index,  a similarity measure between two clusterings after being adjusted for chance, were reported.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct labels</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct labels based on morphologic and phylogenetic taxonomy ordersa</span>
+<span class="n">order_mapper</span> <span class="o">=</span> <span class="p">{</span>
+<span class="s1">&#39;Rodentia&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Rat&#39;</span><span class="p">,</span> <span class="s1">&#39;Mouse&#39;</span><span class="p">,</span> <span class="s1">&#39;Merion&#39;</span><span class="p">,</span> <span class="s1">&#39;CaucasianSquirrel&#39;</span><span class="p">,</span> <span class="s1">&#39;BlindMole&#39;</span><span class="p">,</span> <span class="s1">&#39;SkinnyPig&#39;</span><span class="p">,</span> <span class="s1">&#39;Chinchila&#39;</span><span class="p">,</span> <span class="s1">&#39;PalmSquirrel&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;PrairieDog&#39;</span><span class="p">,</span> <span class="s1">&#39;Vole&#39;</span><span class="p">,</span> <span class="s1">&#39;WildRat&#39;</span><span class="p">,</span> <span class="s1">&#39;Mara&#39;</span><span class="p">,</span> <span class="s1">&#39;Dego&#39;</span><span class="p">,</span> <span class="s1">&#39;Coypu&#39;</span><span class="p">,</span> <span class="s1">&#39;GoldenSpinyMouse&#39;</span><span class="p">,</span> <span class="s1">&#39;Capybara&#39;</span><span class="p">,</span> <span class="s1">&#39;SpinyMouse&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Porcupine&#39;</span><span class="p">,</span> <span class="s1">&#39;Gerbil&#39;</span><span class="p">,</span> <span class="s1">&#39;Agouti&#39;</span><span class="p">],</span> 
+<span class="s1">&#39;Carnivora&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Meerkat&#39;</span><span class="p">,</span> <span class="s1">&#39;CommonFox&#39;</span><span class="p">,</span> <span class="s1">&#39;PteropusLylei&#39;</span><span class="p">,</span> <span class="s1">&#39;HoneyBadger&#39;</span><span class="p">,</span> <span class="s1">&#39;Hyaena&#39;</span><span class="p">,</span> <span class="s1">&#39;Lycaon&#39;</span><span class="p">,</span> <span class="s1">&#39;BlanfordFox&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Caracal&#39;</span><span class="p">,</span> <span class="s1">&#39;Dog&#39;</span><span class="p">,</span> <span class="s1">&#39;Ferret&#39;</span><span class="p">,</span> <span class="s1">&#39;JungleCat&#39;</span><span class="p">,</span> <span class="s1">&#39;RedPanda&#39;</span><span class="p">,</span> <span class="s1">&#39;Mongoose&#39;</span><span class="p">,</span> <span class="s1">&#39;Nasua&#39;</span><span class="p">,</span> <span class="s1">&#39;SandCat&#39;</span><span class="p">,</span> <span class="s1">&#39;HimalianBear&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Wolf&#39;</span><span class="p">,</span> <span class="s1">&#39;Otter&#39;</span><span class="p">,</span> <span class="s1">&#39;AsianOtter&#39;</span><span class="p">,</span> <span class="s1">&#39;Leopard&#39;</span><span class="p">,</span> <span class="s1">&#39;Cat&#39;</span><span class="p">,</span> <span class="s1">&#39;Tiger&#39;</span><span class="p">],</span> 
+<span class="s1">&#39;Cetartiodactyla&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;CapraNubiana&#39;</span><span class="p">,</span> <span class="s1">&#39;Oryx&#39;</span><span class="p">,</span> <span class="s1">&#39;ThomsonGazelle&#39;</span><span class="p">,</span> <span class="s1">&#39;Lama&#39;</span><span class="p">,</span> <span class="s1">&#39;Pecari&#39;</span><span class="p">,</span> <span class="s1">&#39;Giraffe&#39;</span><span class="p">,</span> <span class="s1">&#39;Addax&#39;</span><span class="p">,</span> <span class="s1">&#39;StrippdDolphin&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Wilderbeest&#39;</span><span class="p">,</span> <span class="s1">&#39;BactrianDeer&#39;</span><span class="p">,</span> <span class="s1">&#39;Goat&#39;</span><span class="p">,</span> <span class="s1">&#39;WildBoar&#39;</span><span class="p">,</span> <span class="s1">&#39;FallowDeer&#39;</span><span class="p">,</span> <span class="s1">&#39;Chital&#39;</span><span class="p">,</span> <span class="s1">&#39;BottleNoseDolphin&#39;</span><span class="p">,</span> <span class="s1">&#39;IndHogDeer&#39;</span> \
+    <span class="s1">&#39;Sheep&#39;</span><span class="p">,</span> <span class="s1">&#39;Cow&#39;</span><span class="p">,</span> <span class="s1">&#39;Deer&#39;</span><span class="p">,</span> <span class="s1">&#39;Porcine&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Primates&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Colobus&#39;</span><span class="p">,</span> <span class="s1">&#39;Marmoset&#39;</span><span class="p">,</span> <span class="s1">&#39;GreenMonkey&#39;</span><span class="p">,</span> <span class="s1">&#39;SquirrelMonkey&#39;</span><span class="p">,</span> <span class="s1">&#39;TamarinCottonTop&#39;</span><span class="p">,</span> <span class="s1">&#39;Macaque&#39;</span><span class="p">,</span> <span class="s1">&#39;Siamang&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Vervet&#39;</span><span class="p">,</span> <span class="s1">&#39;Mandrill&#39;</span><span class="p">,</span> <span class="s1">&#39;HowlerMonkey&#39;</span><span class="p">,</span> <span class="s1">&#39;TamarinEmperor&#39;</span><span class="p">,</span> <span class="s1">&#39;MacaquePT&#39;</span><span class="p">,</span> <span class="s1">&#39;Orangutan&#39;</span><span class="p">,</span> <span class="s1">&#39;MacaqueBlack&#39;</span><span class="p">,</span> <span class="s1">&#39;Capuchin&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;BrownLemur&#39;</span><span class="p">,</span> <span class="s1">&#39;TamarinGoldenHands&#39;</span><span class="p">,</span> <span class="s1">&#39;MacaqueLionTail&#39;</span><span class="p">,</span> <span class="s1">&#39;Baboon&#39;</span><span class="p">,</span> <span class="s1">&#39;Chimpanzee&#39;</span><span class="p">,</span> <span class="s1">&#39;LemurCatta&#39;</span><span class="p">,</span> <span class="s1">&#39;Gorilla&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Mangebi&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Chiroptera&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ChaerephonPlicata&#39;</span><span class="p">,</span> <span class="s1">&#39;Rhinolophus&#39;</span><span class="p">,</span> <span class="s1">&#39;SturniraLilium&#39;</span><span class="p">,</span> <span class="s1">&#39;Cynopterus&#39;</span><span class="p">,</span> <span class="s1">&#39;Eptesicus&#39;</span><span class="p">,</span> <span class="s1">&#39;Rhinopoma&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;MiniopterusSchreibersii&#39;</span><span class="p">,</span> <span class="s1">&#39;Asellia&#39;</span><span class="p">,</span> <span class="s1">&#39;MyotisEmargenitus&#39;</span><span class="p">,</span> <span class="s1">&#39;CarolliaPerspicilatta&#39;</span><span class="p">,</span> <span class="s1">&#39;TadaridaTeniotis&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;MyotisVivesi&#39;</span><span class="p">,</span> <span class="s1">&#39;VampireBat&#39;</span><span class="p">,</span> <span class="s1">&#39;ArtibeusJamacien&#39;</span><span class="p">,</span> <span class="s1">&#39;MyotisMyotis&#39;</span><span class="p">,</span> <span class="s1">&#39;Pkuhlii&#39;</span><span class="p">,</span> <span class="s1">&#39;HippArmiger&#39;</span><span class="p">,</span> <span class="s1">&#39;FruitBat&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;Eonycteris&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Hyracoidea&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Hyrax&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Marsupialia&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;RedNeckWallaby&#39;</span><span class="p">,</span> <span class="s1">&#39;Battoniga&#39;</span><span class="p">,</span> <span class="s1">&#39;GrayKangaroo&#39;</span><span class="p">,</span> <span class="s1">&#39;Koala&#39;</span><span class="p">,</span> <span class="s1">&#39;RedKangaroo&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Eulipotyphla&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;CommonHedgeHog&#39;</span><span class="p">,</span> <span class="s1">&#39;SandHedgeHog&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Perissodactyla&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Macaque&#39;</span><span class="p">,</span> <span class="s1">&#39;Onager&#39;</span><span class="p">,</span> <span class="s1">&#39;Horse&#39;</span><span class="p">,</span> <span class="s1">&#39;Tapir&#39;</span><span class="p">,</span> <span class="s1">&#39;Zebra&#39;</span><span class="p">,</span> <span class="s1">&#39;Donkey&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Lagomorpha&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Hare&#39;</span><span class="p">,</span> <span class="s1">&#39;Rabbit&#39;</span><span class="p">,</span> <span class="s1">&#39;WildRabbit&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Scandentia&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;CommonTreeShrew&#39;</span><span class="p">],</span>
+<span class="s1">&#39;Xenarthra&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Armadillo&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">idx</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">species_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">order_mapper</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">labels_species</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">species_list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+            <span class="n">idx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">order_mapper</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">idx</span><span class="p">]</span>
+
 <span class="n">mapper</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">labels</span><span class="p">)):</span>
     <span class="n">mapper</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mapper</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_density_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># cluster dissimilarity matrix</span>
+<span class="n">density_gm_embedding</span><span class="p">,</span> <span class="n">density_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;gmm&#39;</span><span class="p">)</span>
+<span class="n">density_gm</span><span class="p">,</span> <span class="n">density_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">density_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">density_gm_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">labels</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11])
 </pre></div>
 </div>
 </div>
@@ -803,40 +930,11 @@ const thebe_selector_output = ".output, .cell_output"
 <h3>Density<a class="headerlink" href="#density" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ndd_utils.utils</span> <span class="k">as</span> <span class="nn">mu</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">ndd_utils</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>__builtins__
-__cached__
-__doc__
-__file__
-__loader__
-__name__
-__package__
-__path__
-__spec__
-calculate_dissim
-utils
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate dissimilarity matrix</span>
-<span class="n">scaled_density_dissim</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">scaled_density_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># cluster dissimilarity matrix</span>
-<span class="n">density_linkage_matrix</span><span class="p">,</span> <span class="n">density_pred</span> <span class="o">=</span> <span class="n">mu</span><span class="o">.</span><span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;agg&quot;</span><span class="p">)</span>
+<span class="n">density_linkage_matrix</span><span class="p">,</span> <span class="n">density_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;agg&quot;</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
 <span class="n">density_pred</span> <span class="o">=</span> <span class="n">remap_labels</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">density_pred</span><span class="p">)</span>
@@ -847,23 +945,19 @@ utils
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">density_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">density_linkage_matrix</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">density_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">37</span><span class="p">],</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">scaled_density_dissim</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># cluster dissimilarity matrix</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">density_linkage_matrix</span><span class="p">,</span> <span class="n">density_pred</span> <span class="o">=</span> <span class="n">mu</span><span class="o">.</span><span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;agg&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># calculate accuracy and ARI</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">density_pred</span> <span class="o">=</span> <span class="n">remap_labels</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">density_pred</span><span class="p">)</span>
-
-<span class="ne">AttributeError</span>: module &#39;ndd_utils.utils&#39; has no attribute &#39;cluster_dissim&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.23555555555555555
+ARI: 0.008697331657992614
 </pre></div>
 </div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9c839e5d00&gt;
+</pre></div>
+</div>
+<img alt="_images/mami_clustering_13_2.png" src="_images/mami_clustering_13_2.png" />
 </div>
 </div>
 </div>
@@ -886,19 +980,19 @@ utils
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">avgedgeweight_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">avgedgeweight_linkage_matrix</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">avgedgeweight_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.65625
-ARI: 0.4124638612271121
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.23555555555555555
+ARI: -0.0037232214457555276
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9df982cc70&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9c918ba430&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_13_2.png" src="_images/mami_clustering_13_2.png" />
+<img alt="_images/mami_clustering_15_2.png" src="_images/mami_clustering_15_2.png" />
 </div>
 </div>
 </div>
@@ -921,19 +1015,19 @@ ARI: 0.4124638612271121
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">avgadjmat_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_avgadjmat_dissim</span><span class="p">,</span> <span class="n">avgadjmat_linkage_matrix</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_avgadjmat_dissim</span><span class="p">,</span> <span class="n">avgadjmat_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.65625
-ARI: 0.3134054954204829
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.23555555555555555
+ARI: 0.0013595880807359755
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dd14e07f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9c918acfa0&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_15_2.png" src="_images/mami_clustering_15_2.png" />
+<img alt="_images/mami_clustering_17_2.png" src="_images/mami_clustering_17_2.png" />
 </div>
 </div>
 </div>
@@ -956,19 +1050,19 @@ ARI: 0.3134054954204829
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l1_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_nodedeg_dissim_l1</span><span class="p">,</span> <span class="n">nodedeg_l1_linkage_matrix</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_nodedeg_dissim_l1</span><span class="p">,</span> <span class="n">nodedeg_l1_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.46875
-ARI: 0.17706740792216819
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.2311111111111111
+ARI: -0.00201007881074537
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dc9e27e20&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9c833d9eb0&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_17_2.png" src="_images/mami_clustering_17_2.png" />
+<img alt="_images/mami_clustering_19_2.png" src="_images/mami_clustering_19_2.png" />
 </div>
 </div>
 </div>
@@ -991,19 +1085,19 @@ ARI: 0.17706740792216819
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l2_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_nodedeg_dissim_l2</span><span class="p">,</span> <span class="n">nodedeg_l2_linkage_matrix</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_nodedeg_dissim_l2</span><span class="p">,</span> <span class="n">nodedeg_l2_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.5
-ARI: 0.27552275522755226
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.23555555555555555
+ARI: -0.0011027700798910906
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dd14e0760&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9c83f3e160&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_19_2.png" src="_images/mami_clustering_19_2.png" />
+<img alt="_images/mami_clustering_21_2.png" src="_images/mami_clustering_21_2.png" />
 </div>
 </div>
 </div>
@@ -1026,19 +1120,19 @@ ARI: 0.27552275522755226
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l1_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_nodestr_dissim_l1</span><span class="p">,</span> <span class="n">nodestr_l1_linkage_matrix</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_nodestr_dissim_l1</span><span class="p">,</span> <span class="n">nodestr_l1_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.875
-ARI: 0.7122838944494996
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.23555555555555555
+ARI: -0.004197053459226666
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dda1dfa90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9c75c43700&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_21_2.png" src="_images/mami_clustering_21_2.png" />
+<img alt="_images/mami_clustering_23_2.png" src="_images/mami_clustering_23_2.png" />
 </div>
 </div>
 </div>
@@ -1061,19 +1155,19 @@ ARI: 0.7122838944494996
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l2_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_nodestr_dissim_l2</span><span class="p">,</span> <span class="n">nodestr_l2_linkage_matrix</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_nodestr_dissim_l2</span><span class="p">,</span> <span class="n">nodestr_l2_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.75
-ARI: 0.5847123719464145
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.2311111111111111
+ARI: -0.0019664918547182006
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dc9a64a60&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9c92412850&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_23_2.png" src="_images/mami_clustering_23_2.png" />
+<img alt="_images/mami_clustering_25_2.png" src="_images/mami_clustering_25_2.png" />
 </div>
 </div>
 </div>
@@ -1096,19 +1190,19 @@ ARI: 0.5847123719464145
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">edgeweight_l1_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_edgeweight_dissim_l1</span><span class="p">,</span> <span class="n">edgeweight_l1_linkage_matrix</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_edgeweight_dissim_l1</span><span class="p">,</span> <span class="n">edgeweight_l1_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.96875
-ARI: 0.9137771184869276
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.2311111111111111
+ARI: -0.0019664918547182006
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dc9a6e790&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9c83aa7850&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_25_2.png" src="_images/mami_clustering_25_2.png" />
+<img alt="_images/mami_clustering_27_2.png" src="_images/mami_clustering_27_2.png" />
 </div>
 </div>
 </div>
@@ -1131,19 +1225,19 @@ ARI: 0.9137771184869276
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">edgeweight_l2_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_edgeweight_dissim_l2</span><span class="p">,</span> <span class="n">edgeweight_l2_linkage_matrix</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_edgeweight_dissim_l2</span><span class="p">,</span> <span class="n">edgeweight_l2_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.96875
-ARI: 0.9137771184869276
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.2311111111111111
+ARI: -0.0019664918547182006
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dda1df460&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9c91c1d5b0&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_27_2.png" src="_images/mami_clustering_27_2.png" />
+<img alt="_images/mami_clustering_29_2.png" src="_images/mami_clustering_29_2.png" />
 </div>
 </div>
 </div>
@@ -1178,19 +1272,19 @@ ARI: 0.9137771184869276
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">omni_agg_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustered dissimilarity matrix</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_omni_dissim</span><span class="p">,</span> <span class="n">omni_linkage_matrix</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_omni_dissim</span><span class="p">,</span> <span class="n">omni_linkage_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 1.0
-ARI: 1.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.2311111111111111
+ARI: -0.0019664918547182006
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9dd2d1cd00&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7f9c764f0850&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_29_2.png" src="_images/mami_clustering_29_2.png" />
+<img alt="_images/mami_clustering_31_2.png" src="_images/mami_clustering_31_2.png" />
 </div>
 </div>
 </div>
@@ -1202,14 +1296,14 @@ ARI: 1.0
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct labels</span>
-<span class="n">mapper</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;B6&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;BTBR&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;CAST&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;DBA2&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mapper</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">mice</span><span class="o">.</span><span class="n">labels</span><span class="p">)])</span>
+<span class="c1">#mapper = {&#39;B6&#39;: 0, &#39;BTBR&#39;: 1, &#39;CAST&#39;: 2, &#39;DBA2&#39;: 3}</span>
+<span class="c1">##y = np.array([mapper[l] for l in list(mice.labels)])</span>
 
 <span class="c1"># set palette for plotting</span>
-<span class="n">palette</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;DBA2&quot;</span><span class="p">:</span> <span class="s2">&quot;#e7298a&quot;</span><span class="p">,</span> <span class="s2">&quot;B6&quot;</span><span class="p">:</span> <span class="s2">&quot;#1b9e77&quot;</span><span class="p">,</span> <span class="s2">&quot;BTBR&quot;</span><span class="p">:</span> <span class="s2">&quot;#d95f02&quot;</span><span class="p">,</span> <span class="s2">&quot;CAST&quot;</span><span class="p">:</span> <span class="s2">&quot;#7570b3&quot;</span><span class="p">}</span>
+<span class="c1">#palette = {&quot;DBA2&quot;: &quot;#e7298a&quot;, &quot;B6&quot;: &quot;#1b9e77&quot;, &quot;BTBR&quot;: &quot;#d95f02&quot;, &quot;CAST&quot;: &quot;#7570b3&quot;}</span>
 
 <span class="c1"># dict for mapping int labels to strings</span>
-<span class="n">mapper_inv</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;B6&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;BTBR&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;CAST&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;DBA2&#39;</span><span class="p">}</span>
+<span class="c1">#mapper_inv = {0: &#39;B6&#39;, 1: &#39;BTBR&#39;, 2: &#39;CAST&#39;, 3: &#39;DBA2&#39;}</span>
 </pre></div>
 </div>
 </div>
@@ -1220,7 +1314,7 @@ ARI: 1.0
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">density_gm_embedding</span><span class="p">,</span> <span class="n">density_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;gmm&#39;</span><span class="p">)</span>
-<span class="n">density_gm</span><span class="p">,</span> <span class="n">density_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">density_gm_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">density_gm_pred</span><span class="p">)</span>
+<span class="n">density_gm</span><span class="p">,</span> <span class="n">density_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">density_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">density_gm_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
 <span class="n">density_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">density_gm_pred</span><span class="p">)</span>
@@ -1230,45 +1324,13 @@ ARI: 1.0
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">density_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">density_gm</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">density_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.53125
-ARI: 0.20111167256189996
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
-</pre></div>
-</div>
-<img alt="_images/mami_clustering_33_2.png" src="_images/mami_clustering_33_2.png" />
-</div>
-</div>
-</div>
-<div class="section" id="id2">
-<h3>Average Edge Weight<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
-<span class="n">avgedgeweight_gm_embedding</span><span class="p">,</span> <span class="n">avgedgeweight_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;gmm&#39;</span><span class="p">)</span>
-<span class="n">avgedgeweight_gm</span><span class="p">,</span> <span class="n">avgedgeweight_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">avgedgeweight_gm_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_gm_pred</span><span class="p">)</span>
-
-<span class="c1"># calculate accuracy and ARI</span>
-<span class="n">avgedgeweight_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_gm_pred</span><span class="p">)</span>
-<span class="n">avgedgeweight_gm_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_gm_pred</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">avgedgeweight_gm_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">avgedgeweight_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">avgedgeweight_gm</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.5
-ARI: 0.18691588785046728
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.24444444444444444
+ARI: 0.006487452311959634
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
@@ -1278,13 +1340,45 @@ ARI: 0.18691588785046728
 </div>
 </div>
 </div>
+<div class="section" id="id2">
+<h3>Average Edge Weight<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<span class="n">avgedgeweight_gm_embedding</span><span class="p">,</span> <span class="n">avgedgeweight_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;gmm&#39;</span><span class="p">)</span>
+<span class="n">avgedgeweight_gm</span><span class="p">,</span> <span class="n">avgedgeweight_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">avgedgeweight_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_gm_pred</span><span class="p">)</span>
+
+<span class="c1"># calculate accuracy and ARI</span>
+<span class="n">avgedgeweight_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_gm_pred</span><span class="p">)</span>
+<span class="n">avgedgeweight_gm_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_gm_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">avgedgeweight_gm_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">avgedgeweight_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot clustering</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">avgedgeweight_gm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.2311111111111111
+ARI: 0.008317060121758521
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/mami_clustering_37_2.png" src="_images/mami_clustering_37_2.png" />
+</div>
+</div>
+</div>
 <div class="section" id="average-of-the-adjacency-matrix">
 <h3>Average of the Adjacency Matrix<a class="headerlink" href="#average-of-the-adjacency-matrix" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">avgadjmat_gm_embedding</span><span class="p">,</span> <span class="n">avgadjmat_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_avgadjmat_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">)</span>
-<span class="n">avgadjmat_gm</span><span class="p">,</span> <span class="n">avgadjmat_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">avgadjmat_gm_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">avgadjmat_gm_pred</span><span class="p">)</span>
+<span class="n">avgadjmat_gm</span><span class="p">,</span> <span class="n">avgadjmat_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">avgadjmat_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">avgadjmat_gm_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
 <span class="n">avgadjmat_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgadjmat_gm_pred</span><span class="p">)</span>
@@ -1295,45 +1389,13 @@ ARI: 0.18691588785046728
 
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">avgadjmat_gm</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">avgadjmat_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.59375
-ARI: 0.27401624980086026
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
-</pre></div>
-</div>
-<img alt="_images/mami_clustering_37_2.png" src="_images/mami_clustering_37_2.png" />
-</div>
-</div>
-</div>
-<div class="section" id="id3">
-<h3>Node Degrees - L1 Norm<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
-<span class="n">nodedeg_l1_gm_embedding</span><span class="p">,</span> <span class="n">nodedeg_l1_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">)</span>
-<span class="n">nodedeg_l1_gm</span><span class="p">,</span> <span class="n">nodedeg_l1_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodedeg_l1_gm_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l1_gm_pred</span><span class="p">)</span>
-
-<span class="c1"># calculate accuracy and ARI</span>
-<span class="n">nodedeg_l1_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l1_gm_pred</span><span class="p">)</span>
-<span class="n">nodedeg_l1_gm_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l1_gm_pred</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodedeg_l1_gm_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l1_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodedeg_l1_gm</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.65625
-ARI: 0.44858546501778757
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.2222222222222222
+ARI: 0.0046276643505478495
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
@@ -1343,29 +1405,29 @@ ARI: 0.44858546501778757
 </div>
 </div>
 </div>
-<div class="section" id="id4">
-<h3>Node Degrees - L2 Norm<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Node Degrees - L1 Norm<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
-<span class="n">nodedeg_l2_gm_embedding</span><span class="p">,</span> <span class="n">nodedeg_l2_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">)</span>
-<span class="n">nodedeg_l2_gm</span><span class="p">,</span> <span class="n">nodedeg_l2_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodedeg_l2_gm_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l2_gm_pred</span><span class="p">)</span>
+<span class="n">nodedeg_l1_gm_embedding</span><span class="p">,</span> <span class="n">nodedeg_l1_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">)</span>
+<span class="n">nodedeg_l1_gm</span><span class="p">,</span> <span class="n">nodedeg_l1_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodedeg_l1_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l1_gm_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
-<span class="n">nodedeg_l2_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l2_gm_pred</span><span class="p">)</span>
-<span class="n">nodedeg_l2_gm_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l2_gm_pred</span><span class="p">)</span>
+<span class="n">nodedeg_l1_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l1_gm_pred</span><span class="p">)</span>
+<span class="n">nodedeg_l1_gm_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l1_gm_pred</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodedeg_l2_gm_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l2_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodedeg_l1_gm_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l1_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodedeg_l2_gm</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodedeg_l1_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.6875
-ARI: 0.5248441974060973
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.27111111111111114
+ARI: 0.011964397924329432
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
@@ -1375,29 +1437,29 @@ ARI: 0.5248441974060973
 </div>
 </div>
 </div>
-<div class="section" id="id5">
-<h3>Node Strength - L1 Norm<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Node Degrees - L2 Norm<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
-<span class="n">nodestr_l1_gm_embedding</span><span class="p">,</span> <span class="n">nodestr_l1_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">)</span>
-<span class="n">nodestr_l1_gm</span><span class="p">,</span> <span class="n">nodestr_l1_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodestr_l1_gm_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l1_gm_pred</span><span class="p">)</span>
+<span class="n">nodedeg_l2_gm_embedding</span><span class="p">,</span> <span class="n">nodedeg_l2_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">)</span>
+<span class="n">nodedeg_l2_gm</span><span class="p">,</span> <span class="n">nodedeg_l2_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodedeg_l2_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l2_gm_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
-<span class="n">nodestr_l1_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l1_gm_pred</span><span class="p">)</span>
-<span class="n">nodestr_l1_gm_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l1_gm_pred</span><span class="p">)</span>
+<span class="n">nodedeg_l2_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l2_gm_pred</span><span class="p">)</span>
+<span class="n">nodedeg_l2_gm_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l2_gm_pred</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodestr_l1_gm_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l1_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodedeg_l2_gm_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l2_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodestr_l1_gm</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodedeg_l2_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.84375
-ARI: 0.6579851691083378
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.22666666666666666
+ARI: 0.0012730652312815847
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
@@ -1407,29 +1469,29 @@ ARI: 0.6579851691083378
 </div>
 </div>
 </div>
-<div class="section" id="id6">
-<h3>Node Strength - L2 Norm<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Node Strength - L1 Norm<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
-<span class="n">nodestr_l2_gm_embedding</span><span class="p">,</span> <span class="n">nodestr_l2_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">)</span>
-<span class="n">nodestr_l2_gm</span><span class="p">,</span> <span class="n">nodestr_l2_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodestr_l2_gm_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l2_gm_pred</span><span class="p">)</span>
+<span class="n">nodestr_l1_gm_embedding</span><span class="p">,</span> <span class="n">nodestr_l1_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">)</span>
+<span class="n">nodestr_l1_gm</span><span class="p">,</span> <span class="n">nodestr_l1_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodestr_l1_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l1_gm_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
-<span class="n">nodestr_l2_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l2_gm_pred</span><span class="p">)</span>
-<span class="n">nodestr_l2_gm_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l2_gm_pred</span><span class="p">)</span>
+<span class="n">nodestr_l1_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l1_gm_pred</span><span class="p">)</span>
+<span class="n">nodestr_l1_gm_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l1_gm_pred</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodestr_l2_gm_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l2_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodestr_l1_gm_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l1_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodestr_l2_gm</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodestr_l1_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.71875
-ARI: 0.6531126871552404
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.23555555555555555
+ARI: 0.013773263177200413
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
@@ -1439,13 +1501,45 @@ ARI: 0.6531126871552404
 </div>
 </div>
 </div>
+<div class="section" id="id6">
+<h3>Node Strength - L2 Norm<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<span class="n">nodestr_l2_gm_embedding</span><span class="p">,</span> <span class="n">nodestr_l2_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">)</span>
+<span class="n">nodestr_l2_gm</span><span class="p">,</span> <span class="n">nodestr_l2_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodestr_l2_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l2_gm_pred</span><span class="p">)</span>
+
+<span class="c1"># calculate accuracy and ARI</span>
+<span class="n">nodestr_l2_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l2_gm_pred</span><span class="p">)</span>
+<span class="n">nodestr_l2_gm_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l2_gm_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodestr_l2_gm_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l2_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot clustering</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodestr_l2_gm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.23555555555555555
+ARI: 0.001162088205775536
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/mami_clustering_47_2.png" src="_images/mami_clustering_47_2.png" />
+</div>
+</div>
+</div>
 <div class="section" id="id7">
 <h3>Edge Weights - L1 Norm<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">edgeweight_l1_gm_embedding</span><span class="p">,</span> <span class="n">edgeweight_l1_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">)</span>
-<span class="n">edgeweight_l1_gm</span><span class="p">,</span> <span class="n">edgeweight_l1_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">edgeweight_l1_gm_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l1_gm_pred</span><span class="p">)</span>
+<span class="n">edgeweight_l1_gm</span><span class="p">,</span> <span class="n">edgeweight_l1_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">edgeweight_l1_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l1_gm_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
 <span class="n">edgeweight_l1_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l1_gm_pred</span><span class="p">)</span>
@@ -1455,19 +1549,19 @@ ARI: 0.6531126871552404
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">edgeweight_l1_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">edgeweight_l1_gm</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">edgeweight_l1_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.75
-ARI: 0.5847123719464145
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.22666666666666666
+ARI: 0.002662177161760102
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_47_2.png" src="_images/mami_clustering_47_2.png" />
+<img alt="_images/mami_clustering_49_2.png" src="_images/mami_clustering_49_2.png" />
 </div>
 </div>
 </div>
@@ -1482,7 +1576,7 @@ ARI: 0.5847123719464145
 
 <span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">edgeweight_l2_gm_embedding</span><span class="p">,</span> <span class="n">edgeweight_l2_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">dissim_matrix</span><span class="o">=</span><span class="n">scaled_edgeweight_dissim_l2</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">)</span>
-<span class="n">edgeweight_l2_gm</span><span class="p">,</span> <span class="n">edgeweight_l2_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">edgeweight_l2_gm_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l2_gm_pred</span><span class="p">)</span>
+<span class="n">edgeweight_l2_gm</span><span class="p">,</span> <span class="n">edgeweight_l2_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">edgeweight_l2_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l2_gm_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
 <span class="n">edgeweight_l2_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l2_gm_pred</span><span class="p">)</span>
@@ -1492,19 +1586,19 @@ ARI: 0.5847123719464145
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">edgeweight_l2_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">edgeweight_l2_gm</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">edgeweight_l2_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.75
-ARI: 0.5847123719464145
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.22666666666666666
+ARI: 0.009645646824761277
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_49_2.png" src="_images/mami_clustering_49_2.png" />
+<img alt="_images/mami_clustering_51_2.png" src="_images/mami_clustering_51_2.png" />
 </div>
 </div>
 </div>
@@ -1514,7 +1608,7 @@ ARI: 0.5847123719464145
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">omni_gm_embedding</span><span class="p">,</span> <span class="n">omni_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_omni_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">)</span>
-<span class="n">omni_gm</span><span class="p">,</span> <span class="n">omni_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">omni_gm_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">omni_gm_pred</span><span class="p">)</span>
+<span class="n">omni_gm</span><span class="p">,</span> <span class="n">omni_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">omni_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">omni_gm_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
 <span class="n">omni_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">omni_gm_pred</span><span class="p">)</span>
@@ -1524,19 +1618,19 @@ ARI: 0.5847123719464145
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">omni_gm_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">omni_gm</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">omni_gm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.96875
-ARI: 0.9137771184869276
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.25333333333333335
+ARI: 0.012494712445882093
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_51_2.png" src="_images/mami_clustering_51_2.png" />
+<img alt="_images/mami_clustering_53_2.png" src="_images/mami_clustering_53_2.png" />
 </div>
 </div>
 </div>
@@ -1551,7 +1645,7 @@ ARI: 0.9137771184869276
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">density_km_embedding</span><span class="p">,</span> <span class="n">density_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;kmeans&quot;</span><span class="p">)</span>
-<span class="n">density_km</span><span class="p">,</span> <span class="n">density_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">density_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">density_km_pred</span><span class="p">)</span>
+<span class="n">density_km</span><span class="p">,</span> <span class="n">density_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">density_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">density_km_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
 <span class="n">density_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">density_km_pred</span><span class="p">)</span>
@@ -1561,45 +1655,13 @@ ARI: 0.9137771184869276
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">density_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">density_km</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">density_km</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.5625
-ARI: 0.24777853725222146
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
-</pre></div>
-</div>
-<img alt="_images/mami_clustering_53_2.png" src="_images/mami_clustering_53_2.png" />
-</div>
-</div>
-</div>
-<div class="section" id="id11">
-<h3>Average Edge Weight<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
-<span class="n">avgedgeweight_km_embedding</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
-<span class="n">avgedgeweight_km</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">avgedgeweight_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span><span class="p">)</span>
-
-<span class="c1"># calculate accuracy and ARI</span>
-<span class="n">avgedgeweight_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span><span class="p">)</span>
-<span class="n">avgedgeweight_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">avgedgeweight_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">avgedgeweight_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">avgedgeweight_km</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.53125
-ARI: 0.2412006432017152
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.27555555555555555
+ARI: 0.011918080780336172
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
@@ -1609,29 +1671,29 @@ ARI: 0.2412006432017152
 </div>
 </div>
 </div>
-<div class="section" id="id12">
-<h3>Average of the Adjacency Matrix<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id11">
+<h3>Average Edge Weight<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
-<span class="n">avgadjmat_km_embedding</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_avgadjmat_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
-<span class="n">avgadjmat_km</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">avgadjmat_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span><span class="p">)</span>
+<span class="n">avgedgeweight_km_embedding</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">avgedgeweight_km</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">avgedgeweight_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
-<span class="n">avgadjmat_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span><span class="p">)</span>
-<span class="n">avgadjmat_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span><span class="p">)</span>
+<span class="n">avgedgeweight_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span><span class="p">)</span>
+<span class="n">avgedgeweight_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">avgadjmat_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">avgadjmat_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">avgedgeweight_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">avgedgeweight_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">avgadjmat_km</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">avgedgeweight_km</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.65625
-ARI: 0.3094958968347011
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.2311111111111111
+ARI: 0.006558588227257733
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
@@ -1641,29 +1703,29 @@ ARI: 0.3094958968347011
 </div>
 </div>
 </div>
-<div class="section" id="node-degree-l1-norm">
-<h3>Node Degree - L1 Norm<a class="headerlink" href="#node-degree-l1-norm" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id12">
+<h3>Average of the Adjacency Matrix<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
-<span class="n">nodedeg_l1_km_embedding</span><span class="p">,</span> <span class="n">nodedeg_l1_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
-<span class="n">nodedeg_l1_km</span><span class="p">,</span> <span class="n">nodedeg_l1_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodedeg_l1_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l1_km_pred</span><span class="p">)</span>
+<span class="n">avgadjmat_km_embedding</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_avgadjmat_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">avgadjmat_km</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">avgadjmat_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
-<span class="n">nodedeg_l1_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l1_km_pred</span><span class="p">)</span>
-<span class="n">nodedeg_l1_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l1_km_pred</span><span class="p">)</span>
+<span class="n">avgadjmat_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span><span class="p">)</span>
+<span class="n">avgadjmat_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodedeg_l1_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l1_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">avgadjmat_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">avgadjmat_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodedeg_l1_km</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">avgadjmat_km</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.625
-ARI: 0.36778063410454154
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.22666666666666666
+ARI: 0.008509401634500386
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
@@ -1673,29 +1735,29 @@ ARI: 0.36778063410454154
 </div>
 </div>
 </div>
-<div class="section" id="node-degree-l2-norm">
-<h3>Node Degree - L2 Norm<a class="headerlink" href="#node-degree-l2-norm" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="node-degree-l1-norm">
+<h3>Node Degree - L1 Norm<a class="headerlink" href="#node-degree-l1-norm" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
-<span class="n">nodedeg_l2_km_embedding</span><span class="p">,</span> <span class="n">nodedeg_l2_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
-<span class="n">nodedeg_l2_km</span><span class="p">,</span> <span class="n">nodedeg_l2_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodedeg_l2_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l2_km_pred</span><span class="p">)</span>
+<span class="n">nodedeg_l1_km_embedding</span><span class="p">,</span> <span class="n">nodedeg_l1_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">nodedeg_l1_km</span><span class="p">,</span> <span class="n">nodedeg_l1_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodedeg_l1_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l1_km_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
-<span class="n">nodedeg_l2_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l2_km_pred</span><span class="p">)</span>
-<span class="n">nodedeg_l2_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l2_km_pred</span><span class="p">)</span>
+<span class="n">nodedeg_l1_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l1_km_pred</span><span class="p">)</span>
+<span class="n">nodedeg_l1_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l1_km_pred</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodedeg_l2_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l2_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodedeg_l1_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l1_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodedeg_l2_km</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodedeg_l1_km</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.65625
-ARI: 0.47026657552973344
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.27111111111111114
+ARI: 0.008247699224470073
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
@@ -1705,29 +1767,29 @@ ARI: 0.47026657552973344
 </div>
 </div>
 </div>
-<div class="section" id="id13">
-<h3>Node Strength - L1 Norm<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="node-degree-l2-norm">
+<h3>Node Degree - L2 Norm<a class="headerlink" href="#node-degree-l2-norm" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
-<span class="n">nodestr_l1_km_embedding</span><span class="p">,</span> <span class="n">nodestr_l1_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
-<span class="n">nodestr_l1_km</span><span class="p">,</span> <span class="n">nodestr_l1_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodestr_l1_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l1_km_pred</span><span class="p">)</span>
+<span class="n">nodedeg_l2_km_embedding</span><span class="p">,</span> <span class="n">nodedeg_l2_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim_l2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">nodedeg_l2_km</span><span class="p">,</span> <span class="n">nodedeg_l2_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodedeg_l2_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l2_km_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
-<span class="n">nodestr_l1_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l1_km_pred</span><span class="p">)</span>
-<span class="n">nodestr_l1_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l1_km_pred</span><span class="p">)</span>
+<span class="n">nodedeg_l2_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l2_km_pred</span><span class="p">)</span>
+<span class="n">nodedeg_l2_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_l2_km_pred</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodestr_l1_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l1_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodedeg_l2_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodedeg_l2_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodestr_l1_km</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodedeg_l2_km</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.84375
-ARI: 0.6558689717925387
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.27555555555555555
+ARI: 0.013435423908471
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
@@ -1737,29 +1799,29 @@ ARI: 0.6558689717925387
 </div>
 </div>
 </div>
-<div class="section" id="id14">
-<h3>Node Strength - L2 Norm<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id13">
+<h3>Node Strength - L1 Norm<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
-<span class="n">nodestr_l2_km_embedding</span><span class="p">,</span> <span class="n">nodestr_l2_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
-<span class="n">nodestr_l2_km</span><span class="p">,</span> <span class="n">nodestr_l2_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodestr_l2_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l2_km_pred</span><span class="p">)</span>
+<span class="n">nodestr_l1_km_embedding</span><span class="p">,</span> <span class="n">nodestr_l1_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">nodestr_l1_km</span><span class="p">,</span> <span class="n">nodestr_l1_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodestr_l1_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l1_km_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
-<span class="n">nodestr_l2_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l2_km_pred</span><span class="p">)</span>
-<span class="n">nodestr_l2_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l2_km_pred</span><span class="p">)</span>
+<span class="n">nodestr_l1_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l1_km_pred</span><span class="p">)</span>
+<span class="n">nodestr_l1_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l1_km_pred</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodestr_l2_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l2_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodestr_l1_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l1_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodestr_l2_km</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodestr_l1_km</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.875
-ARI: 0.7122838944494996
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.23555555555555555
+ARI: 0.0053292145486868005
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
@@ -1769,29 +1831,29 @@ ARI: 0.7122838944494996
 </div>
 </div>
 </div>
-<div class="section" id="edge-weight-l1-norm">
-<h3>Edge Weight - L1 Norm<a class="headerlink" href="#edge-weight-l1-norm" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id14">
+<h3>Node Strength - L2 Norm<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
-<span class="n">edgeweight_l1_km_embedding</span><span class="p">,</span> <span class="n">edgeweight_l1_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
-<span class="n">edgeweight_l1_km</span><span class="p">,</span> <span class="n">edgeweight_l1_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">edgeweight_l1_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l1_km_pred</span><span class="p">)</span>
+<span class="n">nodestr_l2_km_embedding</span><span class="p">,</span> <span class="n">nodestr_l2_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodestr_dissim_l2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">nodestr_l2_km</span><span class="p">,</span> <span class="n">nodestr_l2_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodestr_l2_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l2_km_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
-<span class="n">edgeweight_l1_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l1_km_pred</span><span class="p">)</span>
-<span class="n">edgeweight_l1_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l1_km_pred</span><span class="p">)</span>
+<span class="n">nodestr_l2_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l2_km_pred</span><span class="p">)</span>
+<span class="n">nodestr_l2_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nodestr_l2_km_pred</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">edgeweight_l1_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">edgeweight_l1_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">nodestr_l2_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">nodestr_l2_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">edgeweight_l1_km</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nodestr_l2_km</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.9375
-ARI: 0.8333024290747265
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.2222222222222222
+ARI: -0.0034502157636453245
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
@@ -1801,29 +1863,29 @@ ARI: 0.8333024290747265
 </div>
 </div>
 </div>
-<div class="section" id="edge-weight-l2-norm">
-<h3>Edge Weight - L2 Norm<a class="headerlink" href="#edge-weight-l2-norm" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="edge-weight-l1-norm">
+<h3>Edge Weight - L1 Norm<a class="headerlink" href="#edge-weight-l1-norm" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
-<span class="n">edgeweight_l2_km_embedding</span><span class="p">,</span> <span class="n">edgeweight_l2_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
-<span class="n">edgeweight_l2_km</span><span class="p">,</span> <span class="n">edgeweight_l2_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">edgeweight_l2_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l2_km_pred</span><span class="p">)</span>
+<span class="n">edgeweight_l1_km_embedding</span><span class="p">,</span> <span class="n">edgeweight_l1_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">edgeweight_l1_km</span><span class="p">,</span> <span class="n">edgeweight_l1_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">edgeweight_l1_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l1_km_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
-<span class="n">edgeweight_l2_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l2_km_pred</span><span class="p">)</span>
-<span class="n">edgeweight_l2_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l2_km_pred</span><span class="p">)</span>
+<span class="n">edgeweight_l1_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l1_km_pred</span><span class="p">)</span>
+<span class="n">edgeweight_l1_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l1_km_pred</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">edgeweight_l2_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">edgeweight_l2_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">edgeweight_l1_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">edgeweight_l1_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">edgeweight_l2_km</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">edgeweight_l1_km</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.90625
-ARI: 0.7658006264971439
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.21777777777777776
+ARI: 0.006644004757305964
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
@@ -1833,13 +1895,45 @@ ARI: 0.7658006264971439
 </div>
 </div>
 </div>
+<div class="section" id="edge-weight-l2-norm">
+<h3>Edge Weight - L2 Norm<a class="headerlink" href="#edge-weight-l2-norm" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<span class="n">edgeweight_l2_km_embedding</span><span class="p">,</span> <span class="n">edgeweight_l2_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim_l2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
+<span class="n">edgeweight_l2_km</span><span class="p">,</span> <span class="n">edgeweight_l2_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">edgeweight_l2_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l2_km_pred</span><span class="p">)</span>
+
+<span class="c1"># calculate accuracy and ARI</span>
+<span class="n">edgeweight_l2_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l2_km_pred</span><span class="p">)</span>
+<span class="n">edgeweight_l2_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_l2_km_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">edgeweight_l2_km_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">edgeweight_l2_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot clustering</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">edgeweight_l2_km</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.22666666666666666
+ARI: 0.004377196375962753
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/mami_clustering_71_2.png" src="_images/mami_clustering_71_2.png" />
+</div>
+</div>
+</div>
 <div class="section" id="id15">
 <h3>Omnibus Embedding<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">omni_km_embedding</span><span class="p">,</span> <span class="n">omni_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_omni_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">)</span>
-<span class="n">omni_km</span><span class="p">,</span> <span class="n">omni_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">omni_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">omni_km_pred</span><span class="p">)</span>
+<span class="n">omni_km</span><span class="p">,</span> <span class="n">omni_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">omni_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">omni_km_pred</span><span class="p">)</span>
 
 <span class="c1"># calculate accuracy and ARI</span>
 <span class="n">omni_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">omni_km_pred</span><span class="p">)</span>
@@ -1849,19 +1943,19 @@ ARI: 0.7658006264971439
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ARI: </span><span class="si">{</span><span class="n">omni_km_ari</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># plot clustering</span>
-<span class="n">plot_clustering</span><span class="p">(</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">omni_km</span><span class="p">)</span>
+<span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">omni_km</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.96875
-ARI: 0.9137771184869276
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.23555555555555555
+ARI: 0.0005960765199224942
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_71_2.png" src="_images/mami_clustering_71_2.png" />
+<img alt="_images/mami_clustering_73_2.png" src="_images/mami_clustering_73_2.png" />
 </div>
 </div>
 </div>
@@ -1884,13 +1978,13 @@ ARI: 0.9137771184869276
 
 <span class="c1"># GMM</span>
 <span class="n">random_gm_embedding</span><span class="p">,</span> <span class="n">random_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_random</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">)</span>
-<span class="n">random_gm</span><span class="p">,</span> <span class="n">random_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">random_gm_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_gm_pred</span><span class="p">)</span>
+<span class="n">random_gm</span><span class="p">,</span> <span class="n">random_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">random_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_gm_pred</span><span class="p">)</span>
 <span class="n">random_gm_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">random_gm_pred</span><span class="p">)</span>
 <span class="n">random_gm_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">random_gm_pred</span><span class="p">)</span>
 
 <span class="c1"># K-Means</span>
 <span class="n">random_km_embedding</span><span class="p">,</span> <span class="n">random_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_random</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;kmeans&quot;</span><span class="p">)</span>
-<span class="n">random_km</span><span class="p">,</span> <span class="n">random_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">random_km_embedding</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_km_pred</span><span class="p">)</span>
+<span class="n">random_km</span><span class="p">,</span> <span class="n">random_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">random_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_km_pred</span><span class="p">)</span>
 <span class="n">random_km_score</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">random_km_pred</span><span class="p">)</span>
 <span class="n">random_km_ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">random_km_pred</span><span class="p">)</span>
 </pre></div>
@@ -1930,7 +2024,7 @@ ARI: 0.9137771184869276
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_clustering_74_0.png" src="_images/mami_clustering_74_0.png" />
+<img alt="_images/mami_clustering_76_0.png" src="_images/mami_clustering_76_0.png" />
 </div>
 </div>
 </div>
