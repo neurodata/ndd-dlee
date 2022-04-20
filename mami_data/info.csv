@@ -1,0 +1,226 @@
+Id,Name,Filename,Order,Superorder,Family
+0,Addax,Addax,Artiodactyla,Laurasiatheria,Bovidae
+1,Agouti,Agouti1,Rodentia,Euarchontoglires,Dasyproctidae
+2,Agouti,Agouti2,Rodentia,Euarchontoglires,Dasyproctidae
+3,Armadillo,Armadillo,Xenarthra,Xenarthra,Chlamyphoridae
+4,Artibeus Jamacien,ArtibeusJamacien,Chiroptera,Laurasiatheria,Phyllostomidae
+5,Asellia,Asellia,Chiroptera,Laurasiatheria,Hipposideridae
+6,Asian Otter,AsianOtter,Carnivora,Laurasiatheria,Mustelidae
+7,Baboon,Baboon1,Primates,Euarchontoglires,Cercopithecidae
+8,Baboon,Baboon2,Primates,Euarchontoglires,Cercopithecidae
+9,Baboon,Baboon3,Primates,Euarchontoglires,Cercopithecidae
+10,Baboon,Baboon4,Primates,Euarchontoglires,Cercopithecidae
+11,Baboon,Baboon5,Primates,Euarchontoglires,Cercopithecidae
+12,Bactrian Deer,BactrianDeer1,Artiodactyla,Laurasiatheria,Cervidae
+13,Bactrian Deer,BactrianDeer2,Artiodactyla,Laurasiatheria,Cervidae
+14,Battongia,Battongia1,Marsupialia,No placenta,Potoroidae
+15,Battongia,Battongia2,Marsupialia,No placenta,Potoroidae
+16,Blanford Fox,BlanfordFox,Carnivora,Laurasiatheria,Canidae
+17,Blind Mole,BlindMole1,Rodentia,Euarchontoglires,Spalacidae
+18,Blind Mole,BlindMole2,Rodentia,Euarchontoglires,Spalacidae
+19,Bottle Nose Dolphin,BottleNoseDolphin,Artiodactyla,Laurasiatheria,Delphinidae
+20,Brown Lemur,BrownLemur1,Primates,Euarchontoglires,Lemuridae
+21,Brown Lemur,BrownLemur2,Primates,Euarchontoglires,Lemuridae
+22,Brown Lemur,BrownLemur3,Primates,Euarchontoglires,Lemuridae
+23,Capra Nubiana,CapraNubiana1,Artiodactyla,Laurasiatheria,Bovidae
+24,Capra Nubiana,CapraNubiana2,Artiodactyla,Laurasiatheria,Bovidae
+25,Capra Nubiana,CapraNubiana3,Artiodactyla,Laurasiatheria,Bovidae
+26,Capra Nubiana,CapraNubiana4,Artiodactyla,Laurasiatheria,Bovidae
+27,Capuchin,Capuchin1,Primates,Euarchontoglires,Cebidae
+28,Capuchin,Capuchin2,Primates,Euarchontoglires,Cebidae
+29,Capuchin,Capuchin3,Primates,Euarchontoglires,Cebidae
+30,Capybara,Capybara,Rodentia,Euarchontoglires,Caviidae
+31,Caracal,Caracal,Carnivora,Laurasiatheria,Felidae
+32,Carollia Perspicilatta,CarolliaPerspicilatta1,Chiroptera,Laurasiatheria,Phyllostomidae
+33,Carollia Perspicilatta,CarolliaPerspicilatta2,Chiroptera,Laurasiatheria,Phyllostomidae
+34,Cat,Cat1,Carnivora,Laurasiatheria,Felidae
+35,Cat,Cat2,Carnivora,Laurasiatheria,Felidae
+36,Cat,Cat3,Carnivora,Laurasiatheria,Felidae
+37,Cat,Cat4,Carnivora,Laurasiatheria,Felidae
+38,Cat,Cat5,Carnivora,Laurasiatheria,Felidae
+39,Cat,Cat6,Carnivora,Laurasiatheria,Felidae
+40,Caucasian Squirrel,CaucasianSquirrel,Rodentia,Euarchontoglires,Sciuridae
+41,Chaerephon Plicata,ChaerephonPlicata,Chiroptera,Laurasiatheria,Molossidae
+42,Chimpanzee,Chimpanzee,Primates,Euarchontoglires,Hominidae
+43,Chinchila,Chinchila,Rodentia,Euarchontoglires,Chinchillidae
+44,Chital,Chital1,Artiodactyla,Laurasiatheria,Cervidae
+45,Chital,Chital2,Artiodactyla,Laurasiatheria,Cervidae
+46,Colobus,Colobus2,Primates,Euarchontoglires,Cercopithecidae
+47,Common Fox,CommonFox,Carnivora,Laurasiatheria,Canidae
+48,Common Hedge Hog,CommonHedgeHog1,Eulipotyphla,Laurasiatheria,Erinaceidae
+49,Common Hedge Hog,CommonHedgeHog2,Eulipotyphla,Laurasiatheria,Erinaceidae
+50,Common Hedge Hog,CommonHedgeHog3,Eulipotyphla,Laurasiatheria,Erinaceidae
+51,Common Tree Shrew,CommonTreeShrew,Scandentia,Euarchontoglires,Tupaiidae
+52,Cow,Cow1,Artiodactyla,Laurasiatheria,Bovidae
+53,Coypu,Coypu,Rodentia,Euarchontoglires,Echimyidae
+54,Cynopterus,Cynopterus,Chiroptera,Laurasiatheria,Pteropodidae
+55,Deer,Deer1,Artiodactyla,Laurasiatheria,Cervidae
+56,Deer,Deer2,Artiodactyla,Laurasiatheria,Cervidae
+57,Dego,Dego,Rodentia,Euarchontoglires,Octodontidae
+58,Dik Dik,DikDik,Artiodactyla,Laurasiatheria,Bovidae
+59,Dog,Dog1,Carnivora,Laurasiatheria,Canidae
+60,Dog,Dog2,Carnivora,Laurasiatheria,Canidae
+61,Dog,Dog3,Carnivora,Laurasiatheria,Canidae
+62,Dog,Dog4,Carnivora,Laurasiatheria,Canidae
+63,Dog,Dog5,Carnivora,Laurasiatheria,Canidae
+64,Dog,Dog6,Carnivora,Laurasiatheria,Canidae
+65,Dog,Dog7,Carnivora,Laurasiatheria,Canidae
+66,Donkey,Donkey,Perissodactyla,Laurasiatheria,Equidae
+67,Eonycteris,Eonycteris1,Chiroptera,Laurasiatheria,Pteropodidae
+68,Eonycteris,Eonycteris2,Chiroptera,Laurasiatheria,Pteropodidae
+69,Eptesicus,Eptesicus1,Chiroptera,Laurasiatheria,Vespertilionidae
+70,Eptesicus,Eptesicus2,Chiroptera,Laurasiatheria,Vespertilionidae
+71,Fallow Deer,FallowDeer1,Artiodactyla,Laurasiatheria,Cervidae
+72,Fallow Deer,FallowDeer2,Artiodactyla,Laurasiatheria,Cervidae
+73,Fallow Deer,FallowDeer3,Artiodactyla,Laurasiatheria,Cervidae
+74,Fennek Fox,FennekFox,Carnivora,Laurasiatheria,Canidae
+75,Ferret,Ferret1,Carnivora,Laurasiatheria,Mustelidae
+76,Ferret,Ferret2,Carnivora,Laurasiatheria,Mustelidae
+77,Ferret,Ferret3,Carnivora,Laurasiatheria,Mustelidae
+78,Ferret,Ferret4,Carnivora,Laurasiatheria,Mustelidae
+79,Fruit Bat,FruitBat1,Chiroptera,Laurasiatheria,Pteropodidae
+80,Fruit Bat,FruitBat2,Chiroptera,Laurasiatheria,Pteropodidae
+81,Fruit Bat,FruitBat3,Chiroptera,Laurasiatheria,Pteropodidae
+82,Fruit Bat,FruitBat4,Chiroptera,Laurasiatheria,Pteropodidae
+83,Fruit Bat,FruitBat5,Chiroptera,Laurasiatheria,Pteropodidae
+84,Gerbil,Gerbil,Rodentia,Euarchontoglires,Muridae
+85,Giraffe,Giraffe1,Artiodactyla,Laurasiatheria,Giraffidae
+86,Giraffe,Giraffe2,Artiodactyla,Laurasiatheria,Giraffidae
+87,Giraffe,Giraffe3,Artiodactyla,Laurasiatheria,Giraffidae
+88,Goat,Goat1,Artiodactyla,Laurasiatheria,Bovidae
+89,Goat,Goat2,Artiodactyla,Laurasiatheria,Bovidae
+90,Goat,Goat3,Artiodactyla,Laurasiatheria,Bovidae
+91,Golden Spiny Mouse,GoldenSpinyMouse,Rodentia,Euarchontoglires,Muridae
+92,Gorilla,Gorilla,Primates,Euarchontoglires,Hominidae
+93,Gray Kangaroo,GrayKangaroo1,Marsupialia,No placenta,Macropodidae
+94,Gray Kangaroo,GrayKangaroo3,Marsupialia,No placenta,Macropodidae
+95,Green Monkey,GreenMonkey1,Primates,Euarchontoglires,Cercopithecidae
+96,Green Monkey,GreenMonkey2,Primates,Euarchontoglires,Cercopithecidae
+97,Hare,Hare,Lagomorpha,Euarchontoglires,Leporidae
+98,Himalian Bear,HimalianBear,Carnivora,Laurasiatheria,Ursidae
+99,Hipp Armiger,HippArmiger,Chiroptera,Laurasiatheria,Hipposideridae
+100,Honey Badger,HoneyBadger,Carnivora,Laurasiatheria,Mustelidae
+101,Horse,Horse1,Perissodactyla,Laurasiatheria,Equidae
+102,Horse,Horse2,Perissodactyla,Laurasiatheria,Equidae
+103,Howler Monkey,HowlerMonkey1,Primates,Euarchontoglires,Atelidae
+104,Howler Monkey,HowlerMonkey2,Primates,Euarchontoglires,Atelidae
+105,Hyaena,Hyaena1,Carnivora,Laurasiatheria,Hyaenidae
+106,Hyaena,Hyaena2,Carnivora,Laurasiatheria,Hyaenidae
+107,Hyrax,Hyrax1,Hyracoidea,Afrotheria,Procaviidae
+108,Hyrax,Hyrax2,Hyracoidea,Afrotheria,Procaviidae
+109,Ind Hog Deer,IndHogDeer,Artiodactyla,Laurasiatheria,Cervidae
+110,Jungle Cat,JungleCat,Carnivora,Laurasiatheria,Felidae
+111,Koala,Koala,Marsupialia,No placenta,Phascolarctidae
+112,Lama,Lama1,Artiodactyla,Laurasiatheria,Camelidae
+113,Lama,Lama2,Artiodactyla,Laurasiatheria,Camelidae
+114,Lemur Catta,LemurCatta1,Primates,Euarchontoglires,Lemuridae
+115,Lemur Catta,LemurCatta2,Primates,Euarchontoglires,Lemuridae
+116,Leopard,Leopard1,Carnivora,Laurasiatheria,Felidae
+117,Leopard,Leopard2,Carnivora,Laurasiatheria,Felidae
+118,Lycaon,Lycaon1,Carnivora,Laurasiatheria,Canidae
+119,Lycaon,Lycaon2,Carnivora,Laurasiatheria,Canidae
+120,Lycaon,Lycaon3,Carnivora,Laurasiatheria,Canidae
+121,Macaque,Macaque1,Primates,Euarchontoglires,Cercopithecidae
+122,Macaque,Macaque10,Primates,Euarchontoglires,Cercopithecidae
+123,Macaque,Macaque2,Primates,Euarchontoglires,Cercopithecidae
+124,Macaque,Macaque3,Primates,Euarchontoglires,Cercopithecidae
+125,Macaque,Macaque4,Primates,Euarchontoglires,Cercopithecidae
+126,Macaque,Macaque5,Primates,Euarchontoglires,Cercopithecidae
+127,Macaque,Macaque7,Primates,Euarchontoglires,Cercopithecidae
+128,Macaque,Macaque9,Primates,Euarchontoglires,Cercopithecidae
+129,Macaque Black,MacaqueBlack,Primates,Euarchontoglires,Cercopithecidae
+130,Macaque Lion Tail,MacaqueLionTail,Primates,Euarchontoglires,Cercopithecidae
+131,Macaque P T,MacaquePT,Primates,Euarchontoglires,Cercopithecidae
+132,Mandrill,Mandrill1,Primates,Euarchontoglires,Cercopithecidae
+133,Mandrill,Mandrill2,Primates,Euarchontoglires,Cercopithecidae
+134,Mangebi,Mangebi,Primates,Euarchontoglires,Cercopithecidae
+135,Mara,Mara,Rodentia,Euarchontoglires,Caviidae
+136,Marmoset,Marmoset,Primates,Euarchontoglires,Callitrichidae
+137,Meerkat,Meerkat1,Carnivora,Laurasiatheria,Herpestidae
+138,Meerkat,Meerkat2,Carnivora,Laurasiatheria,Herpestidae
+139,Meerkat,Meerkat3,Carnivora,Laurasiatheria,Herpestidae
+140,Meerkat,Meerkat4,Carnivora,Laurasiatheria,Herpestidae
+141,Meerkat,Meerkat5,Carnivora,Laurasiatheria,Herpestidae
+142,Merion,Merion,Rodentia,Euarchontoglires,Muridae
+143,Miniopterus Schreibersii,MiniopterusSchreibersii1,Chiroptera,Laurasiatheria,Miniopteridae
+144,Mongoose,Mongoose,Carnivora,Laurasiatheria,Herpestidae
+145,Mouse,Mouse,Rodentia,Euarchontoglires,Muridae
+146,Myotis Emargenitus,MyotisEmargenitus,Chiroptera,Laurasiatheria,Vespertilionidae
+147,Myotis Myotis,MyotisMyotis,Chiroptera,Laurasiatheria,Vespertilionidae
+148,Myotis Vivesi,MyotisVivesi1,Chiroptera,Laurasiatheria,Vespertilionidae
+149,Nasua,Nasua1,Carnivora,Laurasiatheria,Procyonidae
+150,Nasua,Nasua2,Carnivora,Laurasiatheria,Procyonidae
+151,Nasua,Nasua3,Carnivora,Laurasiatheria,Procyonidae
+152,Onager,Onager,Perissodactyla,Laurasiatheria,Equidae
+153,Orangutan,Orangutan1,Primates,Euarchontoglires,Hominidae
+154,Orangutan,Orangutan2,Primates,Euarchontoglires,Hominidae
+155,Orangutan,Orangutan3,Primates,Euarchontoglires,Hominidae
+156,Oryx,Oryx1,Artiodactyla,Laurasiatheria,Bovidae
+157,Oryx,Oryx2,Artiodactyla,Laurasiatheria,Bovidae
+158,Oryx,Oryx3,Artiodactyla,Laurasiatheria,Bovidae
+159,Otter,Otter1,Carnivora,Laurasiatheria,Mustelidae
+160,Otter,Otter2,Carnivora,Laurasiatheria,Mustelidae
+161,Otter,Otter3,Carnivora,Laurasiatheria,Mustelidae
+162,Palm Squirrel,PalmSquirrel,Rodentia,Euarchontoglires,Sciuridae
+163,Pecari,Pecari1,Artiodactyla,Laurasiatheria,Tayassuidae
+164,Pecari,Pecari2,Artiodactyla,Laurasiatheria,Tayassuidae
+165,Pkuhlii,Pkuhlii2,Chiroptera,Laurasiatheria,Vespertilionidae
+166,Pkuhlii,Pkuhlii3,Chiroptera,Laurasiatheria,Vespertilionidae
+167,Porcine,Porcine1,Artiodactyla,Laurasiatheria,Suidae
+168,Porcine,Porcine2,Artiodactyla,Laurasiatheria,Suidae
+169,Porcupine,Porcupine1,Rodentia,Euarchontoglires,Hystricidae
+170,Porcupine,Porcupine2,Rodentia,Euarchontoglires,Hystricidae
+171,Prairie Dog,PrairieDog,Rodentia,Euarchontoglires,Sciuridae
+172,Pteropus Lylei,PteropusLylei,Chiroptera,Laurasiatheria,Pteropodidae
+173,Rabbit,Rabbit,Lagomorpha,Euarchontoglires,Leporidae
+174,Rat,Rat1,Rodentia,Euarchontoglires,Muridae
+175,Rat,Rat2,Rodentia,Euarchontoglires,Muridae
+176,Rat,Rat3,Rodentia,Euarchontoglires,Muridae
+177,Rat,Rat4,Rodentia,Euarchontoglires,Muridae
+178,Rat,Rat5,Rodentia,Euarchontoglires,Muridae
+179,Rat,Rat6,Rodentia,Euarchontoglires,Muridae
+180,Red Kangaroo,RedKangaroo1,Marsupialia,No placenta,Macropodidae
+181,Red Kangaroo,RedKangaroo2,Marsupialia,No placenta,Macropodidae
+182,Red Kangaroo,RedKangaroo3,Marsupialia,No placenta,Macropodidae
+183,Red Neck Wallaby,RedNeckWallaby,Marsupialia,No placenta,Macropodidae
+184,Red Panda,RedPanda,Carnivora,Laurasiatheria,Ailuridae
+185,Rhinolophus,Rhinolophus,Chiroptera,Laurasiatheria,Rhinolophidae
+186,Rhinopoma,Rhinopoma,Chiroptera,Laurasiatheria,Rhinopomatidae
+187,Sand Cat,SandCat1,Carnivora,Laurasiatheria,Felidae
+188,Sand Cat,SandCat2,Carnivora,Laurasiatheria,Felidae
+189,Sand Hedge Hog,SandHedgeHog,Eulipotyphla,Laurasiatheria,Erinaceidae
+190,Sheep,Sheep,Artiodactyla,Laurasiatheria,Bovidae
+191,Siamang,Siamang1,Primates,Euarchontoglires,Hylobatidae
+192,Skinny Pig,SkinnyPig,Rodentia,Euarchontoglires,Caviidae
+193,Spiny Mouse,SpinyMouse,Rodentia,Euarchontoglires,Muridae
+194,Squirrel Monkey,SquirrelMonkey1,Primates,Euarchontoglires,Cebidae
+195,Stripped Dolphin,StrippedDolphin1,Artiodactyla,Laurasiatheria,Delphinidae
+196,Stripped Dolphin,StrippedDolphin2,Artiodactyla,Laurasiatheria,Delphinidae
+197,Sturnira Lilium,SturniraLilium,Chiroptera,Laurasiatheria,Phyllostomidae
+198,Tadarida Teniotis,TadaridaTeniotis1,Chiroptera,Laurasiatheria,Molossidae
+199,Tadarida Teniotis,TadaridaTeniotis2,Chiroptera,Laurasiatheria,Molossidae
+200,Tamarin Cotton Top,TamarinCottonTop1,Primates,Euarchontoglires,Callitrichidae
+201,Tamarin Cotton Top,TamarinCottonTop2,Primates,Euarchontoglires,Callitrichidae
+202,Tamarin Emperor,TamarinEmperor1,Primates,Euarchontoglires,Callitrichidae
+203,Tamarin Emperor,TamarinEmperor2,Primates,Euarchontoglires,Callitrichidae
+204,Tamarin Golden Hands,TamarinGoldenHands,Primates,Euarchontoglires,Callitrichidae
+205,Tapir,Tapir1,Perissodactyla,Laurasiatheria,Tapiridae
+206,Tapir,Tapir2,Perissodactyla,Laurasiatheria,Tapiridae
+207,Thomson Gazelle,ThomsonGazelle,Artiodactyla,Laurasiatheria,Bovidae
+208,Tiger,Tiger,Carnivora,Laurasiatheria,Felidae
+209,Vampire Bat,VampireBat1,Chiroptera,Laurasiatheria,Phyllostomidae
+210,Vampire Bat,VampireBat2,Chiroptera,Laurasiatheria,Phyllostomidae
+211,Vervet,Vervet,Primates,Euarchontoglires,Cercopithecidae
+212,Vole,Vole,Rodentia,Euarchontoglires,Cricetidae
+213,Wild Boar,WildBoar1,Artiodactyla,Laurasiatheria,Suidae
+214,Wild Boar,WildBoar2,Artiodactyla,Laurasiatheria,Suidae
+215,Wilderbeest,Wilderbeest,Artiodactyla,Laurasiatheria,Bovidae
+216,Wild Rabbit,WildRabbit1,Lagomorpha,Euarchontoglires,Leporidae
+217,Wild Rabbit,WildRabbit2,Lagomorpha,Euarchontoglires,Leporidae
+218,Wild Rabbit,WildRabbit3,Lagomorpha,Euarchontoglires,Leporidae
+219,Wild Rat,WildRat1,Rodentia,Euarchontoglires,Muridae
+220,Wild Rat,WildRat2,Rodentia,Euarchontoglires,Muridae
+221,Wolf,Wolf1,Carnivora,Laurasiatheria,Canidae
+222,Wolf,Wolf2,Carnivora,Laurasiatheria,Canidae
+223,Wolf,Wolf3,Carnivora,Laurasiatheria,Canidae
+224,Zebra,Zebra,Perissodactyla,Laurasiatheria,Equidae
