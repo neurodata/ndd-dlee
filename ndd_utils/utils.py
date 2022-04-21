@@ -2,6 +2,7 @@ import numpy as np
 from sklearn.cluster import AgglomerativeClustering, KMeans
 from sklearn.mixture import GaussianMixture
 from graspologic.embed import ClassicalMDS
+from graspologic.utils import pass_to_ranks
 
 
 def calculate_dissim(graphs, method="density", norm=None, normalize=True):
@@ -16,22 +17,24 @@ def calculate_dissim(graphs, method="density", norm=None, normalize=True):
         num_nodes_possible = num_nodes ** 2 - num_nodes
 
         metric = np.zeros(len(graphs))
-        for i in range(len(graphs)):
-            num_edges = np.count_nonzero(graphs[i])
+        for i, graph in enumerate(graphs):
+            num_edges = np.count_nonzero(graph)
             metric[i] = num_edges / num_nodes_possible
     
     elif method == "avgedgeweight":
         glob = True
         metric = np.zeros(len(graphs))
-        for i in range(len(graphs)):
-            num_edges = np.count_nonzero(graphs[i])
-            metric[i] = np.sum(graphs[i]) / num_edges
+        for i, graph in enumerate(graphs):
+            graph = pass_to_ranks(graph)
+            num_edges = np.count_nonzero(graph)
+            metric[i] = np.sum(graph) / num_edges
     
     elif method == "avgadjmatrix":
         glob = True
         metric = np.zeros(len(graphs))
-        for i in range(len(graphs)):
-            metric[i] = np.average(graphs[i])   
+        for i, graph in enumerate(graphs):
+            graph = pass_to_ranks(graph)
+            metric[i] = np.average(graph)   
 
     elif method == "degree":
         node = True
