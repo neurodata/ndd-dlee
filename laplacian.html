@@ -101,10 +101,22 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Matched Dataset
+  Introduction
  </span>
 </p>
 <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="data_description.html">
+   Datasets
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="mice_discriminability.html">
    Comparing Discriminability
@@ -115,13 +127,6 @@ const thebe_selector_output = ".output, .cell_output"
    Clustering Dissimilarity Matrices
   </a>
  </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unmatched Dataset
- </span>
-</p>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="mami_discriminability.html">
    Comparing Discriminability
@@ -132,13 +137,6 @@ const thebe_selector_output = ".output, .cell_output"
    Clustering Dissimilarity Matrices
   </a>
  </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Working on Laplacian
- </span>
-</p>
-<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Working on Laplacian Kernel
@@ -441,8 +439,8 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">graph</span> <span class="o">=</span> <span class="n">pass_to_ranks</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
 
     <span class="c1"># find normalized laplacian of each adjacency matrix</span>
-    <span class="c1">#lap = to_laplacian(graph, &#39;I-DAD&#39;)</span>
-    <span class="n">lap</span> <span class="o">=</span> <span class="n">csgraph</span><span class="o">.</span><span class="n">laplacian</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">lap</span> <span class="o">=</span> <span class="n">to_laplacian</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;I-DAD&#39;</span><span class="p">)</span>
+    <span class="c1">#lap = csgraph.laplacian(graph, normed=True)</span>
     <span class="c1">#diags = np.sum(graph, axis=1)</span>
     <span class="c1">#deg_mat = np.diag(diags)</span>
     <span class="c1">#lap = np.eye(np.shape(graphs)[1]) - np.matmul(np.linalg.inv(deg_mat), graph)</span>
@@ -728,10 +726,118 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7081473214285714
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6702008928571429
 </pre></div>
 </div>
 <img alt="_images/laplacian_12_1.png" src="_images/laplacian_12_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ws</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1.13293720e-16  6.06834243e-01  8.19185330e-01 ...  1.09864722e+00
+   1.11427659e+00  1.14425326e+00]
+ [-5.22548020e-17  5.60308328e-01  8.07844353e-01 ...  1.11770137e+00
+   1.12472305e+00  1.16144067e+00]
+ [ 1.47565174e-17  6.30717558e-01  8.27135367e-01 ...  1.11424369e+00
+   1.11587766e+00  1.14401116e+00]
+ ...
+ [-9.12427028e-17  5.58108633e-01  7.20964694e-01 ...  1.11149436e+00
+   1.12171935e+00  1.14026108e+00]
+ [-1.09968223e-16  4.90486885e-01  6.85365884e-01 ...  1.12400294e+00
+   1.13165234e+00  1.14975451e+00]
+ [-5.43832129e-17  6.38620630e-01  7.59396744e-01 ...  1.08944016e+00
+   1.10441809e+00  1.13662051e+00]]
+[-5.43832129e-17  6.38620630e-01  7.59396744e-01  8.11792008e-01
+  8.62017901e-01  8.68884606e-01  8.99148609e-01  9.12593824e-01
+  9.21930982e-01  9.24313360e-01  9.30077501e-01  9.38387950e-01
+  9.41521707e-01  9.43026349e-01  9.45078927e-01  9.48822262e-01
+  9.51554773e-01  9.53883611e-01  9.57101976e-01  9.57313597e-01
+  9.59785897e-01  9.61763960e-01  9.62517134e-01  9.63670684e-01
+  9.64285791e-01  9.65367523e-01  9.66715233e-01  9.69004910e-01
+  9.69268827e-01  9.69433971e-01  9.70170381e-01  9.70944198e-01
+  9.71252148e-01  9.72726983e-01  9.72950819e-01  9.73101012e-01
+  9.73851887e-01  9.74004248e-01  9.74827063e-01  9.75431177e-01
+  9.76262677e-01  9.76924816e-01  9.77139988e-01  9.77833034e-01
+  9.78297891e-01  9.78838516e-01  9.79094531e-01  9.79671936e-01
+  9.79834333e-01  9.80418370e-01  9.80488625e-01  9.81123888e-01
+  9.81359973e-01  9.81507287e-01  9.81847725e-01  9.82983741e-01
+  9.83484665e-01  9.83808293e-01  9.84373974e-01  9.84473240e-01
+  9.84526226e-01  9.85132736e-01  9.85174101e-01  9.85913083e-01
+  9.86142431e-01  9.86656654e-01  9.86823467e-01  9.87157941e-01
+  9.87305130e-01  9.87458822e-01  9.87884257e-01  9.88210833e-01
+  9.88356842e-01  9.88796632e-01  9.88922263e-01  9.89142825e-01
+  9.89807713e-01  9.89934022e-01  9.90357246e-01  9.90786761e-01
+  9.90839549e-01  9.91007220e-01  9.91428281e-01  9.91660408e-01
+  9.92046060e-01  9.92121977e-01  9.92433390e-01  9.92768180e-01
+  9.92823505e-01  9.93146269e-01  9.93274047e-01  9.93332611e-01
+  9.93706842e-01  9.93795730e-01  9.94139914e-01  9.94457139e-01
+  9.94622237e-01  9.94739963e-01  9.95151412e-01  9.95242072e-01
+  9.95375991e-01  9.95631529e-01  9.95936278e-01  9.96195991e-01
+  9.96349806e-01  9.96380492e-01  9.96725499e-01  9.96840788e-01
+  9.96997873e-01  9.97177287e-01  9.97394224e-01  9.97606140e-01
+  9.97751828e-01  9.97899994e-01  9.98002336e-01  9.98224419e-01
+  9.98518652e-01  9.98624913e-01  9.99131110e-01  9.99142120e-01
+  9.99317919e-01  9.99449442e-01  9.99492334e-01  9.99574932e-01
+  9.99699776e-01  9.99968915e-01  1.00010893e+00  1.00013883e+00
+  1.00019880e+00  1.00031163e+00  1.00049233e+00  1.00059190e+00
+  1.00075249e+00  1.00094111e+00  1.00126274e+00  1.00126463e+00
+  1.00136651e+00  1.00149104e+00  1.00164908e+00  1.00178589e+00
+  1.00180487e+00  1.00203173e+00  1.00204419e+00  1.00214037e+00
+  1.00221275e+00  1.00225648e+00  1.00237647e+00  1.00246276e+00
+  1.00249468e+00  1.00261095e+00  1.00271845e+00  1.00280012e+00
+  1.00289329e+00  1.00294374e+00  1.00296689e+00  1.00302034e+00
+  1.00314858e+00  1.00320382e+00  1.00323043e+00  1.00325727e+00
+  1.00331555e+00  1.00334635e+00  1.00339575e+00  1.00343957e+00
+  1.00346880e+00  1.00359462e+00  1.00362558e+00  1.00366804e+00
+  1.00371208e+00  1.00378770e+00  1.00379646e+00  1.00391269e+00
+  1.00398874e+00  1.00408402e+00  1.00424070e+00  1.00435816e+00
+  1.00442676e+00  1.00448830e+00  1.00465697e+00  1.00479966e+00
+  1.00496155e+00  1.00497127e+00  1.00524998e+00  1.00540272e+00
+  1.00544264e+00  1.00549493e+00  1.00567377e+00  1.00569156e+00
+  1.00586700e+00  1.00595074e+00  1.00604869e+00  1.00629337e+00
+  1.00639670e+00  1.00661677e+00  1.00667859e+00  1.00687213e+00
+  1.00706294e+00  1.00735582e+00  1.00747558e+00  1.00771387e+00
+  1.00795811e+00  1.00812443e+00  1.00816540e+00  1.00853288e+00
+  1.00864088e+00  1.00875489e+00  1.00908329e+00  1.00936778e+00
+  1.00967191e+00  1.00974136e+00  1.00986367e+00  1.00999983e+00
+  1.01013645e+00  1.01041042e+00  1.01051360e+00  1.01080029e+00
+  1.01088131e+00  1.01137412e+00  1.01151955e+00  1.01156316e+00
+  1.01187316e+00  1.01210144e+00  1.01224146e+00  1.01262274e+00
+  1.01270493e+00  1.01289087e+00  1.01316416e+00  1.01345750e+00
+  1.01363197e+00  1.01385537e+00  1.01408587e+00  1.01430571e+00
+  1.01436047e+00  1.01458592e+00  1.01484171e+00  1.01499720e+00
+  1.01521731e+00  1.01540624e+00  1.01564333e+00  1.01596281e+00
+  1.01636478e+00  1.01639528e+00  1.01667158e+00  1.01692037e+00
+  1.01770459e+00  1.01788319e+00  1.01804783e+00  1.01841490e+00
+  1.01843089e+00  1.01891345e+00  1.01915007e+00  1.01932615e+00
+  1.01970735e+00  1.02027822e+00  1.02073012e+00  1.02103954e+00
+  1.02126360e+00  1.02158603e+00  1.02162847e+00  1.02200922e+00
+  1.02241103e+00  1.02255472e+00  1.02328283e+00  1.02369316e+00
+  1.02406228e+00  1.02421156e+00  1.02466467e+00  1.02492782e+00
+  1.02530110e+00  1.02554709e+00  1.02586874e+00  1.02617428e+00
+  1.02675605e+00  1.02702618e+00  1.02732629e+00  1.02763987e+00
+  1.02832026e+00  1.02886290e+00  1.02934795e+00  1.02961800e+00
+  1.02975929e+00  1.03034532e+00  1.03131108e+00  1.03147721e+00
+  1.03191449e+00  1.03255391e+00  1.03311385e+00  1.03432740e+00
+  1.03501521e+00  1.03573064e+00  1.03624466e+00  1.03666001e+00
+  1.03717061e+00  1.03787106e+00  1.03817749e+00  1.03920477e+00
+  1.03950262e+00  1.04020157e+00  1.04042987e+00  1.04177917e+00
+  1.04242605e+00  1.04355120e+00  1.04394374e+00  1.04485276e+00
+  1.04568437e+00  1.04577384e+00  1.04652196e+00  1.04766627e+00
+  1.04870674e+00  1.04985897e+00  1.05142084e+00  1.05224204e+00
+  1.05362849e+00  1.05486955e+00  1.05531653e+00  1.05620305e+00
+  1.05676796e+00  1.05994899e+00  1.06107485e+00  1.06418134e+00
+  1.06500726e+00  1.06714937e+00  1.07072740e+00  1.07129639e+00
+  1.07448766e+00  1.07770554e+00  1.08043824e+00  1.08285383e+00
+  1.08606265e+00  1.08944016e+00  1.10441809e+00  1.13662051e+00]
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -794,7 +900,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6856398809523808
 </pre></div>
 </div>
-<img alt="_images/laplacian_14_1.png" src="_images/laplacian_14_1.png" />
+<img alt="_images/laplacian_15_1.png" src="_images/laplacian_15_1.png" />
 </div>
 </div>
 </div>
@@ -852,7 +958,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7743675595238095
 </pre></div>
 </div>
-<img alt="_images/laplacian_16_1.png" src="_images/laplacian_16_1.png" />
+<img alt="_images/laplacian_17_1.png" src="_images/laplacian_17_1.png" />
 </div>
 </div>
 </div>
@@ -875,7 +981,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Eigenvalue&#39;)
 </pre></div>
 </div>
-<img alt="_images/laplacian_18_1.png" src="_images/laplacian_18_1.png" />
+<img alt="_images/laplacian_19_1.png" src="_images/laplacian_19_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -893,7 +999,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Eigenvalue&#39;)
 </pre></div>
 </div>
-<img alt="_images/laplacian_19_1.png" src="_images/laplacian_19_1.png" />
+<img alt="_images/laplacian_20_1.png" src="_images/laplacian_20_1.png" />
 </div>
 </div>
 </div>
@@ -934,7 +1040,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa61857dbe0&gt;
 </pre></div>
 </div>
-<img alt="_images/laplacian_22_1.png" src="_images/laplacian_22_1.png" />
+<img alt="_images/laplacian_23_1.png" src="_images/laplacian_23_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -955,7 +1061,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa6493e7a90&gt;
 </pre></div>
 </div>
-<img alt="_images/laplacian_23_1.png" src="_images/laplacian_23_1.png" />
+<img alt="_images/laplacian_24_1.png" src="_images/laplacian_24_1.png" />
 </div>
 </div>
 </div>
@@ -998,7 +1104,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fdc07de98e0&gt;]
 </pre></div>
 </div>
-<img alt="_images/laplacian_25_2.png" src="_images/laplacian_25_2.png" />
+<img alt="_images/laplacian_26_2.png" src="_images/laplacian_26_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1017,7 +1123,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fad6bc064f0&gt;]
 </pre></div>
 </div>
-<img alt="_images/laplacian_26_1.png" src="_images/laplacian_26_1.png" />
+<img alt="_images/laplacian_27_1.png" src="_images/laplacian_27_1.png" />
 </div>
 </div>
 </div>
