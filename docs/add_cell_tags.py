@@ -4,6 +4,7 @@ import numpy as np
 
 # Collect a list of all notebooks in the content folder
 notebooks = glob("./*.ipynb", recursive=True)
+print(notebooks)
 
 # Search through each notebook and add hide-input tag
 for ipath in notebooks:
