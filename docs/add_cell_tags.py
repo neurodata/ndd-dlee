@@ -3,7 +3,7 @@ from glob import glob
 import numpy as np
 
 # Collect a list of all notebooks in the content folder
-notebooks = glob("ndd-dlee/docs/**/*.ipynb", recursive=True)
+notebooks = glob("./*.ipynb", recursive=True)
 
 # Search through each notebook and add hide-input tag
 for ipath in notebooks:
