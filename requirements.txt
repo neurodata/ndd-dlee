@@ -1,7 +1,9 @@
 jupyter-book
+seaborn
 matplotlib
 numpy
-networkx
-seaborn
 graspologic
 grakel
+sklearn
+hyppo
+pandas

@@ -4,15 +4,14 @@
 format: jb-book
 root: intro
 parts:
-- caption: Matched Dataset
+- caption: Introduction
+  chapters:
+  - file: data_description
+- caption: Appendix
   chapters:
   - file: mice_discriminability
   - file: mice_clustering
-- caption: Unmatched Dataset
-  chapters:
   - file: mami_discriminability
   - file: mami_clustering
-- caption: Working on Laplacian
-  chapters:
   - file: laplacian
 
