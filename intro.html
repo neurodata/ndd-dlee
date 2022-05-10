@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome &#8212; NDD II - Investigating Kernels</title>
+    <title>Abstract &#8212; NDD II - Investigating Kernels</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -95,7 +95,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav">
  <li class="toctree-l1 current">
   <a class="reference internal" href="#">
-   Welcome
+   Abstract
   </a>
  </li>
 </ul>
@@ -108,6 +108,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="data_description.html">
    Datasets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="kernels.html">
+   Kernels
   </a>
  </li>
 </ul>
@@ -231,7 +236,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Welcome</h1>
+                <h1>Abstract</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -242,10 +247,9 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="welcome">
-<h1>Welcome<a class="headerlink" href="#welcome" title="Permalink to this headline">¶</a></h1>
-<p>This is a book that summarizes how simple kernels can be used to measure dissimilarities between networks.</p>
-<p>TODO: Add introduction to graph theory and kernels.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="abstract">
+<h1>Abstract<a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h1>
+<p>Networks are a very effective way of representing complex data structures such as neural connectomes. When working with a large collection of networks, graphs kernels measure how similar or dissimilar one graph is to another, which can help us with clustering disorganized data points into a lower dimensional structure that we can visualize and understand. There are many complex graph kernels that have been developed, but they can be computationally expensive when working with large datasets. Here we build ”simple” kernels that require much less computational power and provide an overview of their performances on weighted matched and unmatched networks. We use the following network properties for the kernels: density, average edge weight, average of the adjacency matrix, node degrees, node strengths, and edge weights. We first calculate the discriminability of each kernel by generating a dissimilarity matrix, then we evaluate the performances of agglomerative clustering, kmeans clustering, and gaussian mixture model clustering on each dissimilarity matrix using the adjusted rand index (ARI). We compare the results to those based on the distance between their Omnibus embeddings (for matched networks), the difference between their latent distribution test statistics (for unmatched networks), and the Laplacian spectral distance (for both matched and unmatched networks) as metrics for comparison against well-established and more complex kernels. We find that overall, these kernels perform much better with matched networks than with unmatched networks. Within the matched networks, kernels based on the known matching of nodes (edge weights, node strengths, node degrees, and Omnibus embeddings) generally show higher discriminability and ARI values than kernels based on global properties that do not assume any node matching (density, average edge weight, average of the adjacency matrix, and Laplacian spectral distance), with Omnibus embeddings being the highest performing metric. Whereas within unmatched networks, we observe the opposite, with Laplacian spectral distance being the highest performing metric and kernels based on global properties performing better than the other kernels, including the kernel based on the difference between latent distribution test statistics, which suggests that kernel performance may depend more on network properties than kernel complexity. More datasets should be explored to solidfy any identified trends, but these findings suggest that simple kernels can be a much faster yet still relatively effective way of measuring dissimilarity between graphs.</p>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
