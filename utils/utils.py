@@ -33,7 +33,6 @@ def calculate_dissim(graphs, method="density", norm=None, normalize=True):
         glob = True
         metric = np.zeros(len(graphs))
         for i, graph in enumerate(graphs):
-            #graph = pass_to_ranks(graph)
             num_edges = np.count_nonzero(graph)
             metric[i] = np.sum(graph) / num_edges
     
@@ -41,7 +40,6 @@ def calculate_dissim(graphs, method="density", norm=None, normalize=True):
         glob = True
         metric = np.zeros(len(graphs))
         for i, graph in enumerate(graphs):
-            graph = pass_to_ranks(graph)
             metric[i] = np.average(graph)   
 
     elif method == "degree":
@@ -66,20 +64,7 @@ def calculate_dissim(graphs, method="density", norm=None, normalize=True):
         print("Not a valid kernel name.")
     
     dissim_matrix = np.zeros((len(graphs), len(graphs)))
-    """
-    for i in range(len(metric)):
-        for j in range(i, len(metric)):
-            if glob and norm == None:
-                diff = np.abs(metric[i] - metric[j])
-            elif (node or edge) and norm == "l1":
-                diff = np.linalg.norm(metric[i] - metric[j], ord=1)
-            elif (node or edge) and norm == "l2":
-                diff = np.linalg.norm(metric[i] - metric[j], ord=2)
-            else:
-                print("L1, L2 norms only apply to node or edge-wise kernels.")
-            
-            dissim_matrix[j, i] = diff
-    """
+
     for i, metric1 in enumerate(metric):
         for j, metric2 in enumerate(metric):
             if glob and norm == None:
@@ -144,7 +129,7 @@ def laplacian_dissim(graphs, transform: str=None, metric: str='l2', smooth_eigva
     elif transform == None:
         graphs = graphs
     else:
-        print('Supported transformations are "pass-to-ranks", "binarize", or None.')
+        print('Supported transformations are "pass-to-ranks" (simple-nonzero), "binarize", or None.')
     
     eigs = []
     for i, graph in enumerate(graphs):
@@ -181,15 +166,15 @@ def laplacian_dissim(graphs, transform: str=None, metric: str='l2', smooth_eigva
     return dissim_matrix
 
 
-def cluster_dissim(dissim_matrix: np.ndarray, labels: list, method="agg"):
+def cluster_dissim(dissim_matrix: np.ndarray, labels: list, method: str="agg", n_components: int=4):
     """
     Cluster dissimilarity matrix using Agglomerative, K-means, or GMM. 
     """
     if method == "agg":
         # Agglomerative clustering
-        agg = AgglomerativeClustering(n_clusters=4, affinity='precomputed', linkage='average', \
+        agg = AgglomerativeClustering(n_clusters=n_components, affinity='precomputed', linkage='average', \
             compute_distances=True).fit(dissim_matrix, y=labels)
-        pred = AgglomerativeClustering(n_clusters=4, affinity='precomputed', linkage='average', \
+        pred = AgglomerativeClustering(n_clusters=n_components, affinity='precomputed', linkage='average', \
             compute_distances=True).fit_predict(dissim_matrix, y=labels)
 
         # construct linkage matrix
@@ -216,9 +201,9 @@ def cluster_dissim(dissim_matrix: np.ndarray, labels: list, method="agg"):
 
         # cluster using GMM or K-means
         if method == "gmm":
-            clustering = GaussianMixture(n_components=2, n_init=25).fit_predict(cmds_embedding, y=labels)
+            clustering = GaussianMixture(n_components=n_components, n_init=25).fit_predict(cmds_embedding, y=labels)
         elif method == "kmeans":
-            clustering = KMeans(n_clusters=2, n_init=25).fit_predict(cmds_embedding, y=labels)
+            clustering = KMeans(n_clusters=n_components, n_init=25).fit_predict(cmds_embedding, y=labels)
         else:
             print("Not a valid kernel name.")
 
@@ -266,7 +251,7 @@ def plot_clustering(
     **kwargs,
 ):
     sns.set_context("talk", font_scale=0.85)
-    palette = dict(zip(set(labels), sns.color_palette("colorblind", len(set(labels)))))
+    palette = dict(zip(set(labels), sns.color_palette("Set2", len(set(labels)))))
     colors = np.array([palette[l] for l in labels])
 
     if algorithm == "agg" and dissim_matrix is not None and linkage_matrix is not None:
@@ -277,7 +262,7 @@ def plot_clustering(
         clustergrid.ax_cbar.set_title("Dissimilarity") # add color bar
         col_ax = clustergrid.ax_col_colors # add row and column colors
         patches = [Patch(color=v, label=k) for k,v in palette.items()] # add legend
-        clustergrid.figure.legend(handles=patches, bbox_to_anchor = (1.23, 1), title='Order')
+        clustergrid.figure.legend(handles=patches, bbox_to_anchor = (1.15, 1), title='Order')
 
         return clustergrid
         
@@ -286,7 +271,7 @@ def plot_clustering(
         markers = {"Incorrect": "X", "Correct": "o"}
         sns.scatterplot(x="Dimension 1", y="Dimension 2", hue=labels, style="Predictions", data=data, \
             palette=palette, markers=markers, ax=ax, **kwargs)
-        plt.legend(bbox_to_anchor = (1.05, 1))
+        plt.legend(bbox_to_anchor = (1.03, 1))
         ax.set_xticklabels([])
         ax.set_yticklabels([])
         ax.set_xlabel('CMDS Dimension 1')
