@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clustering Dissimilarity Matrices - MaMI &#8212; NDD II - Investigating Kernels</title>
+    <title>Unmatched Networks &#8212; NDD II - Investigating Kernels</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="_static/nd_logo_small.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Working on Laplacian Kernel" href="laplacian.html" />
-    <link rel="prev" title="Comparing Discriminability - MaMI" href="mami_discriminability.html" />
+    <link rel="next" title="Conclusion" href="conclusion.html" />
+    <link rel="prev" title="Matched Networks" href="mice_clustering.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -119,33 +119,64 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Appendix
+  Discriminability
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="mice_discriminability.html">
-   Comparing Discriminability - Mice
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="mice_clustering.html">
-   Clustering Dissimilarity Matrices - Mice
+   Matched Networks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mami_discriminability.html">
-   Comparing Discriminability - MaMI
+   Unmatched Networks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Clustering
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="mice_clustering.html">
+   Matched Networks
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Clustering Dissimilarity Matrices - MaMI
+   Unmatched Networks
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conclusion
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="conclusion.html">
+   Conclusion
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="laplacian.html">
    Working on Laplacian Kernel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mami_replicatefigs.html">
+   Replicating Figures from Paper
   </a>
  </li>
 </ul>
@@ -252,153 +283,160 @@ const thebe_selector_output = ".output, .cell_output"
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-data">
-   Load Data
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Unmatched Networks
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#agglomerative-clustering">
-   Agglomerative Clustering
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#density">
-     Density
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-data">
+     Load Data
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#average-edge-weight">
-     Average Edge Weight
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#agglomerative-clustering">
+     Agglomerative Clustering
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#density">
+       Density
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#average-edge-weight">
+       Average Edge Weight
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#average-of-adjacency-matrix">
+       Average of Adjacency Matrix
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#laplacian-spectral-distance">
+       Laplacian Spectral Distance
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#node-degree">
+       Node Degree
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#node-strength">
+       Node Strength
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#edge-weight">
+       Edge Weight
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#latent-distribution-test">
+       Latent Distribution Test
+      </a>
+     </li>
+    </ul>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#average-of-adjacency-matrix">
-     Average of Adjacency Matrix
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gmm">
+     GMM
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Density
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       Average Edge Weight
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#average-of-the-adjacency-matrix">
+       Average of the Adjacency Matrix
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id3">
+       Laplacian Spectral Distance
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id4">
+       Node Degree
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id5">
+       Node Strength
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id6">
+       Edge Weight
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id7">
+       Latent Distribution Test
+      </a>
+     </li>
+    </ul>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#spectral-distance-laplacian">
-     Spectral Distance (Laplacian)
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-means">
+     K-Means
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#node-degrees">
-     Node Degrees
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#node-strength">
-     Node Strength
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#edge-weights">
-     Edge weights
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#latent-distribution-test">
-     Latent Distribution Test
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id8">
+       Density
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id9">
+       Average Edge Weight
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id10">
+       Average of the Adjacency Matrix
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id11">
+       Laplacian Spectral Distance
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id12">
+       Node Degree
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id13">
+       Node Strength
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id14">
+       Edge Weight
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id15">
+       Latent Distribution Test
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#gmm">
-   GMM
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Density
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     Average Edge Weight
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#average-of-the-adjacency-matrix">
-     Average of the Adjacency Matrix
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     Spectral Distance (Laplacian)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     Node Degrees
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id5">
-     Node Strength
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     Edge Weights
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#latent-distribution">
-     Latent Distribution
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#k-means">
-   K-Means
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     Density
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id8">
-     Average Edge Weight
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     Average of the Adjacency Matrix
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id10">
-     Spectral Distance (Laplacian)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#node-degree">
-     Node Degree
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id11">
-     Node Strength
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#edge-weight">
-     Edge Weight
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id12">
-     Latent Distribution
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ari-plot">
    ARI Plot
   </a>
@@ -413,7 +451,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Clustering Dissimilarity Matrices - MaMI</h1>
+                <h1>Unmatched Networks</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -423,153 +461,160 @@ const thebe_selector_output = ".output, .cell_output"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-data">
-   Load Data
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Unmatched Networks
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#agglomerative-clustering">
-   Agglomerative Clustering
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#density">
-     Density
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-data">
+     Load Data
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#average-edge-weight">
-     Average Edge Weight
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#agglomerative-clustering">
+     Agglomerative Clustering
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#density">
+       Density
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#average-edge-weight">
+       Average Edge Weight
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#average-of-adjacency-matrix">
+       Average of Adjacency Matrix
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#laplacian-spectral-distance">
+       Laplacian Spectral Distance
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#node-degree">
+       Node Degree
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#node-strength">
+       Node Strength
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#edge-weight">
+       Edge Weight
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#latent-distribution-test">
+       Latent Distribution Test
+      </a>
+     </li>
+    </ul>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#average-of-adjacency-matrix">
-     Average of Adjacency Matrix
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gmm">
+     GMM
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Density
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       Average Edge Weight
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#average-of-the-adjacency-matrix">
+       Average of the Adjacency Matrix
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id3">
+       Laplacian Spectral Distance
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id4">
+       Node Degree
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id5">
+       Node Strength
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id6">
+       Edge Weight
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id7">
+       Latent Distribution Test
+      </a>
+     </li>
+    </ul>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#spectral-distance-laplacian">
-     Spectral Distance (Laplacian)
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-means">
+     K-Means
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#node-degrees">
-     Node Degrees
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#node-strength">
-     Node Strength
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#edge-weights">
-     Edge weights
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#latent-distribution-test">
-     Latent Distribution Test
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id8">
+       Density
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id9">
+       Average Edge Weight
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id10">
+       Average of the Adjacency Matrix
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id11">
+       Laplacian Spectral Distance
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id12">
+       Node Degree
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id13">
+       Node Strength
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id14">
+       Edge Weight
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id15">
+       Latent Distribution Test
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#gmm">
-   GMM
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Density
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     Average Edge Weight
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#average-of-the-adjacency-matrix">
-     Average of the Adjacency Matrix
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     Spectral Distance (Laplacian)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     Node Degrees
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id5">
-     Node Strength
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     Edge Weights
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#latent-distribution">
-     Latent Distribution
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#k-means">
-   K-Means
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     Density
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id8">
-     Average Edge Weight
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     Average of the Adjacency Matrix
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id10">
-     Spectral Distance (Laplacian)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#node-degree">
-     Node Degree
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id11">
-     Node Strength
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#edge-weight">
-     Edge Weight
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id12">
-     Latent Distribution
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ari-plot">
    ARI Plot
   </a>
@@ -585,7 +630,8 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### import modules</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -598,15 +644,16 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="clustering-dissimilarity-matrices-mami">
-<h1>Clustering Dissimilarity Matrices - MaMI<a class="headerlink" href="#clustering-dissimilarity-matrices-mami" title="Permalink to this headline">¶</a></h1>
-<p>We will run the same clustering algorithms (Agglomerative, K-Means, and GMM) on the dissimilarity matrices obtained from the previous notebook.</p>
-<p>The <a class="reference external" href="https://zenodo.org/record/6382386">MaMI Dataset</a> is opensource, and we use Version 2. The labels used for clustering were based on taxonomy orders using information obtained from ‘data/info/info.csv’.</p>
+<div class="tex2jax_ignore mathjax_ignore section" id="unmatched-networks">
+<h1>Unmatched Networks<a class="headerlink" href="#unmatched-networks" title="Permalink to this headline">¶</a></h1>
+<p>We will run the same clustering algorithms (Agglomerative clustering, GMM, and KMeans) on the dissimilarity matrices generated from each kernel. Similarly, we compare the ARI values for each clustering algorithm for each kernel.</p>
+<p>Note that by default, we only show the result for Agglomerative clustering on the dissimilarity matrix constructed by the Edge weight kernel, but all results can be expanded for viewing.</p>
 <div class="section" id="load-data">
 <h2>Load Data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 <span class="n">graphs_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">225</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
 <span class="n">species_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -618,20 +665,7 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">filestr</span> <span class="o">=</span> <span class="n">filestr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">species_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filestr</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">species_list</span><span class="p">))</span>
-    
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>225
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 
 <span class="c1"># construct labels based on taxonomy orders</span>
 <span class="n">info_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../mami_data/info.csv&#39;</span><span class="p">)</span>
@@ -676,13 +710,11 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">mapper</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="n">labels</span><span class="p">))</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38
-38
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>225
 </pre></div>
 </div>
 </div>
@@ -690,13 +722,14 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="agglomerative-clustering">
 <h2>Agglomerative Clustering<a class="headerlink" href="#agglomerative-clustering" title="Permalink to this headline">¶</a></h2>
-<p>Agglomerative clustering was used directly on the dissimilarity matrices, and the resulting linkage matrix and clusters were visualized with a heatmap below.</p>
-<p>For each kernel, the accuracy score, the number of correct predictions divided by the total number of samples, and the adjusted rand index,  a similarity measure between two clusterings after being adjusted for chance, were reported.</p>
+<p>Here we use agglomerative clustering to cluster the graphs directly on the dissimilarity matrix, and the calculated linkage matrix and clusters are visualized with a heatmap below.</p>
+<p>For each kernel, we report the accuracy score, the number of correct predictions divided by the total number of samples, and the adjusted rand index.</p>
 <div class="section" id="density">
 <h3>Density<a class="headerlink" href="#density" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># calculate dissimilarity matrix</span>
 <span class="n">scaled_density_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># cluster dissimilarity matrix</span>
@@ -723,15 +756,16 @@ ARI: 0.37900307341596956
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7fd192ff9220&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_6_2.png" src="_images/mami_clustering_6_2.png" />
+<img alt="_images/mami_clustering_5_2.png" src="_images/mami_clustering_5_2.png" />
 </div>
 </div>
 </div>
 <div class="section" id="average-edge-weight">
 <h3>Average Edge Weight<a class="headerlink" href="#average-edge-weight" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># calculate dissimilarity matrix</span>
 <span class="n">scaled_avgedgeweight_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;avgedgeweight&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># cluster dissimilarity matrix</span>
@@ -758,15 +792,16 @@ ARI: 0.003844400359796444
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7fd182a7d520&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_8_2.png" src="_images/mami_clustering_8_2.png" />
+<img alt="_images/mami_clustering_7_2.png" src="_images/mami_clustering_7_2.png" />
 </div>
 </div>
 </div>
 <div class="section" id="average-of-adjacency-matrix">
 <h3>Average of Adjacency Matrix<a class="headerlink" href="#average-of-adjacency-matrix" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># calculate dissimilarity matrix</span>
 <span class="n">scaled_avgadjmat_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;avgadjmatrix&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># cluster dissimilarity matrix</span>
@@ -793,15 +828,16 @@ ARI: 0.37900307341596956
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7fd1a33358e0&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_10_2.png" src="_images/mami_clustering_10_2.png" />
+<img alt="_images/mami_clustering_9_2.png" src="_images/mami_clustering_9_2.png" />
 </div>
 </div>
 </div>
-<div class="section" id="spectral-distance-laplacian">
-<h3>Spectral Distance (Laplacian)<a class="headerlink" href="#spectral-distance-laplacian" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="section" id="laplacian-spectral-distance">
+<h3>Laplacian Spectral Distance<a class="headerlink" href="#laplacian-spectral-distance" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># calculate dissimilarity matrix</span>
 <span class="n">scaled_lap_dissim</span> <span class="o">=</span> <span class="n">laplacian_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="s1">&#39;pass-to-ranks&#39;</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># cluster dissimilarity matrix</span>
@@ -828,16 +864,16 @@ ARI: 0.25118454399647394
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7fd150167340&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_12_2.png" src="_images/mami_clustering_12_2.png" />
+<img alt="_images/mami_clustering_11_2.png" src="_images/mami_clustering_11_2.png" />
 </div>
 </div>
-<p>For unmatched datsets, we need to modify the kernels that use node degrees, node strength, and edge weights because they assume that the nodes are matches. Thus, we used the following modified function to calculate the dissimilarity matrices.</p>
 </div>
-<div class="section" id="node-degrees">
-<h3>Node Degrees<a class="headerlink" href="#node-degrees" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="section" id="node-degree">
+<h3>Node Degree<a class="headerlink" href="#node-degree" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># calculate dissimilarity matrix</span>
 <span class="n">scaled_nodedeg_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim_unmatched</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;degree&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># cluster dissimilarity matrix</span>
@@ -864,15 +900,16 @@ ARI: 0.14536047449274056
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7fd150200040&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_15_2.png" src="_images/mami_clustering_15_2.png" />
+<img alt="_images/mami_clustering_13_2.png" src="_images/mami_clustering_13_2.png" />
 </div>
 </div>
 </div>
 <div class="section" id="node-strength">
 <h3>Node Strength<a class="headerlink" href="#node-strength" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># calculate dissimilarity matrix</span>
 <span class="n">scaled_nodestr_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim_unmatched</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;strength&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># cluster dissimilarity matrix</span>
@@ -899,15 +936,16 @@ ARI: 0.37900307341596956
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7fd160abfeb0&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_17_2.png" src="_images/mami_clustering_17_2.png" />
+<img alt="_images/mami_clustering_15_2.png" src="_images/mami_clustering_15_2.png" />
 </div>
 </div>
 </div>
-<div class="section" id="edge-weights">
-<h3>Edge weights<a class="headerlink" href="#edge-weights" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="section" id="edge-weight">
+<h3>Edge Weight<a class="headerlink" href="#edge-weight" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
+<span class="c1"># calculate dissimilarity matrix</span>
 <span class="n">scaled_edgeweight_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim_unmatched</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;edgeweight&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># cluster dissimilarity matrix</span>
@@ -934,7 +972,7 @@ ARI: 0.10071340713407134
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.matrix.ClusterGrid at 0x7fd1405f8700&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_19_2.png" src="_images/mami_clustering_19_2.png" />
+<img alt="_images/mami_clustering_17_2.png" src="_images/mami_clustering_17_2.png" />
 </div>
 </div>
 </div>
@@ -942,7 +980,8 @@ ARI: 0.10071340713407134
 <h3>Latent Distribution Test<a class="headerlink" href="#latent-distribution-test" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graspologic.inference</span> <span class="kn">import</span> <span class="n">latent_distribution_test</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="kn">from</span> <span class="nn">graspologic.inference</span> <span class="kn">import</span> <span class="n">latent_distribution_test</span>
 <span class="kn">from</span> <span class="nn">graspologic.align</span> <span class="kn">import</span> <span class="n">SeedlessProcrustes</span>
 <span class="kn">from</span> <span class="nn">graspologic.plot</span> <span class="kn">import</span> <span class="n">heatmap</span>
 <span class="kn">from</span> <span class="nn">graspologic.embed</span> <span class="kn">import</span> <span class="n">AdjacencySpectralEmbed</span>
@@ -969,18 +1008,8 @@ ARI: 0.10071340713407134
 
 <span class="n">scaled_latent_dissim</span> <span class="o">=</span> <span class="n">latent_dissim</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">latent_dissim</span><span class="p">)</span>
 <span class="n">scaled_latent_dissim</span> <span class="o">=</span> <span class="n">scaled_latent_dissim</span> <span class="o">+</span> <span class="n">scaled_latent_dissim</span><span class="o">.</span><span class="n">T</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 37/37 [3:56:55&lt;00:00, 384.21s/it]    
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">scaled_latent_dissim</span><span class="p">[</span><span class="n">scaled_latent_dissim</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">latent_linkage_matrix</span><span class="p">,</span> <span class="n">latent_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_latent_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;agg&quot;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
@@ -1004,20 +1033,21 @@ ARI: 0.10071340713407134
 ARI: 0.19552068007193069
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_22_2.png" src="_images/mami_clustering_22_2.png" />
+<img alt="_images/mami_clustering_19_2.png" src="_images/mami_clustering_19_2.png" />
 </div>
 </div>
 </div>
 </div>
 <div class="section" id="gmm">
 <h2>GMM<a class="headerlink" href="#gmm" title="Permalink to this headline">¶</a></h2>
-<p>We used classical multidimensional scaling to embed the dissimilarity matrices into a 2-dimensional space, then we used GMM to cluster these points. We assigned the number of components to be 4 since there are 4 genotypes, and the clusters are visualized with a scattermap below. The colors indicate the predicated genotypes, and the shapes (O or X) indicate whether or not those predictions were correct.</p>
-<p>For each kernel, the accuracy score, the number of correct predictions divided by the total number of samples, and the adjusted rand index, a similarity measure between two clusterings after being adjusted for chance, were reported.</p>
+<p>We use <a class="reference external" href="https://microsoft.github.io/graspologic/latest/reference/reference/embed.html#graspologic.embed.ClassicalMDS">classical multidimensional scaling</a> to embed the dissimilarity matrices into a 2-dimensional space, then we use GMM to cluster these points. We assign the number of components to be 4 since there are 4 genotypes, and the clusters are visualized with a scattermap below. The colors indicate the true genotypes, and the shapes (O or X) indicate whether or not the predictions are correct.</p>
+<p>For each kernel, we report the accuracy score, the number of correct predictions divided by the total number of samples, and the adjusted rand index.</p>
 <div class="section" id="id1">
 <h3>Density<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">density_gm_embedding</span><span class="p">,</span> <span class="n">density_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">density_gm</span><span class="p">,</span> <span class="n">density_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">density_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">density_gm_pred</span><span class="p">)</span>
 
@@ -1041,15 +1071,16 @@ ARI: 0.19552068007193069
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_25_2.png" src="_images/mami_clustering_25_2.png" />
+<img alt="_images/mami_clustering_22_2.png" src="_images/mami_clustering_22_2.png" />
 </div>
 </div>
 </div>
 <div class="section" id="id2">
 <h3>Average Edge Weight<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">avgedgeweight_gm_embedding</span><span class="p">,</span> <span class="n">avgedgeweight_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;gmm&#39;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">avgedgeweight_gm</span><span class="p">,</span> <span class="n">avgedgeweight_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">avgedgeweight_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_gm_pred</span><span class="p">)</span>
 
@@ -1073,15 +1104,16 @@ ARI: -0.01948207575911445
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_27_2.png" src="_images/mami_clustering_27_2.png" />
+<img alt="_images/mami_clustering_24_2.png" src="_images/mami_clustering_24_2.png" />
 </div>
 </div>
 </div>
 <div class="section" id="average-of-the-adjacency-matrix">
 <h3>Average of the Adjacency Matrix<a class="headerlink" href="#average-of-the-adjacency-matrix" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">avgadjmat_gm_embedding</span><span class="p">,</span> <span class="n">avgadjmat_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_avgadjmat_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">avgadjmat_gm</span><span class="p">,</span> <span class="n">avgadjmat_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">avgadjmat_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">avgadjmat_gm_pred</span><span class="p">)</span>
 
@@ -1105,15 +1137,16 @@ ARI: 0.19552068007193069
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_29_2.png" src="_images/mami_clustering_29_2.png" />
+<img alt="_images/mami_clustering_26_2.png" src="_images/mami_clustering_26_2.png" />
 </div>
 </div>
 </div>
 <div class="section" id="id3">
-<h3>Spectral Distance (Laplacian)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<h3>Laplacian Spectral Distance<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">lap_gm_embedding</span><span class="p">,</span> <span class="n">lap_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_lap_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">lap_gm</span><span class="p">,</span> <span class="n">lap_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">lap_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lap_gm_pred</span><span class="p">)</span>
 
@@ -1138,15 +1171,16 @@ ARI: 0.31234614193253885
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd18364b670&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_31_2.png" src="_images/mami_clustering_31_2.png" />
+<img alt="_images/mami_clustering_28_2.png" src="_images/mami_clustering_28_2.png" />
 </div>
 </div>
 </div>
 <div class="section" id="id4">
-<h3>Node Degrees<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<h3>Node Degree<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">nodedeg_gm_embedding</span><span class="p">,</span> <span class="n">nodedeg_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">nodedeg_gm</span><span class="p">,</span> <span class="n">nodedeg_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodedeg_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_gm_pred</span><span class="p">)</span>
 
@@ -1170,15 +1204,16 @@ ARI: 0.37900307341596956
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_33_2.png" src="_images/mami_clustering_33_2.png" />
+<img alt="_images/mami_clustering_30_2.png" src="_images/mami_clustering_30_2.png" />
 </div>
 </div>
 </div>
 <div class="section" id="id5">
 <h3>Node Strength<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">nodestr_gm_embedding</span><span class="p">,</span> <span class="n">nodestr_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodestr_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">nodestr_gm</span><span class="p">,</span> <span class="n">nodestr_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodestr_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodestr_gm_pred</span><span class="p">)</span>
 
@@ -1202,15 +1237,16 @@ ARI: 0.37900307341596956
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_35_2.png" src="_images/mami_clustering_35_2.png" />
+<img alt="_images/mami_clustering_32_2.png" src="_images/mami_clustering_32_2.png" />
 </div>
 </div>
 </div>
 <div class="section" id="id6">
-<h3>Edge Weights<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<h3>Edge Weight<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">edgeweight_gm_embedding</span><span class="p">,</span> <span class="n">edgeweight_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">edgeweight_gm</span><span class="p">,</span> <span class="n">edgeweight_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">edgeweight_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_gm_pred</span><span class="p">)</span>
 
@@ -1235,15 +1271,16 @@ ARI: 0.0647883980139417
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd183d461c0&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_37_2.png" src="_images/mami_clustering_37_2.png" />
+<img alt="_images/mami_clustering_34_2.png" src="_images/mami_clustering_34_2.png" />
 </div>
 </div>
 </div>
-<div class="section" id="latent-distribution">
-<h3>Latent Distribution<a class="headerlink" href="#latent-distribution" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="section" id="id7">
+<h3>Latent Distribution Test<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">scaled_latent_dissim</span><span class="p">[</span><span class="n">scaled_latent_dissim</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">latent_gm_embedding</span><span class="p">,</span> <span class="n">latent_gm_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_latent_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">latent_gm</span><span class="p">,</span> <span class="n">latent_gm_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">latent_gm_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">latent_gm_pred</span><span class="p">)</span>
@@ -1268,20 +1305,21 @@ ARI: 0.0647883980139417
 ARI: 0.38031481669544026
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_39_2.png" src="_images/mami_clustering_39_2.png" />
+<img alt="_images/mami_clustering_36_2.png" src="_images/mami_clustering_36_2.png" />
 </div>
 </div>
 </div>
 </div>
 <div class="section" id="k-means">
 <h2>K-Means<a class="headerlink" href="#k-means" title="Permalink to this headline">¶</a></h2>
-<p>Similar to GMM, we first used classical multidimensional scaling to embed the dissimilarity matrices into a 2-dimensional space, then used the K-Means clustering algorithm to predict the genotypes of each point. The clusters are shown in the scatterplot below, and the colors represent the predicted genotypes and the shapes (O or X) indicate whether or not those predictions were correct.</p>
-<p>For each kernel, the raw accuracy score, the number of correct predictions divided by the total number of samples, and the adjusted rand index, a similarity measure between two clusterings after being adjusted for chance, were reported.</p>
-<div class="section" id="id7">
-<h3>Density<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<p>Similar to GMM, we first use <a class="reference external" href="https://microsoft.github.io/graspologic/latest/reference/reference/embed.html#graspologic.embed.ClassicalMDS">classical multidimensional scaling</a> to embed the dissimilarity matrices into a 2-dimensional space, then use KMeans to predict the genotypes of each point. The clusters are shown in the scatterplot below, and the colors represent the true genotypes and the shapes (O or X) indicate whether or not we made correct predictions.</p>
+<p>For each kernel, we report the raw accuracy score, the number of correct predictions divided by the total number of samples, and the adjusted rand index.</p>
+<div class="section" id="id8">
+<h3>Density<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">density_km_embedding</span><span class="p">,</span> <span class="n">density_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;kmeans&quot;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">density_km</span><span class="p">,</span> <span class="n">density_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">density_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">density_km_pred</span><span class="p">)</span>
 
@@ -1305,15 +1343,16 @@ ARI: 0.5302001190751023
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_41_2.png" src="_images/mami_clustering_41_2.png" />
+<img alt="_images/mami_clustering_38_2.png" src="_images/mami_clustering_38_2.png" />
 </div>
 </div>
 </div>
-<div class="section" id="id8">
-<h3>Average Edge Weight<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="section" id="id9">
+<h3>Average Edge Weight<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">avgedgeweight_km_embedding</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">avgedgeweight_km</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">avgedgeweight_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">avgedgeweight_km_pred</span><span class="p">)</span>
 
@@ -1337,15 +1376,16 @@ ARI: -0.006213200611561108
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_43_2.png" src="_images/mami_clustering_43_2.png" />
+<img alt="_images/mami_clustering_40_2.png" src="_images/mami_clustering_40_2.png" />
 </div>
 </div>
 </div>
-<div class="section" id="id9">
-<h3>Average of the Adjacency Matrix<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="section" id="id10">
+<h3>Average of the Adjacency Matrix<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">avgadjmat_km_embedding</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_avgadjmat_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">avgadjmat_km</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">avgadjmat_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">avgadjmat_km_pred</span><span class="p">)</span>
 
@@ -1369,15 +1409,16 @@ ARI: 0.5302001190751023
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_45_2.png" src="_images/mami_clustering_45_2.png" />
+<img alt="_images/mami_clustering_42_2.png" src="_images/mami_clustering_42_2.png" />
 </div>
 </div>
 </div>
-<div class="section" id="id10">
-<h3>Spectral Distance (Laplacian)<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="section" id="id11">
+<h3>Laplacian Spectral Distance<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">lap_km_embedding</span><span class="p">,</span> <span class="n">lap_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_lap_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gmm&quot;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">lap_km</span><span class="p">,</span> <span class="n">lap_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">lap_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lap_km_pred</span><span class="p">)</span>
 
@@ -1402,15 +1443,16 @@ ARI: 0.31234614193253885
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd1a3bf3820&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_47_2.png" src="_images/mami_clustering_47_2.png" />
+<img alt="_images/mami_clustering_44_2.png" src="_images/mami_clustering_44_2.png" />
 </div>
 </div>
 </div>
-<div class="section" id="node-degree">
-<h3>Node Degree<a class="headerlink" href="#node-degree" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="section" id="id12">
+<h3>Node Degree<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">nodedeg_km_embedding</span><span class="p">,</span> <span class="n">nodedeg_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">nodedeg_km</span><span class="p">,</span> <span class="n">nodedeg_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodedeg_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodedeg_km_pred</span><span class="p">)</span>
 
@@ -1434,15 +1476,16 @@ ARI: 0.37900307341596956
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_49_2.png" src="_images/mami_clustering_49_2.png" />
+<img alt="_images/mami_clustering_46_2.png" src="_images/mami_clustering_46_2.png" />
 </div>
 </div>
 </div>
-<div class="section" id="id11">
-<h3>Node Strength<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="section" id="id13">
+<h3>Node Strength<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">nodestr_km_embedding</span><span class="p">,</span> <span class="n">nodestr_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_nodestr_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">nodestr_km</span><span class="p">,</span> <span class="n">nodestr_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">nodestr_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nodestr_km_pred</span><span class="p">)</span>
 
@@ -1466,15 +1509,16 @@ ARI: 0.37900307341596956
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;CMDS Dimension 1&#39;, ylabel=&#39;CMDS Dimension 2&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_51_2.png" src="_images/mami_clustering_51_2.png" />
+<img alt="_images/mami_clustering_48_2.png" src="_images/mami_clustering_48_2.png" />
 </div>
 </div>
 </div>
-<div class="section" id="edge-weight">
-<h3>Edge Weight<a class="headerlink" href="#edge-weight" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="section" id="id14">
+<h3>Edge Weight<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">edgeweight_km_embedding</span><span class="p">,</span> <span class="n">edgeweight_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">edgeweight_km</span><span class="p">,</span> <span class="n">edgeweight_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">edgeweight_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgeweight_km_pred</span><span class="p">)</span>
 
@@ -1499,15 +1543,16 @@ ARI: 0.04134807383236741
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd193c3ba30&gt;
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_53_2.png" src="_images/mami_clustering_53_2.png" />
+<img alt="_images/mami_clustering_50_2.png" src="_images/mami_clustering_50_2.png" />
 </div>
 </div>
 </div>
-<div class="section" id="id12">
-<h3>Latent Distribution<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="section" id="id15">
+<h3>Latent Distribution Test<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster dissimilarity matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="c1"># cluster dissimilarity matrix</span>
 <span class="n">scaled_latent_dissim</span><span class="p">[</span><span class="n">scaled_latent_dissim</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">latent_km_embedding</span><span class="p">,</span> <span class="n">latent_km_pred</span> <span class="o">=</span> <span class="n">cluster_dissim</span><span class="p">(</span><span class="n">scaled_latent_dissim</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;kmeans&#39;</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">latent_km</span><span class="p">,</span> <span class="n">latent_km_pred</span> <span class="o">=</span> <span class="n">construct_df</span><span class="p">(</span><span class="n">latent_km_embedding</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">latent_km_pred</span><span class="p">)</span>
@@ -1532,17 +1577,19 @@ ARI: 0.04134807383236741
 ARI: 0.19552068007193069
 </pre></div>
 </div>
-<img alt="_images/mami_clustering_55_2.png" src="_images/mami_clustering_55_2.png" />
+<img alt="_images/mami_clustering_52_2.png" src="_images/mami_clustering_52_2.png" />
 </div>
 </div>
 </div>
 </div>
-<div class="section" id="ari-plot">
-<h2>ARI Plot<a class="headerlink" href="#ari-plot" title="Permalink to this headline">¶</a></h2>
-<p>We will use the adjusted rand index (ARI) to compare the performace of each clustering algorithm on each kernel. The ARI values are visualized with a scatter plot below, and the colors represent the different clustering algorithms.</p>
-<div class="cell docutils container">
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="ari-plot">
+<h1>ARI Plot<a class="headerlink" href="#ari-plot" title="Permalink to this headline">¶</a></h1>
+<p>We use the adjusted rand index (ARI) to compare the performace of each clustering algorithm on each kernel. The ARI values are visualized with a scatter plot below, and the colors represent the different clustering algorithms. The kernels are sorted by the average ARI value of the three clustering algorithms, from highest to lowest. We also compute the ARI values for each clustering algorithm for a random matrix, which is indicated by the red dash line and should be close to 0.</p>
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graspologic.utils</span> <span class="kn">import</span> <span class="n">symmetrize</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
+<span class="kn">from</span> <span class="nn">graspologic.utils</span> <span class="kn">import</span> <span class="n">symmetrize</span>
 
 <span class="c1"># construct symmetric random matrix with zero diagonal</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -1572,9 +1619,10 @@ ARI: 0.19552068007193069
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kernels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Density&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg. Edge Weight&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg. Adj.&#39;</span><span class="p">,</span> <span class="s1">&#39;Laplacian&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Degree&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Strength&#39;</span><span class="p">,</span> \
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
+<span class="n">kernels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Density&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg. Edge Weight&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg. Adj.&#39;</span><span class="p">,</span> <span class="s1">&#39;Laplacian&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Degree&#39;</span><span class="p">,</span> <span class="s1">&#39;Node Strength&#39;</span><span class="p">,</span> \
     <span class="s1">&#39;Edge Weight&#39;</span><span class="p">,</span> <span class="s1">&#39;Latent&#39;</span><span class="p">]</span>
 <span class="n">kernels_df</span> <span class="o">=</span> <span class="p">[</span><span class="n">kernel</span> <span class="k">for</span> <span class="n">kernel</span> <span class="ow">in</span> <span class="n">kernels</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
 <span class="n">agg_ari</span> <span class="o">=</span> <span class="p">[</span><span class="n">density_agg_ari</span><span class="p">,</span> <span class="n">avgedgeweight_agg_ari</span><span class="p">,</span> <span class="n">avgadjmat_agg_ari</span><span class="p">,</span> <span class="n">lap_agg_ari</span><span class="p">,</span> <span class="n">nodedeg_agg_ari</span><span class="p">,</span> \
@@ -1608,22 +1656,13 @@ ARI: 0.19552068007193069
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_clustering_58_1.png" src="_images/mami_clustering_58_1.png" />
+<img alt="_images/mami_clustering_55_1.png" src="_images/mami_clustering_55_1.png" />
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">())</span>
-</pre></div>
+<div class="figure align-default" id="mami-cluster">
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Scatter plot comparing the ARI values of each clustering algorithm for every kernel, from highest to lowest based on the average ARI value. Most kernels perform better than chance.</span><a class="headerlink" href="#mami-cluster" title="Permalink to this image">¶</a></p>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0.12156862745098039, 0.4666666666666667, 0.7058823529411765), (1.0, 0.4980392156862745, 0.054901960784313725), (0.17254901960784313, 0.6274509803921569, 0.17254901960784313), (0.8392156862745098, 0.15294117647058825, 0.1568627450980392), (0.5803921568627451, 0.403921568627451, 0.7411764705882353), (0.5490196078431373, 0.33725490196078434, 0.29411764705882354), (0.8901960784313725, 0.4666666666666667, 0.7607843137254902), (0.4980392156862745, 0.4980392156862745, 0.4980392156862745), (0.7372549019607844, 0.7411764705882353, 0.13333333333333333), (0.09019607843137255, 0.7450980392156863, 0.8117647058823529)]
-</pre></div>
-</div>
-</div>
-</div>
-</div>
+<p>We observe similar trends to those of the discriminability plot for unmatched networks, where kernels that use global properties of the network perform better than node-wise or edge-wise kernels, with the exception of the Node strength kernel. There is no one clustering algorithm that performs consistently well, suggesting that the dissimilarity matrix is the main determining factor in its clustering performance rather than the algorithm itself.</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -1651,17 +1690,17 @@ ARI: 0.19552068007193069
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="mami_discriminability.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="mice_clustering.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Comparing Discriminability - MaMI</p>
+            <p class="prev-next-title">Matched Networks</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="laplacian.html" title="next page">
+    <a class='right-next' id="next-link" href="conclusion.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Working on Laplacian Kernel</p>
+        <p class="prev-next-title">Conclusion</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

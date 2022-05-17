@@ -55,6 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="_static/nd_logo_small.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Working on Laplacian Kernel" href="laplacian.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -117,33 +118,64 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Appendix
+  Discriminability
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="mice_discriminability.html">
-   Comparing Discriminability - Mice
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="mice_clustering.html">
-   Clustering Dissimilarity Matrices - Mice
+   Matched Networks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mami_discriminability.html">
-   Comparing Discriminability - MaMI
+   Unmatched Networks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Clustering
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="mice_clustering.html">
+   Matched Networks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mami_clustering.html">
-   Clustering Dissimilarity Matrices - MaMI
+   Unmatched Networks
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conclusion
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="conclusion.html">
+   Conclusion
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="laplacian.html">
    Working on Laplacian Kernel
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Replicating Figures from Paper
   </a>
  </li>
 </ul>
@@ -395,7 +427,6 @@ const thebe_selector_output = ".output, .cell_output"
             <span class="n">log_dens</span> <span class="o">=</span> <span class="n">kde</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">xs</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">])</span>
             <span class="n">eigs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_dens</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
             <span class="n">eigs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
 
     <span class="n">dissim_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">graphs</span><span class="p">)))</span>
@@ -419,10 +450,12 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_lap_dissim</span><span class="p">,</span> <span class="n">eigs</span><span class="p">,</span> <span class="n">ws</span> <span class="o">=</span> <span class="n">laplacian_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;cosine&#39;</span><span class="p">,</span> <span class="n">smooth_eigvals</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_lap_dissim</span><span class="p">,</span> <span class="n">eigs</span><span class="p">,</span> <span class="n">ws</span> <span class="o">=</span> <span class="n">laplacian_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="s1">&#39;binarize&#39;</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;cosine&#39;</span><span class="p">,</span> <span class="n">smooth_eigvals</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1">#transformed = pass_to_ranks(scaled_lap_dissim, method=&#39;simple-all&#39;)</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_lap_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># try different normalizing</span>
+<span class="c1"># log, pass-to-rank</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -481,17 +514,18 @@ area = 0.9970012499994536
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">values</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">return_counts</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">val_counts_dict</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">counts</span><span class="p">):</span>
-    <span class="n">val_counts_dict</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+    <span class="n">val_counts_dict</span><span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 
-<span class="n">counts_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">counts</span><span class="p">))</span>
-<span class="c1">#values_sorted = [&#39;Chiroptera&#39;, &#39;Rodentia&#39;, &#39;Cetartiodactyla&#39;, &#39;Carnivora&#39;, &#39;Perissodactyla&#39;, &#39;Primates&#39;]</span>
+<span class="c1">#counts_sorted = np.flip(np.sort(counts))</span>
+<span class="n">values_sorted</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Chiroptera&#39;</span><span class="p">,</span> <span class="s1">&#39;Rodentia&#39;</span><span class="p">,</span> <span class="s1">&#39;Cetartiodactyla&#39;</span><span class="p">,</span> <span class="s1">&#39;Carnivora&#39;</span><span class="p">,</span> <span class="s1">&#39;Perissodactyla&#39;</span><span class="p">,</span> <span class="s1">&#39;Primates&#39;</span><span class="p">]</span>
 
-<span class="n">values_sorted</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">counts_sorted</span><span class="p">:</span>
-    <span class="n">values_sorted</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val_counts_dict</span><span class="p">[</span><span class="n">count</span><span class="p">])</span>
+<span class="n">counts_sorted</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values_sorted</span><span class="p">:</span>
+    <span class="n">counts_sorted</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val_counts_dict</span><span class="p">[</span><span class="n">value</span><span class="p">])</span>
 
 <span class="n">labels_sorted</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">values_sorted</span><span class="p">,</span> <span class="n">counts_sorted</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">labels_sorted</span><span class="p">)</span>
 
 <span class="n">graphs_sorted</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_sorted</span><span class="p">):</span>
@@ -506,7 +540,8 @@ area = 0.9970012499994536
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(203, 200, 200)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Rodentia&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Cetartiodactyla&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Carnivora&#39;, &#39;Perissodactyla&#39;, &#39;Perissodactyla&#39;, &#39;Perissodactyla&#39;, &#39;Perissodactyla&#39;, &#39;Perissodactyla&#39;, &#39;Perissodactyla&#39;, &#39;Perissodactyla&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;]
+(203, 200, 200)
 </pre></div>
 </div>
 </div>
@@ -514,9 +549,9 @@ area = 0.9970012499994536
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># confirm graphs are in correct order</span>
-<span class="n">scaled_lap_dissim</span><span class="p">,</span> <span class="n">eigs</span><span class="p">,</span> <span class="n">ws</span> <span class="o">=</span> <span class="n">laplacian_dissim</span><span class="p">(</span><span class="n">graphs_sorted</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;cosine&#39;</span><span class="p">,</span> <span class="n">smooth_eigvals</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">scaled_lap_dissim_sorted</span><span class="p">,</span> <span class="n">eigs</span><span class="p">,</span> <span class="n">ws</span> <span class="o">=</span> <span class="n">laplacian_dissim</span><span class="p">(</span><span class="n">graphs_sorted</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="s1">&#39;binarize&#39;</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;cosine&#39;</span><span class="p">,</span> <span class="n">smooth_eigvals</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_lap_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_lap_dissim_sorted</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="s1">&#39;zero-boost&#39;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -527,38 +562,32 @@ area = 0.9970012499994536
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate median spectral distance within order</span>
-<span class="n">counts_acc</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">counts_sorted</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">counts_acc</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#scaled_lap_dissim_sorted_transformed = pass_to_ranks(scaled_lap_dissim_sorted, method=&#39;zero-boost&#39;)</span>
 <span class="n">dissim_median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">count1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">counts_sorted</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">count2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">counts_sorted</span><span class="p">):</span>
-        <span class="n">subset</span> <span class="o">=</span> <span class="n">scaled_lap_dissim</span><span class="p">[:</span><span class="n">count1</span><span class="p">,</span> <span class="p">:</span><span class="n">count2</span><span class="p">]</span>
-        <span class="n">dissim_median</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
+<span class="n">labels_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">labels_sorted</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values_sorted</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">label2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values_sorted</span><span class="p">):</span>
+        <span class="c1">#mask = ~((labels_sorted[:, None] == label1) &amp; (labels_sorted[ None, :] == label2))</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">labels_sorted</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">==</span> <span class="n">label1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">labels_sorted</span><span class="p">[</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">==</span> <span class="n">label2</span><span class="p">)</span>
+        <span class="c1">#subset = np.ma.array(scaled_lap_dissim_sorted_transformed, mask=mask)</span>
+        <span class="n">dissim_median</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">scaled_lap_dissim_sorted</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span>
 
+<span class="n">dissim_median_transformed</span> <span class="o">=</span> <span class="n">pass_to_ranks</span><span class="p">(</span><span class="n">dissim_median</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;zero-boost&#39;</span><span class="p">)</span>
+<span class="c1">#dissim_median = dissim_median / np.max(dissim_median)</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tril</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">dissim_median</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">dissim_median</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">)</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">cubehelix_palette</span><span class="p">(</span><span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">dissim_median</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">values_sorted</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">values_sorted</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">values_sorted</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;mami_repfigure.jpg&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[51, 97, 137, 167, 196, 203]
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Text(0.5, 0, &#39;Carnivora&#39;),
- Text(1.5, 0, &#39;Primates&#39;),
- Text(2.5, 0, &#39;Cetartiodactyla&#39;),
- Text(3.5, 0, &#39;Chiroptera&#39;),
- Text(4.5, 0, &#39;Rodentia&#39;),
- Text(5.5, 0, &#39;Perissodactyla&#39;)]
-</pre></div>
-</div>
-<img alt="_images/mami_replicatefigs_9_2.png" src="_images/mami_replicatefigs_9_2.png" />
+<img alt="_images/mami_replicatefigs_9_0.png" src="_images/mami_replicatefigs_9_0.png" />
 </div>
 </div>
 </div>
@@ -587,7 +616,14 @@ area = 0.9970012499994536
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="laplacian.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Working on Laplacian Kernel</p>
+        </div>
+    </a>
 </div>
             
         </div>

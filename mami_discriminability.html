@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Comparing Discriminability - MaMI &#8212; NDD II - Investigating Kernels</title>
+    <title>Unmatched Networks &#8212; NDD II - Investigating Kernels</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="_static/nd_logo_small.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Clustering Dissimilarity Matrices - MaMI" href="mami_clustering.html" />
-    <link rel="prev" title="Clustering Dissimilarity Matrices - Mice" href="mice_clustering.html" />
+    <link rel="next" title="Matched Networks" href="mice_clustering.html" />
+    <link rel="prev" title="Matched Networks" href="mice_discriminability.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -119,33 +119,64 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Appendix
+  Discriminability
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="mice_discriminability.html">
-   Comparing Discriminability - Mice
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="mice_clustering.html">
-   Clustering Dissimilarity Matrices - Mice
+   Matched Networks
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Comparing Discriminability - MaMI
+   Unmatched Networks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Clustering
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="mice_clustering.html">
+   Matched Networks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mami_clustering.html">
-   Clustering Dissimilarity Matrices - MaMI
+   Unmatched Networks
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conclusion
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="conclusion.html">
+   Conclusion
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="laplacian.html">
    Working on Laplacian Kernel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mami_replicatefigs.html">
+   Replicating Figures from Paper
   </a>
  </li>
 </ul>
@@ -252,87 +283,94 @@ const thebe_selector_output = ".output, .cell_output"
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-data">
-   Load Data
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Unmatched Networks
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#kernels">
-   Kernels
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#global-kernels">
-   Global Kernels
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#density">
-     Density
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-data">
+     Load Data
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#average-edge-weight">
-     Average Edge Weight
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#global-properties">
+     Global Properties
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#density">
+       Density
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#average-edge-weight">
+       Average Edge Weight
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#average-of-the-adjacency-matrix">
+       Average of the Adjacency Matrix
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#laplacian-spectral-distance">
+       Laplacian Spectral Distance
+      </a>
+     </li>
+    </ul>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#average-of-the-adjacency-matrix">
-     Average of the Adjacency Matrix
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-wise-properties">
+     Node-wise Properties
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#node-degrees">
+       Node Degrees
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#node-strength">
+       Node Strength
+      </a>
+     </li>
+    </ul>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#spectral-distance-laplacian">
-     Spectral Distance (Laplacian)
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edge-wise-properties">
+     Edge-wise Properties
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#edge-weight">
+       Edge weight
+      </a>
+     </li>
+    </ul>
    </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#node-wise-kernels">
-   Node-wise Kernels
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#node-degrees">
-     Node Degrees
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#node-strength">
-     Node Strength
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#edge-wise-kernels">
-   Edge-wise Kernels
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#edge-weights">
-     Edge weights
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
+   <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#latent-distribution-test">
      Latent Distribution Test
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#pairplots-after-alignments">
-       Pairplots After Alignments
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#pairplots-after-alignments-might-move-to-appendix">
+       Pairplots After Alignments (might move to Appendix)
       </a>
      </li>
     </ul>
    </li>
   </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#discriminability-plot">
    Discriminability Plot
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
   </a>
  </li>
 </ul>
@@ -345,7 +383,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Comparing Discriminability - MaMI</h1>
+                <h1>Unmatched Networks</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -355,87 +393,94 @@ const thebe_selector_output = ".output, .cell_output"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-data">
-   Load Data
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Unmatched Networks
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#kernels">
-   Kernels
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#global-kernels">
-   Global Kernels
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#density">
-     Density
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-data">
+     Load Data
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#average-edge-weight">
-     Average Edge Weight
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#global-properties">
+     Global Properties
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#density">
+       Density
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#average-edge-weight">
+       Average Edge Weight
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#average-of-the-adjacency-matrix">
+       Average of the Adjacency Matrix
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#laplacian-spectral-distance">
+       Laplacian Spectral Distance
+      </a>
+     </li>
+    </ul>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#average-of-the-adjacency-matrix">
-     Average of the Adjacency Matrix
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-wise-properties">
+     Node-wise Properties
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#node-degrees">
+       Node Degrees
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#node-strength">
+       Node Strength
+      </a>
+     </li>
+    </ul>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#spectral-distance-laplacian">
-     Spectral Distance (Laplacian)
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edge-wise-properties">
+     Edge-wise Properties
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#edge-weight">
+       Edge weight
+      </a>
+     </li>
+    </ul>
    </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#node-wise-kernels">
-   Node-wise Kernels
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#node-degrees">
-     Node Degrees
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#node-strength">
-     Node Strength
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#edge-wise-kernels">
-   Edge-wise Kernels
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#edge-weights">
-     Edge weights
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
+   <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#latent-distribution-test">
      Latent Distribution Test
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#pairplots-after-alignments">
-       Pairplots After Alignments
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#pairplots-after-alignments-might-move-to-appendix">
+       Pairplots After Alignments (might move to Appendix)
       </a>
      </li>
     </ul>
    </li>
   </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#discriminability-plot">
    Discriminability Plot
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
   </a>
  </li>
 </ul>
@@ -449,7 +494,8 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### import modules</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">graspologic.plot</span> <span class="kn">import</span> <span class="n">heatmap</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -461,14 +507,16 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="comparing-discriminability-mami">
-<h1>Comparing Discriminability - MaMI<a class="headerlink" href="#comparing-discriminability-mami" title="Permalink to this headline">¶</a></h1>
-<p>We will run the same kernels on the <a class="reference external" href="https://www.biorxiv.org/content/10.1101/2022.03.11.483995v1">MaMI dataset</a> (unmatched).</p>
+<div class="tex2jax_ignore mathjax_ignore section" id="unmatched-networks">
+<h1>Unmatched Networks<a class="headerlink" href="#unmatched-networks" title="Permalink to this headline">¶</a></h1>
+<p>We will run the same kernels on the unmatched networks from the <a class="reference external" href="https://www.biorxiv.org/content/10.1101/2022.03.11.483995v1">MaMI dataset</a> <span id="id1">[<a class="reference internal" href="#id3" title="Laura E Suárez, Yossi Yovel, Martijin P Van den Heuvel, Olaf Sporns, Yaniv Assaf, Guillaume Lajoie, and Bratislav Misic. A connectomics-based taxonomy of mammals. bioRxiv, 03 2022. doi:10.1101/2022.03.11.483995.">Suárez <em>et al.</em>, 2022</a>]</span>, then compare their discriminability index.</p>
+<p>First, let’s load in the data. For the sake of time, we only use two orders with the most samples (Chiroptera and Primates), then randomly select half of the graphs to run our analysis on.</p>
 <div class="section" id="load-data">
 <h2>Load Data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 <span class="n">graphs_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">225</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
 <span class="n">species_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -480,20 +528,7 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">filestr</span> <span class="o">=</span> <span class="n">filestr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">species_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filestr</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">species_list</span><span class="p">))</span>
-    
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>225
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 
 <span class="c1"># construct labels based on taxonomy orders</span>
 <span class="n">info_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../mami_data/info.csv&#39;</span><span class="p">)</span>
@@ -537,51 +572,46 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">mapper</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
 <span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">mapper</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="n">labels</span><span class="p">))</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38
-38
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>225
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<p>Now similarly to the process for matched networks, we generate dissimilarity matrices for each of the kernels and visualize them with the <a class="reference external" href="https://microsoft.github.io/graspologic/latest/reference/reference/plotting.html#heatmap">heatmap</a> function in Graspologic, sorting the matrix by their labels. All dissimilarity matrices are scaled from 0 to 1 by dividing by its maximum value.</p>
+<p>By default, we only display dissimilarity matrices for the Density kernel, the Edge weight kernel, the Laplacian spectral kernel, and the Latent distribution test kernel, but all results can be expanded for viewing.</p>
+</div>
+<div class="section" id="global-properties">
+<h2>Global Properties<a class="headerlink" href="#global-properties" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="density">
+<h3>Density<a class="headerlink" href="#density" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualize one of the graphs</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">graphs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">context</span><span class="o">=</span><span class="s1">&#39;talk&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="s1">&#39;simple-all&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
+<span class="n">scaled_density_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_4_0.png" src="_images/mami_discriminability_4_0.png" />
+<img alt="_images/mami_discriminability_5_0.png" src="_images/mami_discriminability_5_0.png" />
 </div>
 </div>
 </div>
-<div class="section" id="kernels">
-<h2>Kernels<a class="headerlink" href="#kernels" title="Permalink to this headline">¶</a></h2>
-<p>The following is a list of kernels that were implemented. We divided them into three major groups based on the metrics used.</p>
-<ul class="simple">
-<li><p>Global: Density, Average Edge Weight, Average of Adjacency Matrix</p></li>
-<li><p>Node-wise: Node Degree, Node Strength</p></li>
-<li><p>Edge-wise: Edge Weights</p></li>
-</ul>
-</div>
-<div class="section" id="global-kernels">
-<h2>Global Kernels<a class="headerlink" href="#global-kernels" title="Permalink to this headline">¶</a></h2>
-<p>The following kernels are constructed using characteristics of the entire graph. For each metric, the absolute differences between every pair of graphs were calculated and visualized using a heatmap.</p>
-<div class="section" id="density">
-<h3>Density<a class="headerlink" href="#density" title="Permalink to this headline">¶</a></h3>
-<p>The density of each graph was calculated by dividing the number of edges by the number of possible nodes.</p>
-<div class="cell docutils container">
+<div class="section" id="average-edge-weight">
+<h3>Average Edge Weight<a class="headerlink" href="#average-edge-weight" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_density_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="n">scaled_avgedgeweight_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;avgedgeweight&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_density_dissim</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -591,13 +621,14 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="section" id="average-edge-weight">
-<h3>Average Edge Weight<a class="headerlink" href="#average-edge-weight" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="section" id="average-of-the-adjacency-matrix">
+<h3>Average of the Adjacency Matrix<a class="headerlink" href="#average-of-the-adjacency-matrix" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_avgedgeweight_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;avgedgeweight&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="n">scaled_avgadjmat_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;avgadjmatrix&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_avgedgeweight_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_avgadjmat_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -607,14 +638,15 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="section" id="average-of-the-adjacency-matrix">
-<h3>Average of the Adjacency Matrix<a class="headerlink" href="#average-of-the-adjacency-matrix" title="Permalink to this headline">¶</a></h3>
-<p>Note that when we calculate the average of each adjacency matrix, we include edges that do not exist, whereas we only consider those with nonzero values when we calculate the average edge weight of each graph.</p>
-<div class="cell docutils container">
+<div class="section" id="laplacian-spectral-distance">
+<h3>Laplacian Spectral Distance<a class="headerlink" href="#laplacian-spectral-distance" title="Permalink to this headline">¶</a></h3>
+<p>Each network is transformed using pass-to-ranks, and the L2 norm of the difference between the sorted eigenspecta is calculated.</p>
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_avgadjmat_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;avgadjmatrix&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
+<span class="n">scaled_lap_dissim</span> <span class="o">=</span> <span class="n">laplacian_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="s1">&#39;pass-to-ranks&#39;</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_avgadjmat_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_lap_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -624,14 +656,17 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="section" id="spectral-distance-laplacian">
-<h3>Spectral Distance (Laplacian)<a class="headerlink" href="#spectral-distance-laplacian" title="Permalink to this headline">¶</a></h3>
-<p>The spectral distance between networks was estimated by computing the difference between the Laplacian eigenspectrums. Each network was transformed using pass-to-ranks, and the L2 norm of the difference between the sorted eigenspectrums was calculated.</p>
-<div class="cell docutils container">
+</div>
+<div class="section" id="node-wise-properties">
+<h2>Node-wise Properties<a class="headerlink" href="#node-wise-properties" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="node-degrees">
+<h3>Node Degrees<a class="headerlink" href="#node-degrees" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_lap_dissim</span> <span class="o">=</span> <span class="n">laplacian_dissim</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="s1">&#39;pass-to-ranks&#39;</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="n">scaled_nodedeg_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim_unmatched</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;degree&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_lap_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -640,35 +675,13 @@ const thebe_selector_output = ".output, .cell_output"
 <img alt="_images/mami_discriminability_13_0.png" src="_images/mami_discriminability_13_0.png" />
 </div>
 </div>
-<p>For the kernels that follow, they assume that the nodes are matched. However, we are working with an umatched datset. Thus, we used the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html">two-sample Kolmogorov-Smirnov test</a> to compare two distributions.</p>
-</div>
-</div>
-<div class="section" id="node-wise-kernels">
-<h2>Node-wise Kernels<a class="headerlink" href="#node-wise-kernels" title="Permalink to this headline">¶</a></h2>
-<p>The following kernels use characteristics related to the nodes of each graph. For each metric, we calculate the two-sample Kolmogorov-Smirnov statistic between each graph.</p>
-<div class="section" id="node-degrees">
-<h3>Node Degrees<a class="headerlink" href="#node-degrees" title="Permalink to this headline">¶</a></h3>
-<p>The degree of a node in a graph is the number of nodes each node is adjacent to, aka the number of edges each node has.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_nodedeg_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim_unmatched</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;degree&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_nodedeg_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_16_0.png" src="_images/mami_discriminability_16_0.png" />
-</div>
-</div>
 </div>
 <div class="section" id="node-strength">
 <h3>Node Strength<a class="headerlink" href="#node-strength" title="Permalink to this headline">¶</a></h3>
-<p>Node strength, unlike node degree, takes into account the weight of the edges each node has. We calculate node strength by finding the sum of the edge weights for each node.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_nodestr_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim_unmatched</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;strength&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
+<span class="n">scaled_nodestr_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim_unmatched</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;strength&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_nodestr_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
@@ -676,20 +689,19 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_18_0.png" src="_images/mami_discriminability_18_0.png" />
+<img alt="_images/mami_discriminability_15_0.png" src="_images/mami_discriminability_15_0.png" />
 </div>
 </div>
 </div>
 </div>
-<div class="section" id="edge-wise-kernels">
-<h2>Edge-wise Kernels<a class="headerlink" href="#edge-wise-kernels" title="Permalink to this headline">¶</a></h2>
-<p>The following kernels use characteristics related to the edges of each graph. For each metric, we calculated the two-sample Kolmogrov-Smirnov statistic between each graph.</p>
-<div class="section" id="edge-weights">
-<h3>Edge weights<a class="headerlink" href="#edge-weights" title="Permalink to this headline">¶</a></h3>
-<p>Here we compare the weights of each edge between graphs by simply subtracting one adjacency matrix from another.</p>
-<div class="cell docutils container">
+<div class="section" id="edge-wise-properties">
+<h2>Edge-wise Properties<a class="headerlink" href="#edge-wise-properties" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="edge-weight">
+<h3>Edge weight<a class="headerlink" href="#edge-weight" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_edgeweight_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim_unmatched</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;edgeweight&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
+<span class="n">scaled_edgeweight_dissim</span> <span class="o">=</span> <span class="n">calculate_dissim_unmatched</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;edgeweight&quot;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">scaled_edgeweight_dissim</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">inner_hier_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">hier_label_fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
@@ -697,17 +709,18 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_20_0.png" src="_images/mami_discriminability_20_0.png" />
+<img alt="_images/mami_discriminability_17_0.png" src="_images/mami_discriminability_17_0.png" />
+</div>
 </div>
 </div>
 </div>
 <div class="section" id="latent-distribution-test">
-<h3>Latent Distribution Test<a class="headerlink" href="#latent-distribution-test" title="Permalink to this headline">¶</a></h3>
+<h2>Latent Distribution Test<a class="headerlink" href="#latent-distribution-test" title="Permalink to this headline">¶</a></h2>
 <p>Instead of using omnibus embedding that assumes the nodes are matched, we will use the <a class="reference external" href="https://microsoft.github.io/graspologic/latest/reference/reference/inference.html#graspologic.inference.latent_distribution_test">latent distribution test</a> from Graspologic that determines whether two random dot product graphs with no known matching between the vertices have the same distributions of latent positions.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graspologic.inference</span> <span class="kn">import</span> <span class="n">latent_distribution_test</span>
-<span class="kn">from</span> <span class="nn">graspologic.align</span> <span class="kn">import</span> <span class="n">SeedlessProcrustes</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
+<span class="kn">from</span> <span class="nn">graspologic.inference</span> <span class="kn">import</span> <span class="n">latent_distribution_test</span>
 <span class="kn">from</span> <span class="nn">graspologic.plot</span> <span class="kn">import</span> <span class="n">heatmap</span>
 <span class="kn">from</span> <span class="nn">graspologic.embed</span> <span class="kn">import</span> <span class="n">AdjacencySpectralEmbed</span>
 <span class="kn">from</span> <span class="nn">graspologic.utils</span> <span class="kn">import</span> <span class="n">largest_connected_component</span>
@@ -726,15 +739,10 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">Qs</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ase_graphs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ase_graphs</span><span class="p">)):</span>
-        <span class="c1">#aligner = SeedlessProcrustes()</span>
-        <span class="c1">#graph1 = aligner.fit_transform(ase_graphs[i], ase_graphs[j])</span>
-        <span class="c1">#aligned_graphs.append(graph1)</span>
         <span class="n">statistic</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">misc_dict</span> <span class="o">=</span> <span class="n">latent_distribution_test</span><span class="p">(</span><span class="n">ase_graphs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ase_graphs</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">test</span><span class="o">=</span><span class="s1">&#39;mgc&#39;</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">,</span> \
             <span class="n">n_bootstraps</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">align_type</span><span class="o">=</span><span class="s1">&#39;seedless_procrustes&#39;</span><span class="p">,</span> <span class="n">input_graph</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">latent_dissim</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">statistic</span>
         <span class="n">Qs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">misc_dict</span><span class="p">[</span><span class="s1">&#39;Q&#39;</span><span class="p">])</span>
-
-<span class="c1">#aligned_graphs = np.array(aligned_graphs)</span>
 
 <span class="c1"># plot heatmap</span>
 <span class="n">scaled_latent_dissim</span> <span class="o">=</span> <span class="n">latent_dissim</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">latent_dissim</span><span class="p">)</span>
@@ -751,12 +759,13 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 37/37 [1:00:54&lt;00:00, 98.78s/it] 
 </pre></div>
 </div>
-<img alt="_images/mami_discriminability_22_2.png" src="_images/mami_discriminability_22_2.png" />
+<img alt="_images/mami_discriminability_19_2.png" src="_images/mami_discriminability_19_2.png" />
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">store</span> scaled_latent_dissim
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
+<span class="o">%</span><span class="k">store</span> scaled_latent_dissim
 <span class="o">%</span><span class="k">store</span> Qs
 </pre></div>
 </div>
@@ -768,23 +777,15 @@ Stored &#39;Qs&#39; (list)
 </div>
 </div>
 </div>
-<div class="section" id="pairplots-after-alignments">
-<h4>Pairplots After Alignments<a class="headerlink" href="#pairplots-after-alignments" title="Permalink to this headline">¶</a></h4>
-<div class="cell docutils container">
+<div class="section" id="pairplots-after-alignments-might-move-to-appendix">
+<h3>Pairplots After Alignments (might move to Appendix)<a class="headerlink" href="#pairplots-after-alignments-might-move-to-appendix" title="Permalink to this headline">¶</a></h3>
+<p>To assess how successful the latent distribution test is in aligning two graphs, we visualize some of these alignments within two graphs of the same order after ASE.</p>
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Primates&#39;, &#39;Chiroptera&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Chiroptera&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Chiroptera&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Chiroptera&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Chiroptera&#39;, &#39;Primates&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Primates&#39;, &#39;Chiroptera&#39;, &#39;Chiroptera&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Primates&#39;, &#39;Chiroptera&#39;, &#39;Primates&#39;, &#39;Chiroptera&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Chiroptera (Bats)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
+
+<span class="c1">### Chiroptera (Bats)</span>
+<span class="kn">from</span> <span class="nn">graspologic.align</span> <span class="kn">import</span> <span class="n">SeedlessProcrustes</span>
 <span class="kn">from</span> <span class="nn">graspologic.plot</span> <span class="kn">import</span> <span class="n">pairplot</span>
 
 <span class="n">aligner</span><span class="o">=</span><span class="n">SeedlessProcrustes</span><span class="p">()</span>
@@ -797,12 +798,14 @@ Stored &#39;Qs&#39; (list)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_26_0.png" src="_images/mami_discriminability_26_0.png" />
+<img alt="_images/mami_discriminability_22_0.png" src="_images/mami_discriminability_22_0.png" />
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Primates</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
+
+<span class="c1">### Primates</span>
 <span class="n">aligner</span><span class="o">=</span><span class="n">SeedlessProcrustes</span><span class="p">()</span>
 <span class="n">graph_primate</span> <span class="o">=</span> <span class="n">aligner</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">ase_graphs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ase_graphs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
@@ -813,75 +816,17 @@ Stored &#39;Qs&#39; (list)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_27_0.png" src="_images/mami_discriminability_27_0.png" />
+<img alt="_images/mami_discriminability_23_0.png" src="_images/mami_discriminability_23_0.png" />
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graspologic.plot</span> <span class="kn">import</span> <span class="n">pairplot</span>
-
-<span class="n">pairplot_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Block 1&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;Block 2&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
-<span class="n">primate1</span> <span class="o">=</span> <span class="n">ase_graphs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="n">plot_primate1</span> <span class="o">=</span> <span class="n">pairplot</span><span class="p">(</span><span class="n">primate1</span><span class="p">,</span> <span class="n">pairplot_labels</span><span class="p">)</span>
-<span class="c1">#plt.figure(facecolor=&#39;w&#39;)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;pairplot_primate1.jpg&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_28_0.png" src="_images/mami_discriminability_28_0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bat1</span> <span class="o">=</span> <span class="n">ase_graphs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="n">plot_bat1</span> <span class="o">=</span> <span class="n">pairplot</span><span class="p">(</span><span class="n">bat1</span><span class="p">,</span> <span class="n">pairplot_labels</span><span class="p">)</span>
-<span class="c1">#plt.figure(facecolor=&#39;w&#39;)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;pairplot_bat1.jpg&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_29_0.png" src="_images/mami_discriminability_29_0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">primate2</span> <span class="o">=</span> <span class="n">ase_graphs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-
-<span class="n">plot_primate2</span> <span class="o">=</span> <span class="n">pairplot</span><span class="p">(</span><span class="n">primate2</span><span class="p">,</span> <span class="n">pairplot_labels</span><span class="p">)</span>
-<span class="c1">#plt.figure(facecolor=&#39;w&#39;)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;pairplot_primate2.jpg&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_30_0.png" src="_images/mami_discriminability_30_0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bat2</span> <span class="o">=</span> <span class="n">ase_graphs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-
-<span class="n">plot_bat2</span> <span class="o">=</span> <span class="n">pairplot</span><span class="p">(</span><span class="n">bat2</span><span class="p">,</span> <span class="n">pairplot_labels</span><span class="p">)</span>
-<span class="c1">#plt.figure(facecolor=&#39;w&#39;)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;pairplot_bat2.jpg&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_31_0.png" src="_images/mami_discriminability_31_0.png" />
+<p>We see that the algorithm is unable to produce good alignments between two graphs of the same order, which accounts for its low discriminability index as shown below.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="discriminability-plot">
-<h2>Discriminability Plot<a class="headerlink" href="#discriminability-plot" title="Permalink to this headline">¶</a></h2>
-<p>We will use the <a class="reference external" href="https://mgc.neurodata.io/api/generated/hyppo.discrim.discrimonesample">One Sample Discriminability</a> test from <a class="reference external" href="https://mgc.neurodata.io/index.html">hyppo</a> to compare the performance of each kernel. The distance matrix of the embeddings ater using Omnibus is included as a point of comparison.</p>
-<div class="cell docutils container">
+<div class="tex2jax_ignore mathjax_ignore section" id="discriminability-plot">
+<h1>Discriminability Plot<a class="headerlink" href="#discriminability-plot" title="Permalink to this headline">¶</a></h1>
+<p>Here we compare the discriminability index of each kernel, with that of a random matrix shown by a red dash line. The kernels are sorted from highest to lowest for easy comparison.</p>
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
 
@@ -932,15 +877,29 @@ Stored &#39;Qs&#39; (list)
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Kernel&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Discriminability&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;mami_discrim_fig&#39;</span><span class="p">)</span>
 
 <span class="n">glue</span><span class="p">(</span><span class="s2">&quot;mami_discrim&quot;</span><span class="p">,</span> <span class="n">mami_discrim_fig</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_33_1.png" src="_images/mami_discriminability_33_1.png" />
+<img alt="_images/mami_discriminability_26_0.png" src="_images/mami_discriminability_26_0.png" />
 </div>
 </div>
+<div class="figure align-default" id="mami-discrim">
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Bar graph comparing the discriminability index of each kernel, sorted from highest to lowest. Most kernels perform better than random chance.</span><a class="headerlink" href="#mami-discrim" title="Permalink to this image">¶</a></p>
+</div>
+<p>We observe that for unmatched networks, the Laplacian spectral kernel performs the best. Generally, kernels that use global properties of the network seem to perform better than other kernels with the exception of the Node strength kernel, which performs as well as the Average of the adjacency matrix kernel and the Density kernel. We find that the Latent distribution test kernel performs worse than some of the simple kernels, even though it took the longest. All kernels except for the Average edge weight kernel perform better than chance, and all simple kernels took less time to run than the Laplacian spectral kernel and the Latent distribution kernel.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+<div class="docutils container" id="id2">
+<dl class="citation">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Laura E Suárez, Yossi Yovel, Martijin P Van den Heuvel, Olaf Sporns, Yaniv Assaf, Guillaume Lajoie, and Bratislav Misic. A connectomics-based taxonomy of mammals. <em>bioRxiv</em>, 03 2022. <a class="reference external" href="https://doi.org/10.1101/2022.03.11.483995">doi:10.1101/2022.03.11.483995</a>.</p>
+</dd>
+</dl>
 </div>
 </div>
 
@@ -969,17 +928,17 @@ Stored &#39;Qs&#39; (list)
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="mice_clustering.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="mice_discriminability.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Clustering Dissimilarity Matrices - Mice</p>
+            <p class="prev-next-title">Matched Networks</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="mami_clustering.html" title="next page">
+    <a class='right-next' id="next-link" href="mice_clustering.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Clustering Dissimilarity Matrices - MaMI</p>
+        <p class="prev-next-title">Matched Networks</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

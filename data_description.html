@@ -119,33 +119,64 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Appendix
+  Discriminability
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="mice_discriminability.html">
-   Comparing Discriminability - Mice
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="mice_clustering.html">
-   Clustering Dissimilarity Matrices - Mice
+   Matched Networks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mami_discriminability.html">
-   Comparing Discriminability - MaMI
+   Unmatched Networks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Clustering
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="mice_clustering.html">
+   Matched Networks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mami_clustering.html">
-   Clustering Dissimilarity Matrices - MaMI
+   Unmatched Networks
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conclusion
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="conclusion.html">
+   Conclusion
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="laplacian.html">
    Working on Laplacian Kernel
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mami_replicatefigs.html">
+   Replicating Figures from Paper
   </a>
  </li>
 </ul>
@@ -252,14 +283,26 @@ const thebe_selector_output = ".output, .cell_output"
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#matched-duke-mouse-whole-brain-connectomes">
-   Matched: Duke Mouse Whole-Brain Connectomes
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Datasets
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#matched-duke-mouse-whole-brain-connectomes">
+     Matched: Duke Mouse Whole-Brain Connectomes
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unmatched-mami-mammalian-mri">
+     Unmatched: MaMI (Mammalian MRI)
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#unmatched-mami-mammalian-mri">
-   Unmatched: MaMI (Mammalian MRI)
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
   </a>
  </li>
 </ul>
@@ -282,14 +325,26 @@ const thebe_selector_output = ".output, .cell_output"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#matched-duke-mouse-whole-brain-connectomes">
-   Matched: Duke Mouse Whole-Brain Connectomes
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Datasets
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#matched-duke-mouse-whole-brain-connectomes">
+     Matched: Duke Mouse Whole-Brain Connectomes
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unmatched-mami-mammalian-mri">
+     Unmatched: MaMI (Mammalian MRI)
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#unmatched-mami-mammalian-mri">
-   Unmatched: MaMI (Mammalian MRI)
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
   </a>
  </li>
 </ul>
@@ -345,7 +400,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="unmatched-mami-mammalian-mri">
 <h2>Unmatched: <a class="reference external" href="https://zenodo.org/record/6382386">MaMI (Mammalian MRI)</a><a class="headerlink" href="#unmatched-mami-mammalian-mri" title="Permalink to this headline">¶</a></h2>
-<p>This dataset consists of 225 high resolution <em>ex vivo</em> scans of 124 animal species spanning 12 taxonomy orders: Carnivora, Certatiodactyla, Chiroptera, Eulipotyphla, Hyracoidea, Lagomorpha, Marsupialia, Perissodactyla, Primates, Rodentia, Scandentia and Xenarthra. Each network was a symmetric (200, 200) matrix. To accomodate for the unequal sample size of each order and also for simplicity, we used half of the samples given for Chiroptera and Primates, the two largest orders in the dataset. More details can be found in the page linked above.</p>
+<p>This dataset consists of 225 high resolution <em>ex vivo</em> scans of 124 animal species spanning 12 taxonomy orders: Carnivora, Certatiodactyla, Chiroptera, Eulipotyphla, Hyracoidea, Lagomorpha, Marsupialia, Perissodactyla, Primates, Rodentia, Scandentia and Xenarthra <span id="id1">[<a class="reference internal" href="mami_discriminability.html#id3" title="Laura E Suárez, Yossi Yovel, Martijin P Van den Heuvel, Olaf Sporns, Yaniv Assaf, Guillaume Lajoie, and Bratislav Misic. A connectomics-based taxonomy of mammals. bioRxiv, 03 2022. doi:10.1101/2022.03.11.483995.">Suárez <em>et al.</em>, 2022</a>]</span>. Each network was a symmetric (200, 200) matrix. To accomodate for the unequal sample size of each order and also for simplicity, we used half of the samples given for Chiroptera and Primates, the two largest orders in the dataset. More details can be found in the page linked above.</p>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
@@ -416,6 +471,16 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="figure align-default" id="mami-heatmap">
 <p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Visual representaton of two of the networks of the MaMI dataset. They are both symmetric (200, 200) matrices with a similar block structure, but we cannot assume that there exists a matching between the two networks.</span><a class="headerlink" href="#mami-heatmap" title="Permalink to this image">¶</a></p>
 </div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+<div class="docutils container" id="id2">
+<dl class="citation">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Laura E Suárez, Yossi Yovel, Martijin P Van den Heuvel, Olaf Sporns, Yaniv Assaf, Guillaume Lajoie, and Bratislav Misic. A connectomics-based taxonomy of mammals. <em>bioRxiv</em>, 03 2022. <a class="reference external" href="https://doi.org/10.1101/2022.03.11.483995">doi:10.1101/2022.03.11.483995</a>.</p>
+</dd>
+</dl>
 </div>
 </div>
 
