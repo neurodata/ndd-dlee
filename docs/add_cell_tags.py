@@ -10,7 +10,8 @@ print(notebooks)
 text_search_dict = {
     "# HIDDEN": "remove-cell",  # Remove the whole cell
     "# NO CODE": "remove-input",  # Remove only the input
-    "# HIDE CODE": "hide-input"  # Hide the input w/ a button to show
+    "# HIDE CODE": "hide-input",  # Hide the input w/ a button to show
+    "# HIDE CELL": "hide-cell", # Hide cell w/ a button to show
 }
 
 # Search through each notebook and look for the text, add a tag if necessary
@@ -28,4 +29,4 @@ for ipath in notebooks:
 
     nbf.write(ntbk, ipath)
 
-print('Add cell tag')
+print('Adding cell tag')

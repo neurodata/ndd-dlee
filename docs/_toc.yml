@@ -8,11 +8,19 @@ parts:
   chapters:
   - file: data_description
   - file: kernels
-- caption: Appendix
+- caption: Discriminability
   chapters:
   - file: mice_discriminability
-  - file: mice_clustering
   - file: mami_discriminability
+- caption: Clustering
+  chapters:
+  - file: mice_clustering
   - file: mami_clustering
+- caption: Conclusion
+  chapters:
+  - file: conclusion.md
+- caption: Appendix
+  chapters:
   - file: laplacian
+  - file: mami_replicatefigs
 
