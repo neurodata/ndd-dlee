@@ -171,7 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="laplacian.html">
-   Working on Laplacian Kernel
+   Laplacian Spectral Kernel
   </a>
  </li>
  <li class="toctree-l1">
@@ -353,13 +353,6 @@ const thebe_selector_output = ".output, .cell_output"
     <a class="reference internal nav-link" href="#latent-distribution-test">
      Latent Distribution Test
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#pairplots-after-alignments-might-move-to-appendix">
-       Pairplots After Alignments (might move to Appendix)
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
@@ -463,13 +456,6 @@ const thebe_selector_output = ".output, .cell_output"
     <a class="reference internal nav-link" href="#latent-distribution-test">
      Latent Distribution Test
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#pairplots-after-alignments-might-move-to-appendix">
-       Pairplots After Alignments (might move to Appendix)
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
@@ -777,50 +763,6 @@ Stored &#39;Qs&#39; (list)
 </div>
 </div>
 </div>
-<div class="section" id="pairplots-after-alignments-might-move-to-appendix">
-<h3>Pairplots After Alignments (might move to Appendix)<a class="headerlink" href="#pairplots-after-alignments-might-move-to-appendix" title="Permalink to this headline">¶</a></h3>
-<p>To assess how successful the latent distribution test is in aligning two graphs, we visualize some of these alignments within two graphs of the same order after ASE.</p>
-<div class="cell tag_hide-input docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
-
-<span class="c1">### Chiroptera (Bats)</span>
-<span class="kn">from</span> <span class="nn">graspologic.align</span> <span class="kn">import</span> <span class="n">SeedlessProcrustes</span>
-<span class="kn">from</span> <span class="nn">graspologic.plot</span> <span class="kn">import</span> <span class="n">pairplot</span>
-
-<span class="n">aligner</span><span class="o">=</span><span class="n">SeedlessProcrustes</span><span class="p">()</span>
-<span class="n">graph_bat</span> <span class="o">=</span> <span class="n">aligner</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">ase_graphs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ase_graphs</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
-
-<span class="n">labels_bat</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Bat 1&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">200</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;Bat 2&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">200</span>
-<span class="n">X_bat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">graph_bat</span><span class="p">,</span> <span class="n">ase_graphs</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">plot_bat</span> <span class="o">=</span> <span class="n">pairplot</span><span class="p">(</span><span class="n">X_bat</span><span class="p">,</span> <span class="n">labels_bat</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_22_0.png" src="_images/mami_discriminability_22_0.png" />
-</div>
-</div>
-<div class="cell tag_hide-input docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
-
-<span class="c1">### Primates</span>
-<span class="n">aligner</span><span class="o">=</span><span class="n">SeedlessProcrustes</span><span class="p">()</span>
-<span class="n">graph_primate</span> <span class="o">=</span> <span class="n">aligner</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">ase_graphs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ase_graphs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-
-<span class="n">labels_primate</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Primate 1&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">200</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;Primate 2&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">200</span>
-<span class="n">X_primate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">graph_primate</span><span class="p">,</span> <span class="n">ase_graphs</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">plot_primate</span> <span class="o">=</span> <span class="n">pairplot</span><span class="p">(</span><span class="n">X_primate</span><span class="p">,</span> <span class="n">labels_primate</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_23_0.png" src="_images/mami_discriminability_23_0.png" />
-</div>
-</div>
-<p>We see that the algorithm is unable to produce good alignments between two graphs of the same order, which accounts for its low discriminability index as shown below.</p>
-</div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="discriminability-plot">
@@ -884,7 +826,7 @@ Stored &#39;Qs&#39; (list)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/mami_discriminability_26_0.png" src="_images/mami_discriminability_26_0.png" />
+<img alt="_images/mami_discriminability_22_0.png" src="_images/mami_discriminability_22_0.png" />
 </div>
 </div>
 <div class="figure align-default" id="mami-discrim">

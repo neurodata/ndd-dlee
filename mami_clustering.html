@@ -171,7 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="laplacian.html">
-   Working on Laplacian Kernel
+   Laplacian Spectral Kernel
   </a>
  </li>
  <li class="toctree-l1">
@@ -714,7 +714,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>225
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38
 </pre></div>
 </div>
 </div>
@@ -978,7 +978,7 @@ ARI: 0.10071340713407134
 </div>
 <div class="section" id="latent-distribution-test">
 <h3>Latent Distribution Test<a class="headerlink" href="#latent-distribution-test" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CELL</span>
 <span class="kn">from</span> <span class="nn">graspologic.inference</span> <span class="kn">import</span> <span class="n">latent_distribution_test</span>
@@ -1024,7 +1024,7 @@ ARI: 0.10071340713407134
 <span class="c1"># plot clustered dissimilarity matrix</span>
 <span class="n">mami_latent_agg_fig</span> <span class="o">=</span> <span class="n">plot_clustering</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="n">scaled_latent_dissim</span><span class="p">,</span> <span class="n">latent_linkage_matrix</span><span class="p">)</span>
 
-<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;mami_latent_agg&quot;</span><span class="p">,</span> <span class="n">mami_latent_agg_fig</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">#glue(&quot;mami_latent_agg&quot;, mami_latent_agg_fig, display=False)</span>
 </pre></div>
 </div>
 </div>
