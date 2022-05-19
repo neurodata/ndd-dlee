@@ -22,5 +22,6 @@ parts:
 - caption: Appendix
   chapters:
   - file: laplacian
-  - file: mami_replicatefigs
+  - file: eigenspectrum
+  - file: alignments
 
